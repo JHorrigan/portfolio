@@ -7,7 +7,7 @@ A professional portfolio project for James Horrigan, a software engineer. The we
 - **Next.js 16.1.6** with React 19 — App Router, RSC-first
 - **Tailwind CSS v4** — CSS-first config via `@theme inline` in `globals.css`, no `tailwind.config.js`
 - **TypeScript** strict mode
-- No `src/` directory — `app/`, `lib/`, `types/`, `components/` at root
+- No `src/` directory — `app/` at root
 
 ## Commands
 
@@ -21,49 +21,41 @@ npm run start     # serve production build
 
 ```
 app/
-  layout.tsx       # root layout: fonts (Inter, JetBrains Mono), metadata, body
-  page.tsx         # single page — composes all section components
-  globals.css      # @import "tailwindcss" + @theme inline design tokens
+  layout.tsx       # root layout: Geist Sans + Geist Mono fonts, metadata
+  page.tsx         # single file — all sections inline (header, hero, about, skills, journey, portfolio, footer)
+  globals.css      # @import "tailwindcss" + @theme inline (Geist fonts) + .glass utility
   favicon.ico
-components/
-  sections/        # Hero, About, Career, Skills, Portfolio, Footer (Phase 4)
-  ui/              # reusable primitives: Tag, SectionHeading, etc.
-lib/
-  data.ts          # all content as typed TS — roles[], skillGroups[]
-types/
-  index.ts         # Role, SkillGroup types
+public/            # empty (scaffold SVGs removed)
+next.config.ts     # reactCompiler: true
 planning/
-  PLAN.md          # phased implementation plan with checkboxes
+  PLAN.md          # current implementation-aligned plan + checklist
   TECHSTACK.md     # tech stack research notes
   linkedin.pdf     # source of truth for career content
 ```
 
-## Design Tokens (globals.css)
+## Design System (globals.css)
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--color-bg` | `#0a0a0f` | Page background |
-| `--color-surface` | `#111118` | Card/section backgrounds |
-| `--color-accent` | `#00ffe0` | Electric cyan — used sparingly |
-| `--color-text` | `#f0f0f4` | Primary text |
-| `--color-muted` | `#666680` | Secondary/muted text |
-| `--color-border` | `rgba(240,240,244,0.08)` | Dividers/borders |
-| `--font-sans` | Inter (via next/font) | Body text |
-| `--font-mono` | JetBrains Mono (via next/font) | Headings, code, stats |
+- Background: `#020617` (slate-950 equivalent)
+- Foreground: `#e2e8f0` (slate-200)
+- `.glass` utility: gradient bg (slate-900 tones) + `backdrop-filter: blur(8px)` + slate border
+- Accent: `cyan-300` / `cyan-400` used via Tailwind utilities directly
+- Fonts: Geist Sans (body) + Geist Mono (mono) via `next/font/google`
 
 ## Current State (2026-03-02)
 
-- Phases 1–3 complete: scaffold, design system, content data layer
-- Phase 4 (page sections) not yet started — see `planning/PLAN.md`
-- `page.tsx` is currently a placeholder
+- All sections are inline in `page.tsx` — no separate component files
+- Components directory removed; content arrays are inline in `page.tsx`
+- Design: glass morphism cards, rounded-2xl/3xl, slate palette, cyan accents
+- Sections: header, hero, about, skills, career journey (7 roles), portfolio (3 placeholders), footer
+- Build: clean, zero TypeScript errors
 
 ## Key Conventions
 
-- Components are React Server Components by default — only add `"use client"` for interactivity
-- All content lives in `lib/data.ts`, not in components
-- Tailwind utility classes use token names: `bg-bg`, `text-accent`, `font-mono`, `text-muted`
-- Animations: CSS `@keyframes` only, animate `transform`/`opacity` only
-- Sharp corners — no `rounded-xl` softness; the aesthetic is technical/edgy
+- Single-file page approach — all content and markup in `page.tsx`
+- Tailwind slate/cyan utilities used directly (no custom token classes)
+- `.glass` CSS class for card surfaces
+- Inline data arrays (journey, skills) defined at top of `page.tsx`
+- All RSC — no `"use client"` needed
 
-# currentDate
+## Current Date
 Today's date is 2026-03-02.
