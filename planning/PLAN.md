@@ -46,6 +46,12 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [x] All hardcoded content replaced with DB queries in `page.tsx`
 - [x] `portfolio` table created and seeded (section commented out pending real content)
 
+### Phase 4 — UX & Meta ✅
+- [x] Open Graph and Twitter metadata in `layout.tsx`
+- [x] GitHub profile link in hero CTA row (from `profile.github_url`)
+- [x] Mobile nav: About/Career/Skills hidden on small screens (`hidden md:flex`)
+- [x] JSON-LD `Person` structured data in `page.tsx`
+
 ## Active / Future Work
 
 ### Portfolio Section

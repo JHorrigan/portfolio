@@ -39,7 +39,7 @@ drizzle.config.ts  # points to db/schema.ts, postgresql dialect
 public/            # empty
 next.config.ts     # reactCompiler: true
 planning/
-  PLAN.md          # current implementation-aligned plan + checklist
+  PLAN.md          # phased plan + checklist
   DATABASE_STRATEGY.md  # DB decision rationale and phase tracking
   TECHSTACK.md     # tech stack research notes
 ```
@@ -56,11 +56,20 @@ planning/
 
 - All sections inline in `page.tsx` — no separate component files
 - `page.tsx` is an async RSC — fetches all content from Neon DB via Drizzle at build time
-- All previously hardcoded content (hero, about, career summary, contact, location) now comes from the `profile` DB table
+- All content (hero, about, career summary, contact, location, GitHub URL) sourced from `profile` DB table
 - Career journey (7 roles) rendered from `roles` table
 - Skills (12, grouped by category) rendered from `skills` table
-- Portfolio section exists in DB (`portfolio` table, 3 rows) but section is commented out in `page.tsx` pending real content
+- Portfolio section exists in DB (`portfolio` table, 3 rows) but commented out in `page.tsx` pending real content
+- Hero CTA row: LinkedIn + GitHub buttons (both from DB); Portfolio Links button removed
+- Header nav: About/Career/Skills hidden on mobile (`hidden md:flex`), Contact always visible
+- Open Graph + Twitter metadata in `layout.tsx`
+- JSON-LD `Person` schema in `page.tsx`
 - Build: clean, zero TypeScript errors
+
+## Backlog
+
+- Populate `portfolio` DB table with real projects and uncomment the section in `page.tsx`
+- Deploy to Vercel (optional)
 
 ## Database (Neon)
 

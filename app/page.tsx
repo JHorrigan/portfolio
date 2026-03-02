@@ -20,30 +20,26 @@ export default async function Home() {
             JAMES HORRIGAN
           </p>
           <div className="flex items-center gap-2">
-            <a
-              href="#about"
-              className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
-            >
-              About
-            </a>
-            <a
-              href="#journey"
-              className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
-            >
-              Career
-            </a>
-            <a
-              href="#skills"
-              className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
-            >
-              Skills
-            </a>
-            <a
-              href="#portfolio"
-              className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
-            >
-              Portfolio
-            </a>
+            <div className="hidden md:flex items-center gap-2">
+              <a
+                href="#about"
+                className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
+              >
+                About
+              </a>
+              <a
+                href="#journey"
+                className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
+              >
+                Career
+              </a>
+              <a
+                href="#skills"
+                className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
+              >
+                Skills
+              </a>
+            </div>
             {profile?.email && (
               <a
                 className="rounded-full border border-cyan-300/40 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10"
@@ -76,12 +72,22 @@ export default async function Home() {
                 LinkedIn Profile
               </a>
             )}
-            <a
+            {profile?.github_url && (
+              <a
+                href={profile.github_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-slate-600 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-slate-300 hover:bg-slate-900"
+              >
+                GitHub
+              </a>
+            )}
+            {/* <a
               href="#portfolio"
               className="rounded-full border border-slate-600 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-slate-300 hover:bg-slate-900"
             >
               Portfolio Links
-            </a>
+            </a> */}
           </div>
         </section>
 
@@ -177,6 +183,21 @@ export default async function Home() {
           </div>
         </section> */}
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "James Horrigan",
+              jobTitle: profile?.title ?? "Full Stack Software Engineer",
+              email: profile?.email ?? undefined,
+              sameAs: [profile?.linkedin_url, profile?.github_url].filter(
+                (v): v is string => v != null
+              ),
+            }),
+          }}
+        />
         <footer className="pb-2 text-center text-sm text-slate-400">
           <p>
             {profile?.location && <span>{profile.location} · </span>}

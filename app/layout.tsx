@@ -16,6 +16,16 @@ export const metadata: Metadata = {
   title: "James Horrigan | Full Stack Software Engineer",
   description:
     "Professional profile for James Horrigan: full stack software engineer specialising in Python, AWS serverless, React, and AI-enabled product development.",
+  openGraph: {
+    title: "James Horrigan | Full Stack Software Engineer",
+    description:
+      "Professional profile for James Horrigan: full stack software engineer specialising in Python, AWS serverless, React, and AI-enabled product development.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "James Horrigan | Full Stack Software Engineer",
+  },
 };
 
 export default function RootLayout({
