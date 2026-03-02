@@ -22,7 +22,7 @@ async function seed() {
     location: 'Ormskirk, England',
     email: 'jahorrigan1411@gmail.com',
     linkedin_url: 'https://www.linkedin.com/in/jameshorrigan',
-    github_url: null,
+    github_url: 'https://github.com/JHorrigan',
   });
 
   console.log('Seeding skills...');
@@ -44,7 +44,7 @@ async function seed() {
   console.log('Seeding roles...');
   await db.insert(schema.roles).values([
     {
-      period: '2023 — 2025',
+      period: 'October 2023 — July 2025',
       company: 'Intrum',
       role: 'Full Stack Software Engineer',
       summary:
@@ -54,7 +54,7 @@ async function seed() {
       sort_order: 0,
     },
     {
-      period: '2019 — 2023',
+      period: 'January 2019 — July 2023',
       company: 'CiiVSOFT',
       role: 'CTO / Software Engineer',
       summary:
@@ -64,7 +64,7 @@ async function seed() {
       sort_order: 1,
     },
     {
-      period: '2017 — 2018',
+      period: 'January 2017 — December 2018',
       company: 'Pricesearcher.com',
       role: 'Data Platform Engineer',
       summary:
@@ -74,7 +74,7 @@ async function seed() {
       sort_order: 2,
     },
     {
-      period: '2016',
+      period: 'March 2016 - December 2016',
       company: 'Capita Customer Management',
       role: 'Innovations Technician',
       summary:
@@ -84,7 +84,7 @@ async function seed() {
       sort_order: 3,
     },
     {
-      period: '2008 — 2016',
+      period: 'January 2008 — March 2016',
       company: 'Capita Customer Management',
       role: 'Web Administrator / Communications Manager',
       summary:
@@ -94,7 +94,7 @@ async function seed() {
       sort_order: 4,
     },
     {
-      period: '1998 — 2006',
+      period: 'August 1998 — December 2006',
       company: 'Marconi PLC',
       role: 'Software Engineer',
       summary:
@@ -104,7 +104,7 @@ async function seed() {
       sort_order: 5,
     },
     {
-      period: '1996 — 1998',
+      period: 'August 1996 — August 1998',
       company: 'Marconi PLC',
       role: 'Trainee Software Engineer',
       summary:
