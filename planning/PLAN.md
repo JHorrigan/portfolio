@@ -10,15 +10,16 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 
 - Next.js 16.1.6 + React 19 + Tailwind CSS v4
 - TypeScript strict mode
-- Single-file page implementation in `app/page.tsx`
+- Single-file page implementation in `app/page.tsx` (async RSC)
 - Global tokens and utility in `app/globals.css`
+- Neon Serverless Postgres + Drizzle ORM — all content DB-backed
 - Local production build passing (`npm run build`)
 
 ## Source of Truth
 
 - Primary implementation status: `CLAUDE.md`
+- DB strategy and phase tracking: `planning/DATABASE_STRATEGY.md`
 - Tech stack reference: `planning/TECHSTACK.md`
-- Career content reference: `planning/linkedin.pdf`
 
 ## Delivery Principles
 
@@ -27,35 +28,39 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - Maintain RSC-first approach unless interactivity requires otherwise.
 - Keep docs synchronized with implementation.
 
-## Active Work Items
+## Completed Work
 
-### 1) Documentation Consistency
+### Phase 1 — Scaffold & Design ✅
+- [x] Next.js 16.1.6 + React 19 + Tailwind CSS v4 setup
+- [x] Single-file `page.tsx` approach, glass morphism design
+- [x] All sections: header, hero, about, skills, career journey, footer
 
-- [x] Align `README.md` with current architecture.
-- [x] Replace outdated phased assumptions in this plan.
-- [x] Keep `CLAUDE.md` and this plan in sync after feature changes.
+### Phase 2 — Content & Polish ✅
+- [x] 7-role career timeline from LinkedIn source
+- [x] 12 skills grouped by category
+- [x] Anchor navigation, footer metadata
 
-### 2) UX Hygiene
+### Phase 3 — Database (Neon + Drizzle) ✅
+- [x] Neon project created, schema pushed, data seeded
+- [x] `db/schema.ts`, `db/index.ts`, `db/queries.ts`, `db/seed.ts`
+- [x] All hardcoded content replaced with DB queries in `page.tsx`
+- [x] `portfolio` table created and seeded (section commented out pending real content)
 
-- [x] Keep anchor navigation coherent with available sections.
-- [x] Ensure placeholder project cards do not use dead links.
-- [x] Keep footer metadata (year/name/contact) complete.
+## Active / Future Work
 
-### 3) Career Content Strategy
+### Portfolio Section
+- [ ] Add real project content to `portfolio` DB table
+- [ ] Uncomment portfolio section in `page.tsx`
 
-- [x] Confirm whether timeline should remain condensed (5 roles) or be expanded from LinkedIn source.
-- [x] Apply decision consistently in `app/page.tsx`.
-
-### 4) Codebase Cleanliness
-
-- [x] Remove or repurpose unused structure (for example empty directories).
+### Deployment (optional)
+- [ ] Deploy to Vercel with `DATABASE_URL` environment variable
 
 ## Validation Checklist
 
 1. `npm run build` exits 0.
-2. No new TypeScript diagnostics introduced.
-3. Key anchors navigate correctly (`about`, `skills`, `journey`, `portfolio`).
-4. No non-functional placeholder navigation.
+2. No TypeScript diagnostics.
+3. Key anchors navigate correctly (`about`, `skills`, `journey`).
+4. No hardcoded content — all text sourced from DB.
 
 ## Commands
 
@@ -63,4 +68,6 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 npm run dev
 npm run build
 npm run start
+npx drizzle-kit push   # apply schema changes
+npx tsx db/seed.ts     # re-seed (truncates first)
 ```

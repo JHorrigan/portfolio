@@ -4,7 +4,11 @@ export const profile = pgTable('profile', {
   id: serial('id').primaryKey(),
   title: text('title'),
   hero: text('hero'),
+  hero_summary: text('hero_summary'),
   summary: text('summary'),
+  career_summary: text('career_summary'),
+  location: text('location'),
+  email: text('email'),
   linkedin_url: text('linkedin_url'),
   github_url: text('github_url'),
 });
@@ -24,6 +28,14 @@ export const roles = pgTable('roles', {
   summary: text('summary'),
   highlights: text('highlights').array(),
   related_skills: integer('related_skills').array(),
+  sort_order: integer('sort_order').default(0),
+});
+
+export const portfolio = pgTable('portfolio', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  image_url: text('image_url'),
   sort_order: integer('sort_order').default(0),
 });
 

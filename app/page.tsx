@@ -1,80 +1,13 @@
-export default function Home() {
+import { /*getPortfolio,*/ getProfile, getRoles, getSkillGroups } from '../db/queries';
+
+export default async function Home() {
   const year = new Date().getFullYear();
-
-  const journey = [
-    {
-      period: "2023 — 2025",
-      company: "Intrum",
-      role: "Full Stack Software Engineer",
-      summary:
-        "Built customer-facing debt management portals and APIs with React, Python, and AWS serverless architecture. Delivered secure authentication, white-labelling, high-speed content delivery, and AI-assisted agent tooling.",
-    },
-    {
-      period: "2019 — 2023",
-      company: "CiiVSOFT",
-      role: "CTO / Software Engineer",
-      summary:
-        "Designed scalable Python systems for enterprise hiring automation, launched NLP parsing products, and led engineering delivery across major European client onboarding programs.",
-    },
-    {
-      period: "2017 — 2018",
-      company: "Pricesearcher.com",
-      role: "Data Platform Engineer",
-      summary:
-        "Engineered high-throughput Python data pipelines for hundreds of millions of live product updates, including large-scale migrations and platform-level optimisation work.",
-    },
-    {
-      period: "2016",
-      company: "Capita Customer Management",
-      role: "Innovations Technician",
-      summary:
-        "Built innovation-focused internal tooling and rapid prototypes to improve operational efficiency and support faster decision-making across customer operations.",
-    },
-    {
-      period: "2008 — 2016",
-      company: "Capita Customer Management",
-      role: "Web Administrator / Communications Manager",
-      summary:
-        "Created real-time operational web tooling and reporting systems, improving decision speed and reducing manual workload across multiple business sites.",
-    },
-    {
-      period: "1998 — 2006",
-      company: "Marconi PLC",
-      role: "Software Engineer",
-      summary:
-        "Started in embedded software, delivering production C/C++ solutions, testing workflows, and engineering utilities while building a strong software lifecycle foundation.",
-    },
-    {
-      period: "1996 — 1998",
-      company: "Marconi PLC",
-      role: "Trainee Software Engineer",
-      summary:
-        "Completed foundational engineering training while supporting software delivery, testing activities, and technical documentation in a production environment.",
-    },
-  ];
-
-  const skillGroups = [
-    {
-      title: "Backend",
-      items: ["Python", "API Development", "Serverless"],
-    },
-    {
-      title: "Frontend",
-      items: ["React", "Next.js", "Tailwind CSS"],
-    },
-    {
-      title: "AI / ML",
-      items: ["Generative AI", "NLP"],
-    },
-    {
-      title: "Cloud & DevOps",
-      items: ["AWS", "Docker", "CI/CD"],
-    },
-    {
-      title: "Delivery",
-      items: ["Agile Delivery"],
-    },
-  ];
+  const [profile, journey, skillGroups /*, portfolioItems*/] = await Promise.all([
+    getProfile(),
+    getRoles(),
+    getSkillGroups(),
+    // getPortfolio(),
+  ]);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
@@ -111,38 +44,38 @@ export default function Home() {
             >
               Portfolio
             </a>
-            <a
-              className="rounded-full border border-cyan-300/40 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10"
-              href="mailto:jahorrigan1411@gmail.com"
-            >
-              Contact
-            </a>
+            {profile?.email && (
+              <a
+                className="rounded-full border border-cyan-300/40 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10"
+                href={`mailto:${profile.email}`}
+              >
+                Contact
+              </a>
+            )}
           </div>
         </header>
 
         <section className="glass rounded-3xl p-8 md:p-12">
           <p className="mb-4 inline-flex rounded-full border border-cyan-300/35 bg-cyan-300/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-cyan-200">
-            FULL STACK SOFTWARE ENGINEER
+            {profile?.title?.toUpperCase() ?? 'FULL STACK SOFTWARE ENGINEER'}
           </p>
           <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-white md:text-6xl">
-            Enterprise-grade engineering with an edge for AI, serverless, and
-            modern product delivery.
+            {profile?.hero ?? 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.'}
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
-            I am James Horrigan, a software engineer with 25+ years in
-            technology, specialising in Python, AWS, and scalable architecture.
-            I design and deliver reliable platforms that balance performance,
-            security, and real user value.
+            {profile?.hero_summary}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="https://www.linkedin.com/in/jameshorrigan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-            >
-              LinkedIn Profile
-            </a>
+            {profile?.linkedin_url && (
+              <a
+                href={profile.linkedin_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+              >
+                LinkedIn Profile
+              </a>
+            )}
             <a
               href="#portfolio"
               className="rounded-full border border-slate-600 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-slate-300 hover:bg-slate-900"
@@ -156,19 +89,11 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
             About Me
           </h2>
-          <p className="mt-4 max-w-4xl leading-8 text-slate-300">
-            My core discipline is backend engineering with Python and cloud
-            computing on AWS, including 9 years of commercial serverless
-            delivery. I also work across React, Next.js, and Tailwind CSS to
-            build complete product experiences when full stack execution is
-            needed.
-          </p>
-          <p className="mt-4 max-w-4xl leading-8 text-slate-300">
-            I am a detail-focused problem solver who thrives on clear
-            communication, high standards, and constant learning. I enjoy
-            building systems that are technically robust and strategically
-            aligned to business outcomes.
-          </p>
+          {profile?.summary?.split('\n\n').map((para, i) => (
+            <p key={i} className="mt-4 max-w-4xl leading-8 text-slate-300">
+              {para}
+            </p>
+          ))}
         </section>
 
         <section id="skills" className="glass rounded-3xl p-8 md:p-10">
@@ -208,9 +133,7 @@ export default function Home() {
             Career Journey
           </h2>
           <p className="mt-3 max-w-3xl text-slate-300">
-            From embedded software engineering to modern cloud and AI-enabled
-            platforms, each role has built depth in scalability, reliability,
-            and customer-facing product impact.
+            {profile?.career_summary}
           </p>
 
           <ol className="mt-8 space-y-5">
@@ -231,7 +154,7 @@ export default function Home() {
           </ol>
         </section>
 
-        <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
+        {/* <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
             Portfolio Links (Future)
           </h2>
@@ -240,30 +163,32 @@ export default function Home() {
             portfolio expands.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <article className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-200">
-              <h3 className="font-semibold text-white">Project Case Study #1</h3>
-              <p className="mt-1 text-sm text-slate-300">Coming soon</p>
-            </article>
-            <article className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-200">
-              <h3 className="font-semibold text-white">Project Case Study #2</h3>
-              <p className="mt-1 text-sm text-slate-300">Coming soon</p>
-            </article>
-            <article className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-200">
-              <h3 className="font-semibold text-white">Project Case Study #3</h3>
-              <p className="mt-1 text-sm text-slate-300">Coming soon</p>
-            </article>
+            {portfolioItems.map((item) => (
+              <article
+                key={item.id}
+                className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-200"
+              >
+                <h3 className="font-semibold text-white">{item.title}</h3>
+                {item.description && (
+                  <p className="mt-1 text-sm text-slate-300">{item.description}</p>
+                )}
+              </article>
+            ))}
           </div>
-        </section>
+        </section> */}
 
         <footer className="pb-2 text-center text-sm text-slate-400">
           <p>
-            Based in Ormskirk, England · Email:
-            <a
-              href="mailto:jahorrigan1411@gmail.com"
-              className="text-cyan-300 hover:text-cyan-200"
-            >
-              jahorrigan1411@gmail.com
-            </a>
+            {profile?.location && <span>{profile.location} · </span>}
+            Email:{' '}
+            {profile?.email && (
+              <a
+                href={`mailto:${profile.email}`}
+                className="text-cyan-300 hover:text-cyan-200"
+              >
+                {profile.email}
+              </a>
+            )}
           </p>
           <p className="mt-2">© {year} James Horrigan</p>
         </footer>

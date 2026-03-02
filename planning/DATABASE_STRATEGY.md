@@ -4,7 +4,7 @@ Generated: 2026-03-02
 
 ## Goal
 
-Replace hardcoded inline data in `app/page.tsx` (journey, skills, about text) with a database-backed CMS layer, removing dependency on `planning/linkedin.pdf`. All content should be editable without a code deploy.
+Replace hardcoded inline data in `app/page.tsx` (journey, skills, about text) with a database-backed CMS layer. All content should be editable without a code deploy.
 
 ---
 
@@ -122,25 +122,26 @@ education (
 
 ## Implementation Plan
 
-### Phase A — Setup (no UI changes yet)
+### Phase A — Setup ✅ DONE
 
-1. Create Neon project (free tier), copy connection string
-2. Add `@neondatabase/serverless` and `drizzle-orm` + `drizzle-kit` as dependencies
-3. Define schema in `db/schema.ts`
-4. Run `drizzle-kit push` to create tables
-5. Seed initial data (migrate content from current `page.tsx` inline arrays)
+1. ✅ Create Neon project (free tier), copy connection string
+2. ✅ Add `@neondatabase/serverless` and `drizzle-orm` + `drizzle-kit` as dependencies
+3. ✅ Define schema in `db/schema.ts`
+4. ✅ Run `drizzle-kit push` to create tables
+5. ✅ Seed initial data (migrate content from current `page.tsx` inline arrays)
 
-### Phase B — Wire to Page
+### Phase B — Wire to Page ✅ DONE
 
-6. Create `db/index.ts` — Neon HTTP client + Drizzle instance
-7. Create `db/queries.ts` — typed queries: `getRoles()`, `getSkills()`, `getProfile()`
-8. Replace inline arrays in `page.tsx` with server-side query calls (RSC — no `use client` needed)
-9. Verify build passes and page renders correctly
+6. ✅ Create `db/index.ts` — Neon HTTP client + Drizzle instance
+7. ✅ Create `db/queries.ts` — typed queries: `getRoles()`, `getSkillGroups()`, `getProfile()`, `getPortfolio()`
+8. ✅ Replace inline arrays and hardcoded content in `page.tsx` with server-side query calls (async RSC)
+9. ✅ Build passes, page renders correctly
+10. ✅ Extended `profile` table with `hero_summary`, `career_summary`, `location`, `email`
+11. ✅ Added `portfolio` table; portfolio section commented out pending real content
 
-### Phase C — Admin (optional, future)
+### Phase C — Admin (not required)
 
-10. Add a simple password-protected admin route to edit content without a deploy
-11. Or: use Neon's built-in SQL editor / Drizzle Studio for direct edits (simpler)
+Decided against an admin route. Content editable directly via Neon SQL editor or `db/seed.ts`.
 
 ---
 

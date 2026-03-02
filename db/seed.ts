@@ -6,18 +6,27 @@ const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
 
 async function seed() {
+  console.log('Truncating tables...');
+  await sql`TRUNCATE TABLE profile, skills, roles, portfolio RESTART IDENTITY CASCADE`;
+
   console.log('Seeding profile...');
   await db.insert(schema.profile).values({
     title: 'Full Stack Software Engineer',
     hero: 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.',
+    hero_summary:
+      'I am James Horrigan, a software engineer with 25+ years in technology, specialising in Python, AWS, and scalable architecture. I design and deliver reliable platforms that balance performance, security, and real user value.',
     summary:
       'My core discipline is backend engineering with Python and cloud computing on AWS, including 9 years of commercial serverless delivery. I also work across React, Next.js, and Tailwind CSS to build complete product experiences when full stack execution is needed.\n\nI am a detail-focused problem solver who thrives on clear communication, high standards, and constant learning. I enjoy building systems that are technically robust and strategically aligned to business outcomes.',
+    career_summary:
+      'From embedded software engineering to modern cloud and AI-enabled platforms, each role has built depth in scalability, reliability, and customer-facing product impact.',
+    location: 'Ormskirk, England',
+    email: 'jahorrigan1411@gmail.com',
     linkedin_url: 'https://www.linkedin.com/in/jameshorrigan',
     github_url: null,
   });
 
   console.log('Seeding skills...');
-  const skillRows = [
+  await db.insert(schema.skills).values([
     { name: 'Python', category: 'Backend', sort_order: 0 },
     { name: 'API Development', category: 'Backend', sort_order: 1 },
     { name: 'Serverless', category: 'Backend', sort_order: 2 },
@@ -30,11 +39,10 @@ async function seed() {
     { name: 'Docker', category: 'Cloud & DevOps', sort_order: 9 },
     { name: 'CI/CD', category: 'Cloud & DevOps', sort_order: 10 },
     { name: 'Agile Delivery', category: 'Delivery', sort_order: 11 },
-  ];
-  await db.insert(schema.skills).values(skillRows);
+  ]);
 
   console.log('Seeding roles...');
-  const roleRows = [
+  await db.insert(schema.roles).values([
     {
       period: '2023 — 2025',
       company: 'Intrum',
@@ -105,8 +113,29 @@ async function seed() {
       related_skills: null,
       sort_order: 6,
     },
-  ];
-  await db.insert(schema.roles).values(roleRows);
+  ]);
+
+  console.log('Seeding portfolio...');
+  await db.insert(schema.portfolio).values([
+    {
+      title: 'Project Case Study #1',
+      description: 'Coming soon',
+      image_url: null,
+      sort_order: 0,
+    },
+    {
+      title: 'Project Case Study #2',
+      description: 'Coming soon',
+      image_url: null,
+      sort_order: 1,
+    },
+    {
+      title: 'Project Case Study #3',
+      description: 'Coming soon',
+      image_url: null,
+      sort_order: 2,
+    },
+  ]);
 
   console.log('Done. Database seeded.');
 }
