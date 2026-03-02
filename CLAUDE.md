@@ -54,14 +54,17 @@ planning/
 
 ## Current State (2026-03-02)
 
-- All sections inline in `page.tsx` — no separate component files
+- All sections inline in `page.tsx` — `app/components/NavMenu.tsx` is the only separate component
 - `page.tsx` is an async RSC — fetches all content from Neon DB via Drizzle at build time
 - All content (hero, about, career summary, contact, location, GitHub URL) sourced from `profile` DB table
 - Career journey (7 roles) rendered from `roles` table
 - Skills (12, grouped by category) rendered from `skills` table
 - Portfolio section exists in DB (`portfolio` table, 3 rows) but commented out in `page.tsx` pending real content
-- Hero CTA row: LinkedIn + GitHub buttons (both from DB); Portfolio Links button removed
-- Header nav: About/Career/Skills hidden on mobile (`hidden md:flex`), Contact always visible
+- Hero CTA row: LinkedIn + GitHub buttons (both from DB); stack vertically on mobile
+- Header nav: `NavMenu` client component — burger menu on mobile (all links in dropdown), pill row on md+
+- Skills grid: `sm:grid-cols-2` (2-col from sm breakpoint)
+- All long text blobs: `text-sm leading-7 md:text-lg md:leading-8` (consistent across all sections)
+- Section padding tightened on mobile; hero h1 `text-3xl md:text-6xl`
 - Open Graph + Twitter metadata in `layout.tsx`
 - JSON-LD `Person` schema in `page.tsx`
 - Build: clean, zero TypeScript errors
@@ -92,7 +95,7 @@ planning/
 - Single-file page approach — all markup in `page.tsx`
 - Tailwind slate/cyan utilities used directly (no custom token classes)
 - `.glass` CSS class for card surfaces
-- No `"use client"` — all RSC
+- RSC-first — only `NavMenu.tsx` uses `"use client"` (burger menu state)
 - Content editable via DB, not code deploy
 
 ## Current Date

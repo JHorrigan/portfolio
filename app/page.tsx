@@ -1,4 +1,5 @@
 import { /*getPortfolio,*/ getProfile, getRoles, getSkillGroups } from '../db/queries';
+import NavMenu from './components/NavMenu';
 
 export default async function Home() {
   const year = new Date().getFullYear();
@@ -14,60 +15,31 @@ export default async function Home() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.16),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(14,116,144,0.2),transparent_42%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/80 to-transparent" />
 
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-10 md:px-10 md:py-14">
-        <header className="glass flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
-          <p className="text-sm font-semibold tracking-[0.18em] text-cyan-300">
+      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
+        <header className="glass relative z-10 flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
+          <p className="text-sm font-semibold tracking-widest text-cyan-300">
             JAMES HORRIGAN
           </p>
-          <div className="flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-2">
-              <a
-                href="#about"
-                className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
-              >
-                About
-              </a>
-              <a
-                href="#journey"
-                className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
-              >
-                Career
-              </a>
-              <a
-                href="#skills"
-                className="rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70"
-              >
-                Skills
-              </a>
-            </div>
-            {profile?.email && (
-              <a
-                className="rounded-full border border-cyan-300/40 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10"
-                href={`mailto:${profile.email}`}
-              >
-                Contact
-              </a>
-            )}
-          </div>
+          <NavMenu email={profile?.email} />
         </header>
 
-        <section className="glass rounded-3xl p-8 md:p-12">
+        <section className="glass rounded-3xl p-5 md:p-12">
           <p className="mb-4 inline-flex rounded-full border border-cyan-300/35 bg-cyan-300/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-cyan-200">
             {profile?.title?.toUpperCase() ?? 'FULL STACK SOFTWARE ENGINEER'}
           </p>
-          <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-white md:text-6xl">
+          <h1 className="max-w-4xl text-3xl font-semibold tracking-tight text-white md:text-6xl">
             {profile?.hero ?? 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.'}
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
+          <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
             {profile?.hero_summary}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             {profile?.linkedin_url && (
               <a
                 href={profile.linkedin_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                className="rounded-full bg-cyan-400 px-5 py-2.5 text-center text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
               >
                 LinkedIn Profile
               </a>
@@ -77,7 +49,7 @@ export default async function Home() {
                 href={profile.github_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-slate-600 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-slate-300 hover:bg-slate-900"
+                className="rounded-full border border-slate-600 px-5 py-2.5 text-center text-sm font-semibold text-slate-200 transition hover:border-slate-300 hover:bg-slate-900"
               >
                 GitHub
               </a>
@@ -91,26 +63,26 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="about" className="glass rounded-3xl p-8 md:p-10">
+        <section id="about" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
             About Me
           </h2>
           {profile?.summary?.split('\n\n').map((para, i) => (
-            <p key={i} className="mt-4 max-w-4xl leading-8 text-slate-300">
+            <p key={i} className="mt-4 max-w-4xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
               {para}
             </p>
           ))}
         </section>
 
-        <section id="skills" className="glass rounded-3xl p-8 md:p-10">
+        <section id="skills" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
             Skills
           </h2>
-          <p className="mt-3 max-w-3xl text-slate-300">
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
             Core technologies and capabilities used across platform, product,
             and delivery work.
           </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {skillGroups.map((group) => (
               <article
                 key={group.title}
@@ -134,27 +106,30 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="journey" className="glass rounded-3xl p-8 md:p-10">
+        <section id="journey" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
             Career Journey
           </h2>
-          <p className="mt-3 max-w-3xl text-slate-300">
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
             {profile?.career_summary}
           </p>
 
-          <ol className="mt-8 space-y-5">
+          <ol className="mt-8 space-y-4">
             {journey.map((item) => (
               <li
                 key={`${item.company}-${item.period}`}
-                className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5"
+                className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4"
               >
                 <p className="text-xs font-semibold tracking-[0.14em] text-cyan-300">
                   {item.period}
                 </p>
-                <h3 className="mt-1 text-lg font-semibold text-white">
-                  {item.role} · {item.company}
+                <h3 className="mt-1 text-base font-semibold leading-snug text-white sm:text-lg">
+                  {item.role}
+                  <br className="sm:hidden" />
+                  <span className="hidden sm:inline"> · </span>
+                  {item.company}
                 </h3>
-                <p className="mt-2 leading-7 text-slate-300">{item.summary}</p>
+                <p className="mt-2 text-sm leading-7 text-slate-300 md:text-lg md:leading-8">{item.summary}</p>
               </li>
             ))}
           </ol>
