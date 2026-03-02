@@ -75,6 +75,17 @@ export const roles: Role[] = [
     ],
     tech: ["C", "C++", "Embedded Systems"],
   },
+  {
+    company: "Marconi PLC",
+    title: "Trainee Software Engineer",
+    period: "Aug 1996 – Aug 1998",
+    location: "UK",
+    summary: [
+      "Learned software engineering fundamentals in an embedded systems environment, working on payphone platform software.",
+      "Supported senior engineers in defect investigation and resolution using C on proprietary hardware.",
+    ],
+    tech: ["C", "Embedded Systems"],
+  },
 ];
 
 export const skillGroups: SkillGroup[] = [

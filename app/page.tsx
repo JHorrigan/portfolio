@@ -1,7 +1,23 @@
+import Nav from "@/components/sections/Nav";
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+import Career from "@/components/sections/Career";
+import Skills from "@/components/sections/Skills";
+import Portfolio from "@/components/sections/Portfolio";
+import Footer from "@/components/sections/Footer";
+
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <p className="p-8 font-mono text-accent">James Horrigan — portfolio scaffold</p>
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Career />
+        <Skills />
+        <Portfolio />
+      </main>
+      <Footer />
+    </>
   );
 }

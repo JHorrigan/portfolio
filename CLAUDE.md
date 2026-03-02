@@ -21,19 +21,28 @@ npm run start     # serve production build
 
 ```
 app/
-  layout.tsx       # root layout: fonts (Inter, JetBrains Mono), metadata, body
-  page.tsx         # single page — composes all section components
-  globals.css      # @import "tailwindcss" + @theme inline design tokens
+  layout.tsx       # root layout: Inter + JetBrains Mono fonts, metadata
+  page.tsx         # single page — composes Nav + all sections + Footer
+  globals.css      # @import "tailwindcss" + @theme inline tokens + @keyframes
   favicon.ico
 components/
-  sections/        # Hero, About, Career, Skills, Portfolio, Footer (Phase 4)
-  ui/              # reusable primitives: Tag, SectionHeading, etc.
+  sections/
+    Nav.tsx        # sticky header: JH branding, 4 nav links, 1px accent top border
+    Hero.tsx       # full-viewport: name, subtitle, descriptor, CTA, CSS grid bg
+    About.tsx      # two-column: bio prose + skill tags from skillGroups data
+    Career.tsx     # vertical timeline: 7 roles, accent left line, bullets, tech tags
+    Skills.tsx     # 3-col grid of skill group cards
+    Portfolio.tsx  # placeholder cards (3x "Coming soon")
+    Footer.tsx     # LinkedIn, email, copyright
+  ui/
+    Tag.tsx        # inline tech/skill tag (monospace, border, no rounding)
+    SectionHeading.tsx  # section label + h2 + rule divider
 lib/
-  data.ts          # all content as typed TS — roles[], skillGroups[]
+  data.ts          # roles[] (7 entries), skillGroups[] (5 groups)
 types/
   index.ts         # Role, SkillGroup types
 planning/
-  PLAN.md          # phased implementation plan with checkboxes
+  PLAN.md          # phased plan with testing guidelines + success criteria
   TECHSTACK.md     # tech stack research notes
   linkedin.pdf     # source of truth for career content
 ```
@@ -53,9 +62,13 @@ planning/
 
 ## Current State (2026-03-02)
 
-- Phases 1–3 complete: scaffold, design system, content data layer
-- Phase 4 (page sections) not yet started — see `planning/PLAN.md`
-- `page.tsx` is currently a placeholder
+- Phases 1–4 complete: scaffold, design system, content data layer, all page sections
+- `page.tsx` composes Nav, Hero, About, Career, Skills, Portfolio, Footer
+- `lib/data.ts` has 7 roles (including Trainee Software Engineer, Marconi 1996–1998) and 5 skill groups
+- `components/sections/`: Nav, Hero, About, Career, Skills, Portfolio, Footer
+- `components/ui/`: Tag, SectionHeading
+- All components are RSC — no `"use client"` needed
+- Phase 5 (responsiveness polish) and Phase 6 (final review) pending — see `planning/PLAN.md`
 
 ## Key Conventions
 
