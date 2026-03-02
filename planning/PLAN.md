@@ -79,6 +79,14 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [x] Header name tracking: `tracking-widest` (was `tracking-[0.18em]`)
 - [x] Header `relative z-10` so burger dropdown renders above glass section cards
 
+### Phase 6 — Skills Section Redesign ✅
+- [x] Skills grid expanded to `sm:grid-cols-2 md:grid-cols-3`
+- [x] Cards compacted: `p-3/p-4`, `rounded-xl`, `text-xs` pills
+- [x] Removed intro paragraph for tighter layout
+- [x] Colour-coded by category via `CATEGORY_COLORS` map in `page.tsx`
+  - Backend: cyan, Frontend: violet, AI / ML: emerald, Cloud & DevOps: amber, Delivery: rose
+  - Each card: distinct border, label colour, tinted pill chips
+
 #### 5e — Consistent text sizing ✅
 - [x] All long text blobs use `text-sm leading-7 md:text-lg md:leading-8`
 - [x] Applies to: hero summary, about paragraphs, skills intro, career summary, journey role summaries

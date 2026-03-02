@@ -1,6 +1,15 @@
 import { /*getPortfolio,*/ getProfile, getRoles, getSkillGroups } from '../db/queries';
 import NavMenu from './components/NavMenu';
 
+const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string }> = {
+  'Backend':        { border: 'border-cyan-400/25',    label: 'text-cyan-300',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-200' },
+  'Frontend':       { border: 'border-violet-400/25',  label: 'text-violet-300',  pill: 'border-violet-400/30 bg-violet-400/10 text-violet-200' },
+  'AI / ML':        { border: 'border-emerald-400/25', label: 'text-emerald-300', pill: 'border-emerald-400/30 bg-emerald-400/10 text-emerald-200' },
+  'Cloud & DevOps': { border: 'border-amber-400/25',   label: 'text-amber-300',   pill: 'border-amber-400/30 bg-amber-400/10 text-amber-200' },
+  'Delivery':       { border: 'border-rose-400/25',    label: 'text-rose-300',    pill: 'border-rose-400/30 bg-rose-400/10 text-rose-200' },
+  '__default':      { border: 'border-slate-700',      label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
+};
+
 export default async function Home() {
   const year = new Date().getFullYear();
   const [profile, journey, skillGroups /*, portfolioItems*/] = await Promise.all([
@@ -78,31 +87,30 @@ export default async function Home() {
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
             Skills
           </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
-            Core technologies and capabilities used across platform, product,
-            and delivery work.
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {skillGroups.map((group) => (
-              <article
-                key={group.title}
-                className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5"
-              >
-                <h3 className="text-sm font-semibold tracking-[0.12em] text-cyan-300">
-                  {group.title}
-                </h3>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {group.items.map((skill) => (
-                    <li
-                      key={skill}
-                      className="rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1 text-sm text-slate-200"
-                    >
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+            {skillGroups.map((group) => {
+              const colors = CATEGORY_COLORS[group.title] ?? CATEGORY_COLORS['__default'];
+              return (
+                <article
+                  key={group.title}
+                  className={`rounded-xl border bg-slate-900/50 p-3 md:p-4 ${colors.border}`}
+                >
+                  <h3 className={`text-xs font-semibold tracking-[0.14em] ${colors.label}`}>
+                    {group.title.toUpperCase()}
+                  </h3>
+                  <ul className="mt-2 flex flex-wrap gap-1.5">
+                    {group.items.map((skill) => (
+                      <li
+                        key={skill}
+                        className={`rounded-full border px-2.5 py-0.5 text-xs ${colors.pill}`}
+                      >
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
           </div>
         </section>
 

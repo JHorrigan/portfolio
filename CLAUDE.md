@@ -62,7 +62,8 @@ planning/
 - Portfolio section exists in DB (`portfolio` table, 3 rows) but commented out in `page.tsx` pending real content
 - Hero CTA row: LinkedIn + GitHub buttons (both from DB); stack vertically on mobile
 - Header nav: `NavMenu` client component — burger menu on mobile (all links in dropdown), pill row on md+
-- Skills grid: `sm:grid-cols-2` (2-col from sm breakpoint)
+- Skills grid: `sm:grid-cols-2 md:grid-cols-3` (3-col from md), compact cards (`p-3/p-4`, `rounded-xl`, `text-xs` pills)
+- Skills colour-coded by category via `CATEGORY_COLORS` map at top of `page.tsx` — Backend: cyan, Frontend: violet, AI/ML: emerald, Cloud & DevOps: amber, Delivery: rose
 - All long text blobs: `text-sm leading-7 md:text-lg md:leading-8` (consistent across all sections)
 - Section padding tightened on mobile; hero h1 `text-3xl md:text-6xl`
 - Open Graph + Twitter metadata in `layout.tsx`
