@@ -58,8 +58,9 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [ ] Add real project content to `portfolio` DB table
 - [ ] Uncomment portfolio section in `page.tsx`
 
-### Deployment (optional)
-- [ ] Deploy to Vercel with `DATABASE_URL` environment variable
+### Deployment ✅
+- [x] Deploy to Vercel with `DATABASE_URL` environment variable
+- Production URL: https://portfolio-gamma-seven-ptzc9n2knp.vercel.app
 
 ## Validation Checklist
 

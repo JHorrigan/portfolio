@@ -66,10 +66,18 @@ planning/
 - JSON-LD `Person` schema in `page.tsx`
 - Build: clean, zero TypeScript errors
 
+## Deployment (Vercel)
+
+- Production URL: https://jameshorrigan.com
+- Vercel project: `portfolio` (team: james-horrigans-projects-9b275ab9)
+- `DATABASE_URL` set as Vercel production environment variable
+- GitHub (`JHorrigan/portfolio`) connected to Vercel — push to `main` auto-deploys
+- Custom domain `jameshorrigan.com` + `www.jameshorrigan.com` configured (DNS via IONOS)
+- Deploy command: `npx vercel --prod` (or push to main)
+
 ## Backlog
 
 - Populate `portfolio` DB table with real projects and uncomment the section in `page.tsx`
-- Deploy to Vercel (optional)
 
 ## Database (Neon)
 
