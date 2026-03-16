@@ -37,7 +37,7 @@ export default async function Home() {
 
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
         <header className="glass relative z-10 flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
-          <p className="text-sm font-semibold tracking-widest text-cyan-300">
+          <p className="text-sm font-semibold tracking-widest text-cyan-300 md:text-lg">
             JAMES HORRIGAN
           </p>
           <NavMenu email={profile?.email} />
@@ -226,7 +226,6 @@ export default async function Home() {
               </a>
             )}
           </p>
-          <p className="mt-2">© {year} James Horrigan</p>
         </footer>
       </main>
     </div>
