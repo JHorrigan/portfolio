@@ -1,6 +1,6 @@
 # Portfolio Project Plan (Current)
 
-Last updated: 2026-03-02
+Last updated: 2026-03-16
 
 ## Objective
 
@@ -52,6 +52,13 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [x] Mobile nav: About/Career/Skills hidden on small screens (`hidden md:flex`)
 - [x] JSON-LD `Person` structured data in `page.tsx`
 
+## Current Baseline (2026-03-16)
+
+- Digital Twin ("Ask James") feature live: `app/api/chat/route.ts` + `app/components/DigitalTwin.tsx`
+- `chat_rate_limits` table in Neon — IP-hash rate limiting, 5 questions/IP/day
+- `db/seed.ts` now requires `--force` flag — safe against accidental truncation
+- All three Vercel env vars required: `DATABASE_URL`, `OPENAI_API_KEY`, `IP_SALT`
+
 ## Active / Future Work
 
 ### Phase 5 — Mobile Responsive Polish ✅
@@ -91,6 +98,14 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [x] All long text blobs use `text-sm leading-7 md:text-lg md:leading-8`
 - [x] Applies to: hero summary, about paragraphs, skills intro, career summary, journey role summaries
 
+### Phase 7 — Digital Twin ✅
+- [x] `chat_rate_limits` Neon table (ip_hash, count, window_start) — schema pushed
+- [x] `app/api/chat/route.ts` — IP-hash rate limiting, system prompt from DB, GPT-4o-mini streaming
+- [x] `app/components/DigitalTwin.tsx` — messaging UI: JH + YOU avatars, suggestion chips, typing dots, streaming cursor, "New chat" button
+- [x] Rate limit: 5/IP/24h; label + status dot go rose on exhaustion; in-chat message on limit hit
+- [x] `db/seed.ts` guarded with `--force` flag
+- [x] NavMenu updated with "Ask" link
+
 ### Portfolio Section
 - [ ] Add real project content to `portfolio` DB table
 - [ ] Uncomment portfolio section in `page.tsx`
@@ -104,8 +119,9 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 
 1. `npm run build` exits 0.
 2. No TypeScript diagnostics.
-3. Key anchors navigate correctly (`about`, `skills`, `journey`).
+3. Key anchors navigate correctly (`about`, `skills`, `journey`, `ask`).
 4. No hardcoded content — all text sourced from DB.
+5. `OPENAI_API_KEY` and `IP_SALT` set in `.env.local` and Vercel.
 
 ## Commands
 
@@ -113,6 +129,6 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 npm run dev
 npm run build
 npm run start
-npx drizzle-kit push   # apply schema changes
-npx tsx db/seed.ts     # re-seed (truncates first)
+npx drizzle-kit push              # apply schema changes
+npx tsx db/seed.ts --force        # re-seed (truncates first — --force required)
 ```

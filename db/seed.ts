@@ -175,6 +175,12 @@ async function seed() {
   console.log('Done. Database seeded.');
 }
 
+if (!process.argv.includes('--force')) {
+  console.error('Aborted. This script truncates and re-seeds all tables.');
+  console.error('Run with --force to confirm: npx tsx db/seed.ts --force');
+  process.exit(1);
+}
+
 seed().catch((err) => {
   console.error(err);
   process.exit(1);
