@@ -58,6 +58,7 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - `chat_rate_limits` table in Neon — IP-hash rate limiting, 5 questions/IP/day
 - `db/seed.ts` now requires `--force` flag — safe against accidental truncation
 - All three Vercel env vars required: `DATABASE_URL`, `OPENAI_API_KEY`, `IP_SALT`
+- CV downloads live: `public/cv.pdf` + `public/cv.docx` — ATS-optimised, served via NavMenu dropdown
 
 ## Active / Future Work
 
