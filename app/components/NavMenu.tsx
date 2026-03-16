@@ -15,6 +15,58 @@ const pillBase =
 const contactBase =
   'rounded-full border border-cyan-300/40 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10';
 
+function DownloadCvButton() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1.5 rounded-full border border-slate-600 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-400 hover:bg-slate-900/70"
+      >
+        Download CV
+        <svg
+          width="11" height="11" viewBox="0 0 11 11" fill="none"
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          className={`transition-transform ${open ? 'rotate-180' : ''}`}
+        >
+          <polyline points="2,3 5.5,7 9,3" />
+        </svg>
+      </button>
+
+      {open && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-full z-50 mt-2 flex min-w-[140px] flex-col gap-1 rounded-2xl border border-slate-700/60 bg-slate-900/95 p-2 backdrop-blur-sm">
+            <a
+              href="/cv.pdf"
+              download
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:bg-slate-800"
+            >
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6.5 1v8M3.5 6.5l3 3 3-3" /><path d="M1 10.5v1a1 1 0 001 1h9a1 1 0 001-1v-1" />
+              </svg>
+              PDF
+            </a>
+            <a
+              href="/cv.docx"
+              download
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:bg-slate-800"
+            >
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6.5 1v8M3.5 6.5l3 3 3-3" /><path d="M1 10.5v1a1 1 0 001 1h9a1 1 0 001-1v-1" />
+              </svg>
+              DOCX
+            </a>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function NavMenu({ email }: { email?: string | null }) {
   const [open, setOpen] = useState(false);
 
@@ -27,6 +79,7 @@ export default function NavMenu({ email }: { email?: string | null }) {
             {link.label}
           </a>
         ))}
+        <DownloadCvButton />
         {email && (
           <a href={`mailto:${email}`} className={contactBase}>
             Contact
@@ -68,6 +121,24 @@ export default function NavMenu({ email }: { email?: string | null }) {
               {link.label}
             </a>
           ))}
+          <div className="mt-1 border-t border-slate-700/50 pt-1">
+            <a
+              href="/cv.pdf"
+              download
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:bg-slate-800"
+            >
+              Download CV (PDF)
+            </a>
+            <a
+              href="/cv.docx"
+              download
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:bg-slate-800"
+            >
+              Download CV (DOCX)
+            </a>
+          </div>
           {email && (
             <a
               href={`mailto:${email}`}

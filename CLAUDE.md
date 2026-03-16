@@ -33,7 +33,7 @@ app/
     chat/
       route.ts          # POST — digital twin chat: rate limiting, context building, GPT-4o-mini streaming
   components/
-    NavMenu.tsx         # "use client" — burger menu on mobile, pill row on md+
+    NavMenu.tsx         # "use client" — burger menu on mobile, pill row on md+; includes Download CV dropdown
     DigitalTwin.tsx     # "use client" — messaging-style chat UI for the digital twin
 db/
   schema.ts        # Drizzle table definitions: profile, skills, roles, portfolio, education, chatRateLimits
@@ -42,7 +42,9 @@ db/
   seed.ts          # truncates and re-seeds all tables (requires --force flag)
 drizzle.config.ts  # points to db/schema.ts, postgresql dialect
 .env.local         # DATABASE_URL, OPENAI_API_KEY, IP_SALT (not committed)
-public/            # empty
+public/
+  cv.pdf           # ATS-optimised CV (regenerate with db/scripts — see below)
+  cv.docx          # ATS-optimised CV (regenerate with db/scripts — see below)
 next.config.ts     # reactCompiler: true
 planning/
   PLAN.md          # phased plan + checklist
@@ -67,7 +69,7 @@ planning/
 - Skills (12, grouped by category) rendered from `skills` table
 - Portfolio section exists in DB (`portfolio` table, 3 rows) but commented out in `page.tsx` pending real content
 - Hero CTA row: LinkedIn + GitHub buttons (both from DB); stack vertically on mobile
-- Header nav: `NavMenu` client component — burger menu on mobile, pill row on md+; links: About, Career, Skills, Ask
+- Header nav: `NavMenu` client component — burger menu on mobile, pill row on md+; links: About, Career, Skills, Digital Twin, Download CV (dropdown: PDF / DOCX)
 - Skills grid: `sm:grid-cols-2 md:grid-cols-3`, compact cards (`p-3/p-4`, `rounded-xl`, `text-xs` pills)
 - Skills colour-coded by category via `CATEGORY_COLORS` map at top of `page.tsx`
 - All long text blobs: `text-sm leading-7 md:text-lg md:leading-8`
@@ -90,9 +92,18 @@ planning/
 - Custom domain `jameshorrigan.com` + `www.jameshorrigan.com` configured (DNS via IONOS)
 - Deploy command: `npx vercel --prod` (or push to main)
 
+## CV Downloads
+
+- `public/cv.pdf` and `public/cv.docx` are ATS-optimised placeholder files generated via Python (`uv run --with fpdf2` / `uv run --with python-docx`)
+- Generated with: single-column layout, standard ATS headings (PROFESSIONAL SUMMARY, CORE COMPETENCIES, WORK EXPERIENCE, EDUCATION, CERTIFICATIONS), action-verb bullets with metrics, Calibri/Helvetica fonts, plain ASCII only
+- **To update**: regenerate by re-running the generation scripts with updated data, or replace files directly in `public/`
+- **Placeholders to fill before sending**: phone number (`+44 [PHONE]`), education section, certifications section
+- Download CV button lives in `NavMenu.tsx` — desktop: pill button with chevron dropdown (PDF / DOCX); mobile: links in burger menu
+
 ## Backlog
 
 - Populate `portfolio` DB table with real projects and uncomment the section in `page.tsx`
+- Fill in CV placeholders: phone number, education, certifications
 
 ## Database (Neon)
 

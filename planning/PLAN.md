@@ -106,6 +106,14 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [x] `db/seed.ts` guarded with `--force` flag
 - [x] NavMenu updated with "Ask" link
 
+### Phase 8 — CV Downloads ✅
+- [x] `public/cv.pdf` and `public/cv.docx` generated — ATS-optimised layout
+- [x] Section order: Contact, Professional Summary, Core Competencies, Work Experience, Education, Certifications
+- [x] Action-verb bullet points with metrics; plain ASCII; single column; no tables
+- [x] Placeholder sections for Education and Certifications
+- [x] Download CV button in `NavMenu.tsx` — desktop dropdown (PDF/DOCX), mobile burger links
+- [ ] Fill placeholders: phone number, education, certifications
+
 ### Portfolio Section
 - [ ] Add real project content to `portfolio` DB table
 - [ ] Uncomment portfolio section in `page.tsx`
