@@ -1,4 +1,4 @@
-import { integer, pgTable, primaryKey, serial, text } from 'drizzle-orm/pg-core';
+import { integer, pgTable, primaryKey, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const profile = pgTable('profile', {
   id: serial('id').primaryKey(),
@@ -53,6 +53,12 @@ export const portfolio = pgTable('portfolio', {
   description: text('description'),
   image_url: text('image_url'),
   sort_order: integer('sort_order').default(0),
+});
+
+export const chatRateLimits = pgTable('chat_rate_limits', {
+  ip_hash: text('ip_hash').primaryKey(),
+  count: integer('count').notNull().default(0),
+  window_start: timestamp('window_start', { withTimezone: true }).notNull(),
 });
 
 export const education = pgTable('education', {

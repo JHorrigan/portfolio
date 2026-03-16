@@ -1,4 +1,5 @@
 import { /*getPortfolio,*/ getProfile, getRoles, getSkillGroups } from '../db/queries';
+import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
 
 const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string }> = {
@@ -18,7 +19,6 @@ const TITLE_BADGE_STYLES = [
 ];
 
 export default async function Home() {
-  const year = new Date().getFullYear();
   const [profile, journey, skillGroups /*, portfolioItems*/] = await Promise.all([
     getProfile(),
     getRoles(),
@@ -213,6 +213,8 @@ export default async function Home() {
             }),
           }}
         />
+        <DigitalTwin />
+
         <footer className="pb-2 text-center text-sm text-slate-400">
           <p>
             {profile?.location && <span>{profile.location} · </span>}
