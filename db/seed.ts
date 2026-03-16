@@ -11,7 +11,11 @@ async function seed() {
 
   console.log('Seeding profile...');
   await db.insert(schema.profile).values({
-    title: 'Full Stack Software Engineer',
+    title: [
+      'Full Stack Software Engineer',
+      'Python + AWS Specialist',
+      'AI Product Builder',
+    ],
     hero: 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.',
     hero_summary:
       'I am James Horrigan, a software engineer with 25+ years in technology, specialising in Python, AWS, and scalable architecture. I design and deliver reliable platforms that balance performance, security, and real user value.',

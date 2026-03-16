@@ -10,6 +10,13 @@ const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: str
   '__default':      { border: 'border-slate-700',      label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
 };
 
+const TITLE_BADGE_STYLES = [
+  'border-cyan-300/35 bg-cyan-300/10 text-cyan-200',
+  'border-emerald-300/35 bg-emerald-300/10 text-emerald-200',
+  'border-amber-300/35 bg-amber-300/10 text-amber-200',
+  'border-rose-300/35 bg-rose-300/10 text-rose-200',
+];
+
 export default async function Home() {
   const year = new Date().getFullYear();
   const [profile, journey, skillGroups /*, portfolioItems*/] = await Promise.all([
@@ -18,6 +25,10 @@ export default async function Home() {
     getSkillGroups(),
     // getPortfolio(),
   ]);
+
+  const titleBadges = Array.isArray(profile?.title) && profile.title.length > 0
+    ? profile.title
+    : ['Full Stack Software Engineer'];
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
@@ -33,9 +44,16 @@ export default async function Home() {
         </header>
 
         <section className="glass rounded-3xl p-5 md:p-12">
-          <p className="mb-4 inline-flex rounded-full border border-cyan-300/35 bg-cyan-300/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-cyan-200">
-            {profile?.title?.toUpperCase() ?? 'FULL STACK SOFTWARE ENGINEER'}
-          </p>
+          <div className="mb-4 flex flex-wrap gap-2">
+            {titleBadges.map((title, index) => (
+              <p
+                key={`${title}-${index}`}
+                className={`inline-flex rounded-full border px-4 py-1 text-xs font-semibold tracking-[0.16em] ${TITLE_BADGE_STYLES[index % TITLE_BADGE_STYLES.length]}`}
+              >
+                {title.toUpperCase()}
+              </p>
+            ))}
+          </div>
           <h1 className="max-w-4xl text-3xl font-semibold tracking-tight text-white md:text-6xl">
             {profile?.hero ?? 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.'}
           </h1>
@@ -173,7 +191,7 @@ export default async function Home() {
               "@context": "https://schema.org",
               "@type": "Person",
               name: "James Horrigan",
-              jobTitle: profile?.title ?? "Full Stack Software Engineer",
+              jobTitle: titleBadges.join(' | '),
               email: profile?.email ?? undefined,
               sameAs: [profile?.linkedin_url, profile?.github_url].filter(
                 (v): v is string => v != null

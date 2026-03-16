@@ -2,7 +2,7 @@ import { integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
 
 export const profile = pgTable('profile', {
   id: serial('id').primaryKey(),
-  title: text('title'),
+  title: text('title').array(),
   hero: text('hero'),
   hero_summary: text('hero_summary'),
   summary: text('summary'),
