@@ -7,7 +7,7 @@ const db = drizzle(sql, { schema });
 
 async function seed() {
   console.log('Truncating tables...');
-  await sql`TRUNCATE TABLE profile, skills, roles, portfolio RESTART IDENTITY CASCADE`;
+  await sql`TRUNCATE TABLE profile, skills, roles, role_skills, portfolio RESTART IDENTITY CASCADE`;
 
   console.log('Seeding profile...');
   await db.insert(schema.profile).values({
@@ -30,7 +30,7 @@ async function seed() {
   });
 
   console.log('Seeding skills...');
-  await db.insert(schema.skills).values([
+  const seededSkills = await db.insert(schema.skills).values([
     { name: 'Python', category: 'Backend', sort_order: 0 },
     { name: 'API Development', category: 'Backend', sort_order: 1 },
     { name: 'Serverless', category: 'Backend', sort_order: 2 },
@@ -43,10 +43,12 @@ async function seed() {
     { name: 'Docker', category: 'Cloud & DevOps', sort_order: 9 },
     { name: 'CI/CD', category: 'Cloud & DevOps', sort_order: 10 },
     { name: 'Agile Delivery', category: 'Delivery', sort_order: 11 },
-  ]);
+  ]).returning({ id: schema.skills.id, name: schema.skills.name });
+
+  const skillIdByName = new Map(seededSkills.map((skill) => [skill.name, skill.id]));
 
   console.log('Seeding roles...');
-  await db.insert(schema.roles).values([
+  const rolesToSeed = [
     {
       period: 'October 2023 — July 2025',
       company: 'Intrum',
@@ -54,7 +56,7 @@ async function seed() {
       summary:
         'Built customer-facing debt management portals and APIs with React, Python, and AWS serverless architecture. Delivered secure authentication, white-labelling, high-speed content delivery, and AI-assisted agent tooling.',
       highlights: null,
-      related_skills: null,
+      skillNames: ['Python', 'API Development', 'Serverless', 'AWS', 'React'],
       sort_order: 0,
     },
     {
@@ -64,7 +66,7 @@ async function seed() {
       summary:
         'Designed scalable Python systems for enterprise hiring automation, launched NLP parsing products, and led engineering delivery across major European client onboarding programs.',
       highlights: null,
-      related_skills: null,
+      skillNames: ['Python', 'Generative AI', 'NLP', 'AWS', 'Agile Delivery'],
       sort_order: 1,
     },
     {
@@ -74,7 +76,7 @@ async function seed() {
       summary:
         'Engineered high-throughput Python data pipelines for hundreds of millions of live product updates, including large-scale migrations and platform-level optimisation work.',
       highlights: null,
-      related_skills: null,
+      skillNames: ['Python', 'API Development', 'CI/CD'],
       sort_order: 2,
     },
     {
@@ -84,7 +86,7 @@ async function seed() {
       summary:
         'Built innovation-focused internal tooling and rapid prototypes to improve operational efficiency and support faster decision-making across customer operations.',
       highlights: null,
-      related_skills: null,
+      skillNames: ['Python', 'Agile Delivery'],
       sort_order: 3,
     },
     {
@@ -94,7 +96,7 @@ async function seed() {
       summary:
         'Created real-time operational web tooling and reporting systems, improving decision speed and reducing manual workload across multiple business sites.',
       highlights: null,
-      related_skills: null,
+      skillNames: ['API Development', 'Agile Delivery'],
       sort_order: 4,
     },
     {
@@ -104,7 +106,7 @@ async function seed() {
       summary:
         'Started in embedded software, delivering production C/C++ solutions, testing workflows, and engineering utilities while building a strong software lifecycle foundation.',
       highlights: null,
-      related_skills: null,
+      skillNames: ['API Development'],
       sort_order: 5,
     },
     {
@@ -114,10 +116,39 @@ async function seed() {
       summary:
         'Completed foundational engineering training while supporting software delivery, testing activities, and technical documentation in a production environment.',
       highlights: null,
-      related_skills: null,
+      skillNames: ['Agile Delivery'],
       sort_order: 6,
     },
-  ]);
+  ];
+
+  const seededRoles = await db
+    .insert(schema.roles)
+    .values(
+      rolesToSeed.map(({ skillNames: _skillNames, ...role }) => role)
+    )
+    .returning({ id: schema.roles.id, company: schema.roles.company, role: schema.roles.role });
+
+  const roleIdByKey = new Map(
+    seededRoles.map((role) => [`${role.company}::${role.role}`, role.id])
+  );
+
+  const roleSkillRows = rolesToSeed.flatMap((role) => {
+    const roleId = roleIdByKey.get(`${role.company}::${role.role}`);
+    if (!roleId) return [];
+
+    const seenSkillIds = new Set<number>();
+    return role.skillNames.flatMap((skillName, index) => {
+      const skillId = skillIdByName.get(skillName);
+      if (!skillId || seenSkillIds.has(skillId)) return [];
+      seenSkillIds.add(skillId);
+
+      return [{ role_id: roleId, skill_id: skillId, sort_order: index }];
+    });
+  });
+
+  if (roleSkillRows.length > 0) {
+    await db.insert(schema.roleSkills).values(roleSkillRows);
+  }
 
   console.log('Seeding portfolio...');
   await db.insert(schema.portfolio).values([

@@ -44,11 +44,11 @@ export default async function Home() {
         </header>
 
         <section className="glass rounded-3xl p-5 md:p-12">
-          <div className="mb-4 flex flex-wrap gap-2">
+          <div className="mb-6 flex flex-wrap gap-2 md:mb-7">
             {titleBadges.map((title, index) => (
               <p
                 key={`${title}-${index}`}
-                className={`inline-flex rounded-full border px-4 py-1 text-xs font-semibold tracking-[0.16em] ${TITLE_BADGE_STYLES[index % TITLE_BADGE_STYLES.length]}`}
+                className={`inline-flex rounded-full border px-3 py-0.5 text-[11px] font-semibold tracking-[0.16em] md:px-4 md:py-1 md:text-xs ${TITLE_BADGE_STYLES[index % TITLE_BADGE_STYLES.length]}`}
               >
                 {title.toUpperCase()}
               </p>
@@ -156,6 +156,20 @@ export default async function Home() {
                   {item.company}
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-slate-300 md:text-lg md:leading-8">{item.summary}</p>
+                {item.skills.length > 0 && (
+                  <ul className="mt-3 flex flex-wrap gap-1.5">
+                    {item.skills.map((skill) => (
+                      <li
+                        key={`${item.id}-${skill.id}`}
+                        className={`rounded-full border px-2.5 py-0.5 text-xs ${
+                          (CATEGORY_COLORS[skill.category ?? ''] ?? CATEGORY_COLORS['__default']).pill
+                        }`}
+                      >
+                        {skill.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ol>
