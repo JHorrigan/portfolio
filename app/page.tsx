@@ -81,12 +81,12 @@ export default async function Home() {
                 GitHub
               </a>
             )}
-            {/* <a
-              href="#portfolio"
-              className="rounded-full border border-slate-600 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-slate-300 hover:bg-slate-900"
+            <a
+              href="#ask"
+              className="rounded-full border border-cyan-400/40 px-5 py-2.5 text-center text-sm font-semibold text-cyan-300 transition hover:border-cyan-300 hover:bg-cyan-400/10"
             >
-              Portfolio Links
-            </a> */}
+              Ask Digital Twin
+            </a>
           </div>
         </section>
 
