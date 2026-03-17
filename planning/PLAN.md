@@ -89,6 +89,26 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [ ] Add to `NavMenu.tsx` or inline above relevant section
 - [ ] Verify no regression on build + mobile layout
 
+### Phase 11 — Content Completion
+- [ ] Populate `highlights` field in `db/seed.ts` for all 7 roles
+- [ ] Render `highlights` bullet list in role cards in `page.tsx`
+- [ ] Add `certifications` table to `db/schema.ts` (id, title, issuer, date, sort_order)
+- [ ] Run `npx drizzle-kit push` to create certifications table
+- [ ] Populate `education` and `certifications` rows in `db/seed.ts`
+- [ ] Add `getEducation()` and `getCertifications()` queries to `db/queries.ts`
+- [ ] Render education + certifications sections in `page.tsx`
+- [ ] Update CV placeholders: phone number, education, certifications
+- [ ] Ensure every skill category has a distinct entry in `CATEGORY_COLORS` in `page.tsx` (border, label, pill classes) — update if new categories are added
+- [ ] Verify build passes
+
+### Phase 12 — Company Logos on Roles
+- [ ] Add `logo_url` field to `roles` table in `db/schema.ts`
+- [ ] Run `npx drizzle-kit push` to apply schema change
+- [ ] Add `logo_domain` field instead of `logo_url` — use [logo.dev](https://logo.dev) API (`https://img.logo.dev/{domain}?token=...`) to fetch logos by domain (e.g. `hsbc.com`); store domain in DB, construct URL at render time
+- [ ] Populate `logo_domain` for all 7 roles in `db/seed.ts`; fall back to `public/logos/` for any not covered
+- [ ] Render logo image in each role card in `page.tsx` (next/image, fallback to company initial if no logo)
+- [ ] Verify build passes and logos display correctly on mobile
+
 ---
 
 ## Validation Checklist
