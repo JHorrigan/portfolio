@@ -101,6 +101,35 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [ ] Ensure every skill category has a distinct entry in `CATEGORY_COLORS` in `page.tsx` (border, label, pill classes) — update if new categories are added
 - [ ] Verify build passes
 
+### Phase 14 — Digital Twin Improvements
+**UX**
+- [ ] **Multi-turn conversation**: pass full message history to the API so follow-up questions retain context; keep history client-side only (stateless server)
+- [ ] **Markdown rendering**: render assistant responses as markdown (bold, bullets, code) using a lightweight renderer (e.g. `react-markdown` + `remark-gfm`); user bubbles stay plain text
+- [ ] **Follow-up suggestion chips**: after each assistant response, show 2–3 contextual follow-up prompts; replace the static `SUGGESTED` list which currently vanishes after the first message
+- [ ] **Clean stream signalling**: replace the `__remaining:N__` string injected into the stream body with a proper `X-Remaining` response header read after streaming completes; eliminates fragile regex parsing in the client
+- [ ] **Live auto-scroll during streaming**: move `bottomRef.scrollIntoView` inside the chunk loop so the window tracks the response as it streams, not only at the end
+
+**Cost Optimisation**
+- [ ] **Cap conversation history sent to API**: send at most the last 6 messages (3 turns) to avoid token bloat as conversations grow; oldest messages dropped client-side before the POST
+- [ ] **Trim system prompt**: remove verbose fields (e.g. full role summaries) from `buildSystemPrompt` when highlights are populated — keep only the highest-signal content to minimise prompt tokens
+- [ ] **Log token usage**: log `usage.prompt_tokens` + `usage.completion_tokens` from the OpenAI response to the console in development so cost per request is visible
+- [ ] **Tune `max_tokens`**: review typical response lengths after logging; lower the 300-token cap if responses consistently finish well below it
+
+**Testing**
+- [ ] **Unit test rate limiter**: test `checkRateLimit` logic in isolation — first request, within-window increment, window expiry reset, limit hit
+- [ ] **Unit test system prompt builder**: assert `buildSystemPrompt` includes key profile/role/skill fields and handles nulls gracefully
+- [ ] **Component test `DigitalTwin`**: use React Testing Library to test suggestion chip click → message appears, input disabled when `remaining === 0`, error state renders
+- [ ] **E2E smoke test**: Playwright test that opens `/`, clicks a suggestion chip, and asserts an assistant message appears (mock the `/api/chat` endpoint)
+- [ ] **Verify build passes and UX works end-to-end on mobile**
+
+### Phase 13 — Interactive Contact Form
+- [ ] Add `contact_messages` table to `db/schema.ts` (id, name, email, message, created_at)
+- [ ] Run `npx drizzle-kit push` to create the table
+- [ ] Create `app/api/contact/route.ts` — POST handler: validate fields, insert row to DB, return success/error JSON
+- [ ] Create `app/components/ContactForm.tsx` — "use client"; name, email, message fields; submit button; inline success/error feedback; loading state
+- [ ] Replace `mailto:` link in footer with `ContactForm` component (or add a dedicated `#contact` section above footer)
+- [ ] Verify build passes and form submits correctly
+
 ### Phase 12 — Company Logos on Roles
 - [ ] Add `logo_url` field to `roles` table in `db/schema.ts`
 - [ ] Run `npx drizzle-kit push` to apply schema change
