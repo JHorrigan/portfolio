@@ -51,6 +51,7 @@ export const portfolio = pgTable('portfolio', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
   description: text('description'),
+  url: text('url'),
   image_url: text('image_url'),
   sort_order: integer('sort_order').default(0),
 });

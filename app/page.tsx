@@ -1,4 +1,4 @@
-import { /*getPortfolio,*/ getProfile, getRoles, getSkillGroups } from '../db/queries';
+import { getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
 import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
 
@@ -19,11 +19,11 @@ const TITLE_BADGE_STYLES = [
 ];
 
 export default async function Home() {
-  const [profile, journey, skillGroups /*, portfolioItems*/] = await Promise.all([
+  const [profile, journey, skillGroups, portfolioItems] = await Promise.all([
     getProfile(),
     getRoles(),
     getSkillGroups(),
-    // getPortfolio(),
+    getPortfolio(),
   ]);
 
   const titleBadges = Array.isArray(profile?.title) && profile.title.length > 0
@@ -175,28 +175,47 @@ export default async function Home() {
           </ol>
         </section>
 
-        {/* <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
-          <h2 className="text-2xl font-semibold text-white md:text-3xl">
-            Portfolio Links (Future)
-          </h2>
-          <p className="mt-3 max-w-3xl text-slate-300">
-            Dedicated case studies and live projects will be linked here as the
-            portfolio expands.
+        <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">Live Projects</h2>
+          <p className="mt-3 max-w-2xl text-slate-400">
+            Products and platforms built and shipped.
           </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
             {portfolioItems.map((item) => (
               <article
                 key={item.id}
-                className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-200"
+                className="group relative flex flex-col rounded-2xl border border-slate-700/60 bg-slate-900/50 overflow-hidden transition hover:border-cyan-400/40 hover:bg-slate-900/80"
               >
-                <h3 className="font-semibold text-white">{item.title}</h3>
-                {item.description && (
-                  <p className="mt-1 text-sm text-slate-300">{item.description}</p>
-                )}
+                {/* Cyan accent top bar */}
+                <div className="h-px w-full bg-linear-to-r from-transparent via-cyan-400/50 to-transparent" />
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-semibold text-white tracking-tight">{item.title}</h3>
+                  {item.url && (
+                    <p className="mt-1 font-mono text-xs text-slate-500 truncate">
+                      {item.url.replace('https://', '')}
+                    </p>
+                  )}
+                  {item.description && (
+                    <p className="mt-3 text-sm text-slate-400 flex-1">{item.description}</p>
+                  )}
+                  {item.url && (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center gap-1.5 self-start rounded-full border border-cyan-400/30 bg-cyan-400/5 px-3 py-1 text-xs font-semibold text-cyan-300 transition hover:border-cyan-300 hover:bg-cyan-400/15"
+                    >
+                      Visit
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M2 8L8 2M5 2h3v3" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
-        </section> */}
+        </section>
 
         <script
           type="application/ld+json"
