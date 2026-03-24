@@ -1,6 +1,6 @@
 # Portfolio Project Plan
 
-Last updated: 2026-03-17
+Last updated: 2026-03-24
 
 ## References
 - DB strategy & rationale: `@planning/DATABASE_STRATEGY.md`
@@ -76,10 +76,14 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 
 ## Active / Future Work
 
-### Phase 9 — Portfolio Section
-- [ ] Add real project content to `portfolio` DB table
-- [ ] Uncomment portfolio section in `page.tsx`
-- [ ] Verify build passes and section renders correctly
+### Phase 9 — Portfolio Section ✅
+- [x] Add `url` column to `portfolio` schema, pushed to Neon via targeted SQL (not seed)
+- [x] Populated portfolio table with 3 Xploratech sites via SQL UPDATE
+- [x] Screenshots added to `public/` — `xploratech-screenshot.png`, `xa3-screenshot.png`, `xploratech-api-screenshot.png`
+- [x] Flip card UI: front = screenshot + title overlay, hover = detail card with description + Visit link
+- [x] `app/icon.svg` — JH monogram favicon (replaced default `favicon.ico`)
+- [x] "Projects" added to NavMenu
+- [x] Build clean, deployed to production
 
 ### Phase 10 — Search
 > **Awaiting scope confirmation.** Assumed: client-side search across skills/roles/content on the page.
@@ -144,6 +148,6 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 
 - [ ] `npm run build` exits 0
 - [ ] Zero TypeScript diagnostics
-- [ ] Key anchors navigate correctly: `about`, `skills`, `journey`, `ask`
+- [ ] Key anchors navigate correctly: `about`, `skills`, `journey`, `portfolio`, `ask`
 - [ ] No hardcoded content — all text from DB
 - [ ] `OPENAI_API_KEY` + `IP_SALT` set in `.env.local` and Vercel
