@@ -181,39 +181,70 @@ export default async function Home() {
             Products and platforms built and shipped.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {portfolioItems.map((item) => (
-              <article
-                key={item.id}
-                className="group relative flex flex-col rounded-2xl border border-slate-700/60 bg-slate-900/50 overflow-hidden transition hover:border-cyan-400/40 hover:bg-slate-900/80"
-              >
-                {/* Cyan accent top bar */}
-                <div className="h-px w-full bg-linear-to-r from-transparent via-cyan-400/50 to-transparent" />
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-semibold text-white tracking-tight">{item.title}</h3>
-                  {item.url && (
-                    <p className="mt-1 font-mono text-xs text-slate-500 truncate">
-                      {item.url.replace('https://', '')}
-                    </p>
-                  )}
-                  {item.description && (
-                    <p className="mt-3 text-sm text-slate-400 flex-1">{item.description}</p>
-                  )}
-                  {item.url && (
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-5 inline-flex items-center gap-1.5 self-start rounded-full border border-cyan-400/30 bg-cyan-400/5 px-3 py-1 text-xs font-semibold text-cyan-300 transition hover:border-cyan-300 hover:bg-cyan-400/15"
-                    >
-                      Visit
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M2 8L8 2M5 2h3v3" />
-                      </svg>
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
+            {portfolioItems.map((item, i) => {
+              const gradients = [
+                'linear-gradient(135deg, #0c4a6e 0%, #020617 60%, #083344 100%)',
+                'linear-gradient(135deg, #064e3b 0%, #020617 60%, #052e16 100%)',
+                'linear-gradient(135deg, #2e1065 0%, #020617 60%, #1e1b4b 100%)',
+              ];
+              const accentColors = ['#67e8f9', '#6ee7b7', '#c4b5fd'];
+              const gradient = gradients[i % gradients.length];
+              const accent = accentColors[i % accentColors.length];
+              return (
+                <article
+                  key={item.id}
+                  className="group h-52 perspective-[1000px]"
+                >
+                  <div className="relative h-full transition-transform duration-500 transform-3d group-hover:transform-[rotateY(180deg)]">
+
+                    {/* Front — image / gradient with title overlay */}
+                    <div className="absolute inset-0 rounded-2xl overflow-hidden border border-slate-700/60 backface-hidden">
+                      {item.image_url ? (
+                        <img src={item.image_url} alt={item.title} className="h-full w-full object-cover" />
+                      ) : (
+                        <div className="h-full w-full" style={{ background: gradient }} />
+                      )}
+                      {/* grid lines overlay */}
+                      <div className="absolute inset-0 opacity-10" style={{
+                        backgroundImage: `linear-gradient(${accent}33 1px, transparent 1px), linear-gradient(90deg, ${accent}33 1px, transparent 1px)`,
+                        backgroundSize: '24px 24px',
+                      }} />
+                      {/* title overlay */}
+                      <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-slate-950/90 via-slate-950/20 to-transparent p-5">
+                        <p className="font-mono text-xs mb-1 truncate" style={{ color: `${accent}99` }}>
+                          {item.url?.replace('https://', '')}
+                        </p>
+                        <h3 className="text-lg font-bold text-white tracking-tight leading-tight">{item.title}</h3>
+                      </div>
+                    </div>
+
+                    {/* Back — detail card */}
+                    <div className="absolute inset-0 rounded-2xl border border-slate-700/60 bg-slate-900/95 backface-hidden transform-[rotateY(180deg)] flex flex-col p-5">
+                      <div className="h-px w-full mb-4" style={{ background: `linear-gradient(90deg, transparent, ${accent}60, transparent)` }} />
+                      <h3 className="font-semibold text-white tracking-tight">{item.title}</h3>
+                      {item.description && (
+                        <p className="mt-2 text-sm text-slate-400 flex-1">{item.description}</p>
+                      )}
+                      {item.url && (
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full border px-3 py-1 text-xs font-semibold transition"
+                          style={{ borderColor: `${accent}50`, color: accent }}
+                        >
+                          Visit
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M2 8L8 2M5 2h3v3" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
