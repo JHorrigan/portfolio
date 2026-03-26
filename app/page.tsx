@@ -115,12 +115,29 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="about" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:160ms]">
+        <section id="journey" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:160ms]">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
-            About Me
+            Career Journey
           </h2>
-          <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
+            {profile?.career_summary}
+          </p>
+
+          <div className="relative mt-8">
+            {/* Timeline spine */}
+            <div className="absolute left-1.25 top-6 bottom-6 w-px bg-linear-to-b from-cyan-400/50 via-slate-700/40 to-transparent" />
+            <ol className="space-y-3">
+              {journey.map((item, index) => (
+                <RoleCard
+                  key={item.id}
+                  item={item}
+                  isFirst={index === 0}
+                  categoryColors={CATEGORY_COLORS}
+                />
+              ))}
+            </ol>
+          </div>
         </section>
 
         <section id="skills" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:240ms]">
@@ -155,29 +172,12 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="journey" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:320ms]">
+        <section id="about" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:320ms]">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
-            Career Journey
+            About Me
           </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
-            {profile?.career_summary}
-          </p>
-
-          <div className="relative mt-8">
-            {/* Timeline spine */}
-            <div className="absolute left-1.25 top-6 bottom-6 w-px bg-linear-to-b from-cyan-400/50 via-slate-700/40 to-transparent" />
-            <ol className="space-y-3">
-              {journey.map((item, index) => (
-                <RoleCard
-                  key={item.id}
-                  item={item}
-                  isFirst={index === 0}
-                  categoryColors={CATEGORY_COLORS}
-                />
-              ))}
-            </ol>
-          </div>
+          <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
         </section>
 
         <section id="portfolio" className="glass rounded-3xl p-8 md:p-10 animate-fade-in-up [animation-delay:400ms]">
