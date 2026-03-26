@@ -39,14 +39,14 @@ export default async function Home() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/80 to-transparent" />
 
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
-        <header className="glass relative z-10 flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
+        <header className="glass relative z-10 flex items-center justify-between gap-4 rounded-2xl px-6 py-4 animate-fade-in-up [animation-delay:0ms]">
           <p className="text-sm font-semibold tracking-widest text-cyan-300 md:text-lg">
             JAMES HORRIGAN
           </p>
           <NavMenu email={profile?.email} />
         </header>
 
-        <section className="glass relative overflow-hidden rounded-3xl p-6 md:p-16">
+        <section className="glass relative overflow-hidden rounded-3xl p-6 md:p-16 animate-fade-in-up [animation-delay:80ms]">
           {/* Inner hero glow */}
           <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(ellipse_at_top_left,rgba(34,211,238,0.07),transparent_55%)]" />
 
@@ -115,7 +115,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="about" className="glass rounded-3xl p-5 md:p-10">
+        <section id="about" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:160ms]">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             About Me
@@ -123,7 +123,7 @@ export default async function Home() {
           <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
         </section>
 
-        <section id="skills" className="glass rounded-3xl p-5 md:p-10">
+        <section id="skills" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:240ms]">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Skills
@@ -155,7 +155,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="journey" className="glass rounded-3xl p-5 md:p-10">
+        <section id="journey" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:320ms]">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Career Journey
@@ -180,7 +180,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
+        <section id="portfolio" className="glass rounded-3xl p-8 md:p-10 animate-fade-in-up [animation-delay:400ms]">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Live Projects
@@ -225,19 +225,34 @@ export default async function Home() {
         />
         <DigitalTwin />
 
-        <footer className="pb-2 text-center text-sm text-slate-400">
-          <p>
-            {profile?.location && <span>{profile.location} · </span>}
-            Email:{' '}
-            {profile?.email && (
-              <a
-                href={`mailto:${profile.email}`}
-                className="text-cyan-300 hover:text-cyan-200"
-              >
-                {profile.email}
-              </a>
-            )}
-          </p>
+        <footer className="py-6 md:py-10">
+          <div className="mb-6 h-px bg-linear-to-r from-transparent via-cyan-300/40 to-transparent" />
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold tracking-widest text-slate-300">JAMES HORRIGAN</p>
+              {profile?.location && (
+                <p className="mt-1 text-xs text-slate-500">{profile.location}</p>
+              )}
+            </div>
+            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+              {profile?.linkedin_url && (
+                <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="transition hover:text-cyan-300">
+                  LinkedIn
+                </a>
+              )}
+              {profile?.github_url && (
+                <a href={profile.github_url} target="_blank" rel="noopener noreferrer" className="transition hover:text-cyan-300">
+                  GitHub
+                </a>
+              )}
+              {profile?.email && (
+                <a href={`mailto:${profile.email}`} className="transition hover:text-cyan-300">
+                  {profile.email}
+                </a>
+              )}
+            </div>
+          </div>
+          <p className="mt-4 text-xs text-slate-600">© 2025 James Horrigan</p>
         </footer>
       </main>
     </div>

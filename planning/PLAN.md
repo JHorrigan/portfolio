@@ -164,17 +164,15 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [x] Portfolio cards: `PortfolioCard.tsx` client component; `h-72` (was `h-52`); click/tap toggles flip; "tap to explore →" affordance on front; `stopPropagation` on Visit link
 
 **Priority 3 — Digital Twin Section Wrapper**
-- [ ] In `page.tsx`, wrap `<DigitalTwin />` in a proper `<section id="ask">` with an `h2` header ("Digital Twin") and a 1–2 line descriptor
+- [x] Already handled inside `DigitalTwin.tsx` — renders `<section id="ask">` with h2 "Ask James"
 
 **Priority 3 — Entry Animations**
-- [ ] Add CSS-only `@keyframes fadeInUp` in `globals.css` with `animation-fill-mode: both`
-- [ ] Apply `animate-fade-in-up` with staggered `animation-delay` to each `<section>` via a `@theme` animation token in Tailwind v4
-- [ ] Use `prefers-reduced-motion` media query to disable for accessibility
+- [x] `@keyframes fade-in-up` + `--animate-fade-in-up` token in `globals.css` via `@theme inline`
+- [x] `animate-fade-in-up` with staggered `[animation-delay:Xms]` on header + 5 sections (0→400ms, 80ms steps)
+- [x] `prefers-reduced-motion` media query disables animation
 
 **Priority 3 — Footer Upgrade**
-- [ ] Replace the bare `<footer>` with a structured footer: name + tagline left, social links (LinkedIn, GitHub, email) right
-- [ ] Add a thin top separator line (same cyan gradient line already used at top of page)
-- [ ] Add `© 2025 James Horrigan` with location
+- [x] Structured footer: name + location left, LinkedIn + GitHub + email right; cyan separator line; `© 2025 James Horrigan`
 
 **Priority 2 — Accordion for Verbose Sections**
 - [x] **Career Journey role cards**: `RoleCard.tsx` (`"use client"`) — collapsed by default, most-recent open; chevron rotates; CSS grid-rows animation; timeline spine + dot nodes in `page.tsx`
