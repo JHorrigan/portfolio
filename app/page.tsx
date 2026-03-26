@@ -1,6 +1,8 @@
 import { getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
 import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
+import ReadMore from './components/ReadMore';
+import RoleCard from './components/RoleCard';
 
 const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string }> = {
   'Backend':        { border: 'border-cyan-400/25',    label: 'text-cyan-300',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-200' },
@@ -94,11 +96,7 @@ export default async function Home() {
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
             About Me
           </h2>
-          {profile?.summary?.split('\n\n').map((para, i) => (
-            <p key={i} className="mt-4 max-w-4xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
-              {para}
-            </p>
-          ))}
+          <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
         </section>
 
         <section id="skills" className="glass rounded-3xl p-5 md:p-10">
@@ -140,39 +138,20 @@ export default async function Home() {
             {profile?.career_summary}
           </p>
 
-          <ol className="mt-8 space-y-4">
-            {journey.map((item) => (
-              <li
-                key={`${item.company}-${item.period}`}
-                className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4"
-              >
-                <p className="text-xs font-semibold tracking-[0.14em] text-cyan-300">
-                  {item.period}
-                </p>
-                <h3 className="mt-1 text-base font-semibold leading-snug text-white sm:text-lg">
-                  {item.role}
-                  <br className="sm:hidden" />
-                  <span className="hidden sm:inline"> · </span>
-                  {item.company}
-                </h3>
-                <p className="mt-2 text-sm leading-7 text-slate-300 md:text-lg md:leading-8">{item.summary}</p>
-                {item.skills.length > 0 && (
-                  <ul className="mt-3 flex flex-wrap gap-1.5">
-                    {item.skills.map((skill) => (
-                      <li
-                        key={`${item.id}-${skill.id}`}
-                        className={`rounded-full border px-2.5 py-0.5 text-xs ${
-                          (CATEGORY_COLORS[skill.category ?? ''] ?? CATEGORY_COLORS['__default']).pill
-                        }`}
-                      >
-                        {skill.name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ol>
+          <div className="relative mt-8">
+            {/* Timeline spine */}
+            <div className="absolute left-1.25 top-6 bottom-6 w-px bg-linear-to-b from-cyan-400/50 via-slate-700/40 to-transparent" />
+            <ol className="space-y-3">
+              {journey.map((item, index) => (
+                <RoleCard
+                  key={item.id}
+                  item={item}
+                  isFirst={index === 0}
+                  categoryColors={CATEGORY_COLORS}
+                />
+              ))}
+            </ol>
+          </div>
         </section>
 
         <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">

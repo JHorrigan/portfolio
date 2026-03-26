@@ -142,6 +142,57 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [ ] Render logo image in each role card in `page.tsx` (next/image, fallback to company initial if no logo)
 - [ ] Verify build passes and logos display correctly on mobile
 
+### Phase 15 — UI/UX Enhancement
+> Reviewed 2026-03-26. Goal: elevate visual impact and recruiter UX without changing the design system or adding new sections.
+
+**Priority 1 — Career Journey Timeline (highest impact)**
+- [ ] Add vertical timeline spine: a `2px` left-edge line with filled circle nodes connecting all role cards
+- [ ] Style nodes with cyan accent (`bg-cyan-400`, `ring-2 ring-cyan-400/30`) and position relative to the `<ol>`
+- [ ] Differentiate current/most-recent role node (larger, glowing) vs historical
+- [ ] Ensure the spine aligns correctly on mobile (remains left-aligned, not centred)
+
+**Priority 1 — Hero Section Elevation**
+- [ ] Break hero out of the generic `.glass rounded-3xl` treatment — give it distinct visual weight (taller, wider paddings, larger h1)
+- [ ] Add a subtle dot-grid or scan-line texture overlay in the hero background (CSS, no images)
+- [ ] Increase h1 to `text-4xl md:text-7xl`, weight `font-bold`, tighter tracking `tracking-tight`
+- [ ] Add a faint cyan glow text-shadow on the h1 via `drop-shadow` utility or inline style
+- [ ] Add a "scroll to explore" hint with a small animated chevron below the CTAs
+
+**Priority 2 — Background Texture**
+- [ ] Add a full-page `position:fixed` dot-grid overlay in `globals.css` using a radial-gradient background-image (very low opacity, `~3–5%`) — no new assets required
+- [ ] Keep the existing radial gradient blobs; stack texture on top
+
+**Priority 2 — Section Header Treatment**
+- [ ] Add a leading cyan accent bar (`4px wide, 20px tall, rounded`) before each `h2` section title
+- [ ] Or: prefix section numbers (`01`, `02`, `03`…) in a muted monospace style before the title
+- [ ] Apply consistently to: About, Skills, Career Journey, Live Projects, Digital Twin
+
+**Priority 2 — Portfolio Card Height & Affordance**
+- [ ] Increase flip card height from `h-52` to `h-72` so screenshots are not cramped
+- [ ] Add a "hover to explore" affordance label on the front face (small, muted, bottom-right corner)
+- [ ] On mobile (no hover), add a `tap to flip` mechanic (toggle via `onClick` state in a new `PortfolioCard` client component)
+
+**Priority 3 — Digital Twin Section Wrapper**
+- [ ] In `page.tsx`, wrap `<DigitalTwin />` in a proper `<section id="ask">` with an `h2` header ("Digital Twin") and a 1–2 line descriptor
+
+**Priority 3 — Entry Animations**
+- [ ] Add CSS-only `@keyframes fadeInUp` in `globals.css` with `animation-fill-mode: both`
+- [ ] Apply `animate-fade-in-up` with staggered `animation-delay` to each `<section>` via a `@theme` animation token in Tailwind v4
+- [ ] Use `prefers-reduced-motion` media query to disable for accessibility
+
+**Priority 3 — Footer Upgrade**
+- [ ] Replace the bare `<footer>` with a structured footer: name + tagline left, social links (LinkedIn, GitHub, email) right
+- [ ] Add a thin top separator line (same cyan gradient line already used at top of page)
+- [ ] Add `© 2025 James Horrigan` with location
+
+**Priority 2 — Accordion for Verbose Sections**
+- [x] **Career Journey role cards**: `RoleCard.tsx` (`"use client"`) — collapsed by default, most-recent open; chevron rotates; CSS grid-rows animation; timeline spine + dot nodes in `page.tsx`
+- [x] **About Me**: `ReadMore.tsx` (`"use client"`) — shows first paragraph; "Read more/less" toggle
+
+**Priority 4 — Nav Active State**
+- [ ] Create `NavMenuActive.tsx` (or extend `NavMenu.tsx`) using `IntersectionObserver` to highlight the current section's nav pill
+- [ ] Active pill: `bg-cyan-400/10 border-cyan-400/40 text-cyan-200` (already in the design language)
+
 ---
 
 ## Validation Checklist
