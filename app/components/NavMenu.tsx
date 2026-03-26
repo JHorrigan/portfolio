@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
   { href: '#about', label: 'About' },
@@ -13,8 +13,38 @@ const NAV_LINKS = [
 const pillBase =
   'rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70';
 
+const pillActive =
+  'rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-sm font-semibold text-cyan-200 transition';
+
 const contactBase =
   'rounded-full border border-cyan-300/40 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10';
+
+function useActiveSection() {
+  const [active, setActive] = useState('');
+
+  useEffect(() => {
+    const ids = NAV_LINKS.map(({ href }) => href.slice(1));
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(`#${entry.target.id}`);
+          }
+        });
+      },
+      { rootMargin: '-30% 0px -65% 0px' },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return active;
+}
 
 function DownloadCvButton() {
   const [open, setOpen] = useState(false);
@@ -70,13 +100,18 @@ function DownloadCvButton() {
 
 export default function NavMenu({ email }: { email?: string | null }) {
   const [open, setOpen] = useState(false);
+  const activeSection = useActiveSection();
 
   return (
     <div className="relative flex items-center gap-2">
       {/* Desktop nav */}
       <div className="hidden md:flex items-center gap-2">
         {NAV_LINKS.map((link) => (
-          <a key={link.href} href={link.href} className={pillBase}>
+          <a
+            key={link.href}
+            href={link.href}
+            className={link.href === activeSection ? pillActive : pillBase}
+          >
             {link.label}
           </a>
         ))}
@@ -111,7 +146,7 @@ export default function NavMenu({ email }: { email?: string | null }) {
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-2 flex min-w-[150px] flex-col gap-1 rounded-2xl border border-slate-700/60 bg-slate-900/95 p-3 backdrop-blur-sm md:hidden">
+        <div className="absolute right-0 top-full z-50 mt-2 flex min-w-37.5 flex-col gap-1 rounded-2xl border border-slate-700/60 bg-slate-900/95 p-3 backdrop-blur-sm md:hidden">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}

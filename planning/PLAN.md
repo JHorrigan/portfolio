@@ -179,8 +179,8 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [x] **About Me**: `ReadMore.tsx` (`"use client"`) — shows first paragraph; "Read more/less" toggle
 
 **Priority 4 — Nav Active State**
-- [ ] Create `NavMenuActive.tsx` (or extend `NavMenu.tsx`) using `IntersectionObserver` to highlight the current section's nav pill
-- [ ] Active pill: `bg-cyan-400/10 border-cyan-400/40 text-cyan-200` (already in the design language)
+- [x] `useActiveSection` hook in `NavMenu.tsx` — `IntersectionObserver` with `rootMargin: '-30% 0px -65% 0px'` tracks which section is centred in the viewport
+- [x] Active pill: `bg-cyan-400/10 border-cyan-400/40 text-cyan-200`; inactive remains unchanged
 
 ---
 
