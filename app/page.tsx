@@ -46,8 +46,11 @@ export default async function Home() {
           <NavMenu email={profile?.email} />
         </header>
 
-        <section className="glass rounded-3xl p-5 md:p-12">
-          <div className="mb-6 flex flex-wrap gap-2 md:mb-7">
+        <section className="glass relative overflow-hidden rounded-3xl p-6 md:p-16">
+          {/* Inner hero glow */}
+          <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(ellipse_at_top_left,rgba(34,211,238,0.07),transparent_55%)]" />
+
+          <div className="mb-6 flex flex-wrap gap-2 md:mb-8">
             {titleBadges.map((title, index) => (
               <p
                 key={`${title}-${index}`}
@@ -57,12 +60,18 @@ export default async function Home() {
               </p>
             ))}
           </div>
-          <h1 className="max-w-4xl text-3xl font-semibold tracking-tight text-white md:text-6xl">
+
+          <h1
+            className="max-w-4xl text-4xl font-bold tracking-tight text-white md:text-7xl"
+            style={{ textShadow: '0 0 80px rgba(103,232,249,0.22)' }}
+          >
             {profile?.hero ?? 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.'}
           </h1>
+
           <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
             {profile?.hero_summary}
           </p>
+
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             {profile?.linkedin_url && (
               <a
@@ -90,6 +99,19 @@ export default async function Home() {
             >
               Ask Digital Twin
             </a>
+          </div>
+
+          {/* Scroll hint */}
+          <div className="mt-10 flex flex-col items-start gap-1.5">
+            <span className="text-[10px] font-semibold tracking-[0.2em] text-slate-600">SCROLL</span>
+            <svg
+              className="animate-bounce text-slate-600"
+              width="16" height="16" viewBox="0 0 16 16"
+              fill="none" stroke="currentColor" strokeWidth="1.5"
+              strokeLinecap="round" strokeLinejoin="round"
+            >
+              <polyline points="3,5 8,11 13,5" />
+            </svg>
           </div>
         </section>
 
