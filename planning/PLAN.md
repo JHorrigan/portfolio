@@ -159,18 +159,9 @@ Maintain and incrementally improve a single-page portfolio for James Horrigan wi
 - [ ] Add a "scroll to explore" hint with a small animated chevron below the CTAs
 
 **Priority 2 — Background Texture**
-- [ ] Add a full-page `position:fixed` dot-grid overlay in `globals.css` using a radial-gradient background-image (very low opacity, `~3–5%`) — no new assets required
-- [ ] Keep the existing radial gradient blobs; stack texture on top
-
-**Priority 2 — Section Header Treatment**
-- [ ] Add a leading cyan accent bar (`4px wide, 20px tall, rounded`) before each `h2` section title
-- [ ] Or: prefix section numbers (`01`, `02`, `03`…) in a muted monospace style before the title
-- [ ] Apply consistently to: About, Skills, Career Journey, Live Projects, Digital Twin
-
-**Priority 2 — Portfolio Card Height & Affordance**
-- [ ] Increase flip card height from `h-52` to `h-72` so screenshots are not cramped
-- [ ] Add a "hover to explore" affordance label on the front face (small, muted, bottom-right corner)
-- [ ] On mobile (no hover), add a `tap to flip` mechanic (toggle via `onClick` state in a new `PortfolioCard` client component)
+- [x] Background dot-grid overlay in `globals.css` via `body::before` radial-gradient, opacity 0.2
+- [x] Section header accent bars: cyan `h-5 w-1 rounded-full` sibling `<span>` before each `h2` (About, Skills, Career Journey, Live Projects)
+- [x] Portfolio cards: `PortfolioCard.tsx` client component; `h-72` (was `h-52`); click/tap toggles flip; "tap to explore →" affordance on front; `stopPropagation` on Visit link
 
 **Priority 3 — Digital Twin Section Wrapper**
 - [ ] In `page.tsx`, wrap `<DigitalTwin />` in a proper `<section id="ask">` with an `h2` header ("Digital Twin") and a 1–2 line descriptor

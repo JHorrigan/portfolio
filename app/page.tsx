@@ -1,6 +1,7 @@
 import { getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
 import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
+import PortfolioCard from './components/PortfolioCard';
 import ReadMore from './components/ReadMore';
 import RoleCard from './components/RoleCard';
 
@@ -93,14 +94,16 @@ export default async function Home() {
         </section>
 
         <section id="about" className="glass rounded-3xl p-5 md:p-10">
-          <h2 className="text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
+            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             About Me
           </h2>
           <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
         </section>
 
         <section id="skills" className="glass rounded-3xl p-5 md:p-10">
-          <h2 className="text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
+            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Skills
           </h2>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
@@ -131,7 +134,8 @@ export default async function Home() {
         </section>
 
         <section id="journey" className="glass rounded-3xl p-5 md:p-10">
-          <h2 className="text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
+            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Career Journey
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
@@ -155,7 +159,10 @@ export default async function Home() {
         </section>
 
         <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
-          <h2 className="text-2xl font-semibold text-white md:text-3xl">Live Projects</h2>
+          <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
+            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
+            Live Projects
+          </h2>
           <p className="mt-3 max-w-2xl text-slate-400">
             Products and platforms built and shipped.
           </p>
@@ -167,61 +174,13 @@ export default async function Home() {
                 'linear-gradient(135deg, #2e1065 0%, #020617 60%, #1e1b4b 100%)',
               ];
               const accentColors = ['#67e8f9', '#6ee7b7', '#c4b5fd'];
-              const gradient = gradients[i % gradients.length];
-              const accent = accentColors[i % accentColors.length];
               return (
-                <article
+                <PortfolioCard
                   key={item.id}
-                  className="group h-52 perspective-[1000px]"
-                >
-                  <div className="relative h-full transition-transform duration-500 transform-3d group-hover:transform-[rotateY(180deg)]">
-
-                    {/* Front — image / gradient with title overlay */}
-                    <div className="absolute inset-0 rounded-2xl overflow-hidden border border-slate-700/60 backface-hidden">
-                      {item.image_url ? (
-                        <img src={item.image_url} alt={item.title} className="h-full w-full object-cover" />
-                      ) : (
-                        <div className="h-full w-full" style={{ background: gradient }} />
-                      )}
-                      {/* grid lines overlay */}
-                      <div className="absolute inset-0 opacity-10" style={{
-                        backgroundImage: `linear-gradient(${accent}33 1px, transparent 1px), linear-gradient(90deg, ${accent}33 1px, transparent 1px)`,
-                        backgroundSize: '24px 24px',
-                      }} />
-                      {/* title overlay */}
-                      <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-slate-950/90 via-slate-950/20 to-transparent p-5">
-                        <p className="font-mono text-xs mb-1 truncate" style={{ color: `${accent}99` }}>
-                          {item.url?.replace('https://', '')}
-                        </p>
-                        <h3 className="text-lg font-bold text-white tracking-tight leading-tight">{item.title}</h3>
-                      </div>
-                    </div>
-
-                    {/* Back — detail card */}
-                    <div className="absolute inset-0 rounded-2xl border border-slate-700/60 bg-slate-900/95 backface-hidden transform-[rotateY(180deg)] flex flex-col p-5">
-                      <div className="h-px w-full mb-4" style={{ background: `linear-gradient(90deg, transparent, ${accent}60, transparent)` }} />
-                      <h3 className="font-semibold text-white tracking-tight">{item.title}</h3>
-                      {item.description && (
-                        <p className="mt-2 text-sm text-slate-400 flex-1">{item.description}</p>
-                      )}
-                      {item.url && (
-                        <a
-                          href={item.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full border px-3 py-1 text-xs font-semibold transition"
-                          style={{ borderColor: `${accent}50`, color: accent }}
-                        >
-                          Visit
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M2 8L8 2M5 2h3v3" />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
-
-                  </div>
-                </article>
+                  item={item}
+                  gradient={gradients[i % gradients.length]}
+                  accent={accentColors[i % accentColors.length]}
+                />
               );
             })}
           </div>
