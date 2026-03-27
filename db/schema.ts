@@ -65,7 +65,16 @@ export const chatRateLimits = pgTable('chat_rate_limits', {
 export const marqueeItems = pgTable('marquee_items', {
   id: serial('id').primaryKey(),
   label: text('label').notNull(),
+  description: text('description'),
   image_url: text('image_url'),
+  sort_order: integer('sort_order').default(0),
+});
+
+export const heroStats = pgTable('hero_stats', {
+  id: serial('id').primaryKey(),
+  value: text('value').notNull(),
+  label: text('label').notNull(),
+  color: text('color').notNull(),
   sort_order: integer('sort_order').default(0),
 });
 

@@ -1,4 +1,4 @@
-import { getMarqueeItems, getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
+import { getHeroStats, getMarqueeItems, getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
 import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
 import PortfolioCard from './components/PortfolioCard';
@@ -24,12 +24,13 @@ const TITLE_BADGE_STYLES = [
 ];
 
 export default async function Home() {
-  const [profile, journey, skillGroups, portfolioItems, marqueeItems] = await Promise.all([
+  const [profile, journey, skillGroups, portfolioItems, marqueeItems, heroStats] = await Promise.all([
     getProfile(),
     getRoles(),
     getSkillGroups(),
     getPortfolio(),
     getMarqueeItems(),
+    getHeroStats(),
   ]);
 
   const titleBadges = Array.isArray(profile?.title) && profile.title.length > 0
@@ -42,8 +43,8 @@ export default async function Home() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/80 to-transparent" />
 
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
-        <ScrollReveal delay={0}>
-        <header className="glass relative z-10 flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
+        <ScrollReveal delay={0} className="relative z-50">
+        <header className="glass flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
           <p className="text-sm font-semibold tracking-widest text-cyan-300 md:text-lg">
             JAMES HORRIGAN
           </p>
@@ -56,7 +57,7 @@ export default async function Home() {
 
           {/* Background decorative glyph */}
           <div
-            className="pointer-events-none absolute right-8 top-0 select-none font-bold leading-none text-slate-800/50 md:right-16"
+            className="pointer-events-none absolute right-8 top-14 select-none font-bold leading-none text-slate-800/50 sm:top-4 md:right-16 md:top-0"
             style={{ fontSize: 'clamp(8rem, 22vw, 20rem)', fontFamily: 'var(--font-geist-mono)' }}
             aria-hidden="true"
           >
@@ -118,6 +119,18 @@ export default async function Home() {
               Ask Digital Twin
             </a>
           </div>
+
+          {/* Visual stats strip */}
+          {heroStats.length > 0 && (
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6 md:mt-10 md:flex md:flex-wrap md:gap-x-10 md:gap-y-4">
+              {heroStats.map(({ id, value, label, color }) => (
+                <div key={id} className={`border-l-2 pl-3 ${color}`}>
+                  <div className="text-2xl font-bold sm:text-3xl">{value}</div>
+                  <div className="mt-0.5 text-[11px] font-medium tracking-widest text-slate-400 uppercase">{label}</div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Marquee + scroll indicator */}
           <div className="mt-auto flex flex-col gap-6 sm:gap-8">

@@ -1,6 +1,6 @@
 import { asc, eq } from 'drizzle-orm';
 import { db } from './index';
-import { marqueeItems, portfolio, profile, roles, roleSkills, skills } from './schema';
+import { heroStats, marqueeItems, portfolio, profile, roles, roleSkills, skills } from './schema';
 
 export async function getProfile() {
   const rows = await db.select().from(profile).limit(1);
@@ -75,6 +75,10 @@ export async function getPortfolio() {
 
 export async function getMarqueeItems() {
   return db.select().from(marqueeItems).orderBy(asc(marqueeItems.sort_order));
+}
+
+export async function getHeroStats() {
+  return db.select().from(heroStats).orderBy(asc(heroStats.sort_order));
 }
 
 export async function getSkillGroups() {
