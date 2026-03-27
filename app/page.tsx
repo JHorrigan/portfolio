@@ -50,15 +50,13 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal delay={80}>
-        <section className="glass relative overflow-hidden rounded-3xl p-6 md:p-16">
-          {/* Inner hero glow */}
-          <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(ellipse_at_top_left,rgba(34,211,238,0.07),transparent_55%)]" />
+        <section className="relative flex min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-10rem)] flex-col justify-start pt-8 sm:pt-12 md:pt-14 lg:pt-16 px-4 sm:px-8 md:px-10 lg:px-14">
 
-          <div className="mb-6 flex flex-wrap gap-2 md:mb-8">
+          <div className="mb-4 flex flex-wrap gap-2 sm:mb-6 md:mb-8">
             {titleBadges.map((title, index) => (
               <p
                 key={`${title}-${index}`}
-                className={`inline-flex rounded-full border px-3 py-0.5 text-[11px] font-semibold tracking-[0.16em] md:px-4 md:py-1 md:text-xs ${TITLE_BADGE_STYLES[index % TITLE_BADGE_STYLES.length]}`}
+                className={`inline-flex rounded-full border px-3 py-0.5 text-[10px] font-semibold tracking-[0.16em] sm:text-[11px] md:px-4 md:py-1 md:text-xs ${TITLE_BADGE_STYLES[index % TITLE_BADGE_STYLES.length]}`}
               >
                 {title.toUpperCase()}
               </p>
@@ -66,17 +64,17 @@ export default async function Home() {
           </div>
 
           <h1
-            className="max-w-4xl text-4xl font-bold tracking-tight text-white md:text-7xl"
+            className="max-w-4xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
             style={{ textShadow: '0 0 80px rgba(103,232,249,0.22)' }}
           >
             {profile?.hero ?? 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.'}
           </h1>
 
-          <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:mt-5 md:mt-6 md:text-base md:leading-8 lg:text-lg">
             {profile?.hero_summary}
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:mt-8">
             {profile?.linkedin_url && (
               <a
                 href={profile.linkedin_url}
@@ -103,6 +101,18 @@ export default async function Home() {
             >
               Ask Digital Twin
             </a>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="mt-auto flex justify-center pt-10 pb-8 sm:pb-10 md:pb-12 lg:pb-14">
+            <svg
+              className="animate-bounce text-slate-400"
+              width="28" height="28" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" strokeWidth="1.5"
+              strokeLinecap="round" strokeLinejoin="round"
+            >
+              <polyline points="6,9 12,15 18,9" />
+            </svg>
           </div>
 
         </section>
