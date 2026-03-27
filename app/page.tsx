@@ -1,9 +1,10 @@
-import { getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
+import { getMarqueeItems, getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
 import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
 import PortfolioCard from './components/PortfolioCard';
 import ReadMore from './components/ReadMore';
 import RoleCard from './components/RoleCard';
+import HeroMarquee from './components/HeroMarquee';
 import ScrollReveal from './components/ScrollReveal';
 
 const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string }> = {
@@ -23,11 +24,12 @@ const TITLE_BADGE_STYLES = [
 ];
 
 export default async function Home() {
-  const [profile, journey, skillGroups, portfolioItems] = await Promise.all([
+  const [profile, journey, skillGroups, portfolioItems, marqueeItems] = await Promise.all([
     getProfile(),
     getRoles(),
     getSkillGroups(),
     getPortfolio(),
+    getMarqueeItems(),
   ]);
 
   const titleBadges = Array.isArray(profile?.title) && profile.title.length > 0
@@ -52,6 +54,15 @@ export default async function Home() {
         <ScrollReveal delay={80}>
         <section className="relative flex min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-10rem)] flex-col justify-start pt-8 sm:pt-12 md:pt-14 lg:pt-16 px-4 sm:px-8 md:px-10 lg:px-14">
 
+          {/* Background decorative glyph */}
+          <div
+            className="pointer-events-none absolute right-8 top-0 select-none font-bold leading-none text-slate-800/50 md:right-16"
+            style={{ fontSize: 'clamp(8rem, 22vw, 20rem)', fontFamily: 'var(--font-geist-mono)' }}
+            aria-hidden="true"
+          >
+            AI
+          </div>
+
           <div className="mb-4 flex flex-wrap gap-2 sm:mb-6 md:mb-8">
             {titleBadges.map((title, index) => (
               <p
@@ -63,16 +74,31 @@ export default async function Home() {
             ))}
           </div>
 
-          <h1
-            className="max-w-4xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
-            style={{ textShadow: '0 0 80px rgba(103,232,249,0.22)' }}
-          >
-            {profile?.hero ?? 'Enterprise-grade engineering with an edge for AI, serverless, and modern product delivery.'}
-          </h1>
+          <div className="flex items-stretch gap-4 md:gap-6">
+            <div className="w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
+            <h1
+              className="max-w-4xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+              style={{ textShadow: '0 0 80px rgba(103,232,249,0.22)' }}
+            >
+              {(profile?.hero ?? 'AI-first engineering. Enterprise-grade delivery.').split('AI-first').map((part, i, arr) => (
+                <span key={i}>
+                  {i > 0 && <span className="text-cyan-400">AI-first</span>}
+                  {part}
+                </span>
+              ))}
+            </h1>
+          </div>
 
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:mt-5 md:mt-6 md:text-base md:leading-8 lg:text-lg">
-            {profile?.hero_summary}
-          </p>
+          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:mt-6 md:mt-8">
+            {['30 yrs in tech', 'Founder & CTO', 'Enterprise & Startup', 'AI-first'].map((stat, i, arr) => (
+              <span key={stat} className="flex items-center gap-x-3">
+                <span className={`text-sm font-medium md:text-base ${stat === 'AI-first' ? 'text-cyan-400' : 'text-slate-300'}`}>
+                  {stat}
+                </span>
+                {i < arr.length - 1 && <span className="text-slate-600">·</span>}
+              </span>
+            ))}
+          </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:mt-8">
             {profile?.linkedin_url && (
@@ -85,16 +111,6 @@ export default async function Home() {
                 LinkedIn Profile
               </a>
             )}
-            {profile?.github_url && (
-              <a
-                href={profile.github_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-slate-600 px-5 py-2.5 text-center text-sm font-semibold text-slate-200 transition hover:border-slate-300 hover:bg-slate-900"
-              >
-                GitHub
-              </a>
-            )}
             <a
               href="#ask"
               className="rounded-full border border-cyan-400/40 px-5 py-2.5 text-center text-sm font-semibold text-cyan-300 transition hover:border-cyan-300 hover:bg-cyan-400/10"
@@ -103,8 +119,10 @@ export default async function Home() {
             </a>
           </div>
 
-          {/* Scroll indicator */}
-          <div className="mt-auto flex justify-center pt-10 pb-8 sm:pb-10 md:pb-12 lg:pb-14">
+          {/* Marquee + scroll indicator */}
+          <div className="mt-auto flex flex-col gap-6 sm:gap-8">
+            <HeroMarquee items={marqueeItems} />
+          <div className="flex justify-center pb-8 sm:pb-10 md:pb-12 lg:pb-14 pt-2">
             <svg
               className="animate-bounce text-slate-400"
               width="28" height="28" viewBox="0 0 24 24"
@@ -113,6 +131,7 @@ export default async function Home() {
             >
               <polyline points="6,9 12,15 18,9" />
             </svg>
+          </div>
           </div>
 
         </section>

@@ -62,6 +62,13 @@ export const chatRateLimits = pgTable('chat_rate_limits', {
   window_start: timestamp('window_start', { withTimezone: true }).notNull(),
 });
 
+export const marqueeItems = pgTable('marquee_items', {
+  id: serial('id').primaryKey(),
+  label: text('label').notNull(),
+  image_url: text('image_url'),
+  sort_order: integer('sort_order').default(0),
+});
+
 export const education = pgTable('education', {
   id: serial('id').primaryKey(),
   qualification: text('qualification').notNull(),
