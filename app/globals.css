@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Safelist dynamic classes used via DB lookups */
+@source inline("border-cyan-400 text-cyan-400 border-violet-400 text-violet-400 border-amber-400 text-amber-400 border-emerald-400 text-emerald-400 border-rose-400 text-rose-400");
+
 :root {
   --background: #020617;
   --foreground: #e2e8f0;

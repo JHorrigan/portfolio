@@ -16,6 +16,14 @@ const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: str
   '__default':      { border: 'border-slate-700',      label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
 };
 
+const STAT_COLORS: Record<string, string> = {
+  cyan:    'border-cyan-400 text-cyan-400',
+  violet:  'border-violet-400 text-violet-400',
+  amber:   'border-amber-400 text-amber-400',
+  emerald: 'border-emerald-400 text-emerald-400',
+  rose:    'border-rose-400 text-rose-400',
+};
+
 const TITLE_BADGE_STYLES = [
   'border-cyan-300/35 bg-cyan-300/10 text-cyan-200',
   'border-emerald-300/35 bg-emerald-300/10 text-emerald-200',
@@ -64,7 +72,7 @@ export default async function Home() {
             AI
           </div>
 
-          <div className="mb-4 flex flex-wrap gap-2 sm:mb-6 md:mb-8">
+          <div className="mb-4 hidden flex-wrap gap-2 sm:mb-6 sm:flex md:mb-8">
             {titleBadges.map((title, index) => (
               <p
                 key={`${title}-${index}`}
@@ -90,7 +98,7 @@ export default async function Home() {
             </h1>
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:mt-6 md:mt-8">
+          <div className="mt-5 hidden flex-wrap items-center gap-x-3 gap-y-1.5 sm:mt-6 sm:flex md:mt-8">
             {['30 yrs in tech', 'Founder & CTO', 'Enterprise & Startup', 'AI-first'].map((stat, i, arr) => (
               <span key={stat} className="flex items-center gap-x-3">
                 <span className={`text-sm font-medium md:text-base ${stat === 'AI-first' ? 'text-cyan-400' : 'text-slate-300'}`}>
@@ -100,6 +108,18 @@ export default async function Home() {
               </span>
             ))}
           </div>
+
+          {/* Visual stats strip */}
+          {heroStats.length > 0 && (
+            <div className="mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:gap-6 md:flex md:flex-wrap md:gap-x-10 md:gap-y-4">
+              {heroStats.map(({ id, value, label, color }) => (
+                <div key={id} className={`border-l-2 pl-3 ${STAT_COLORS[color] ?? STAT_COLORS['cyan']}`}>
+                  <div className="text-2xl font-bold sm:text-3xl">{value}</div>
+                  <div className="mt-0.5 text-[11px] font-medium tracking-widest text-slate-400 uppercase">{label}</div>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="mt-6 flex gap-3 sm:mt-8">
             {profile?.linkedin_url && (
@@ -126,20 +146,8 @@ export default async function Home() {
             </a>
           </div>
 
-          {/* Visual stats strip */}
-          {heroStats.length > 0 && (
-            <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6 md:mt-10 md:flex md:flex-wrap md:gap-x-10 md:gap-y-4">
-              {heroStats.map(({ id, value, label, color }) => (
-                <div key={id} className={`border-l-2 pl-3 ${color}`}>
-                  <div className="text-2xl font-bold sm:text-3xl">{value}</div>
-                  <div className="mt-0.5 text-[11px] font-medium tracking-widest text-slate-400 uppercase">{label}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
           {/* Marquee + scroll indicator */}
-          <div className="mt-auto flex flex-col gap-6 sm:gap-8">
+          <div className="mt-auto pt-8 sm:pt-10 flex flex-col gap-6 sm:gap-8">
             <HeroMarquee items={marqueeItems} />
           <div className="flex justify-center pb-8 sm:pb-10 md:pb-12 lg:pb-14 pt-2">
             <svg
