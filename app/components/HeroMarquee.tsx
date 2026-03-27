@@ -25,11 +25,10 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
               src={item.image_url}
               alt={item.label}
               className="mx-auto h-10 w-auto max-w-24 object-contain opacity-70"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
             />
           ) : (
-            <span className="text-lg font-bold text-slate-600">
-              {item.label.charAt(0)}
-            </span>
+            <span className="text-lg font-bold text-slate-600">{item.label.charAt(0)}</span>
           )}
           <span className="w-full text-center font-mono text-[10px] tracking-widest text-slate-500 truncate">
             {item.label.toUpperCase()}
@@ -52,13 +51,14 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
 export default function HeroMarquee({ items }: { items: MarqueeItem[] }) {
   const [paused, setPaused] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
+  const [animDelay, setAnimDelay] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
   const touchStartX = useRef(0);
+  const animatedRef = useRef<HTMLDivElement>(null);
   const doubled = [...items, ...items];
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
-    setIsDragging(true);
     setPaused(true);
   };
 
@@ -67,7 +67,22 @@ export default function HeroMarquee({ items }: { items: MarqueeItem[] }) {
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
+    if (animatedRef.current) {
+      const el = animatedRef.current;
+      const computed = window.getComputedStyle(el);
+      const matrix = new DOMMatrix(computed.transform);
+      const currentX = matrix.m41;
+      const halfWidth = el.scrollWidth / 2;
+      const duration = parseFloat(computed.animationDuration) * 1000;
+
+      const combinedX = currentX + dragOffset;
+      let newProgress = (-combinedX) / halfWidth;
+      newProgress = ((newProgress % 1) + 1) % 1;
+
+      setAnimDelay(-newProgress * duration);
+      setAnimKey((k) => k + 1);
+    }
+
     setDragOffset(0);
     setPaused(false);
   };
@@ -82,17 +97,15 @@ export default function HeroMarquee({ items }: { items: MarqueeItem[] }) {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div
-        style={{
-          transform: `translateX(${dragOffset}px)`,
-          transition: isDragging ? 'none' : 'transform 0.4s ease-out',
-        }}
-      >
+      <div style={{ transform: `translateX(${dragOffset}px)` }}>
         <div
+          key={animKey}
+          ref={animatedRef}
           className="flex gap-3 animate-marquee"
           style={{
             width: 'max-content',
             animationPlayState: paused ? 'paused' : 'running',
+            animationDelay: `${animDelay}ms`,
           }}
         >
           {doubled.map((item, i) => (
