@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 type MarqueeItem = { id: number; label: string; description: string | null; image_url: string | null };
 
@@ -51,7 +51,26 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
 
 export default function HeroMarquee({ items }: { items: MarqueeItem[] }) {
   const [paused, setPaused] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const touchStartX = useRef(0);
   const doubled = [...items, ...items];
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsDragging(true);
+    setPaused(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setDragOffset(e.touches[0].clientX - touchStartX.current);
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    setDragOffset(0);
+    setPaused(false);
+  };
 
   return (
     <div
@@ -59,17 +78,27 @@ export default function HeroMarquee({ items }: { items: MarqueeItem[] }) {
       style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div
-        className="flex gap-3 animate-marquee"
         style={{
-          width: 'max-content',
-          animationPlayState: paused ? 'paused' : 'running',
+          transform: `translateX(${dragOffset}px)`,
+          transition: isDragging ? 'none' : 'transform 0.4s ease-out',
         }}
       >
-        {doubled.map((item, i) => (
-          <MarqueeTile key={`${item.id}-${i}`} item={item} />
-        ))}
+        <div
+          className="flex gap-3 animate-marquee"
+          style={{
+            width: 'max-content',
+            animationPlayState: paused ? 'paused' : 'running',
+          }}
+        >
+          {doubled.map((item, i) => (
+            <MarqueeTile key={`${item.id}-${i}`} item={item} />
+          ))}
+        </div>
       </div>
     </div>
   );
