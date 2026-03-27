@@ -101,18 +101,6 @@ export default async function Home() {
             </a>
           </div>
 
-          {/* Scroll hint */}
-          <div className="mt-10 flex flex-col items-start gap-1.5">
-            <span className="text-[10px] font-semibold tracking-[0.2em] text-slate-600">SCROLL</span>
-            <svg
-              className="animate-bounce text-slate-600"
-              width="16" height="16" viewBox="0 0 16 16"
-              fill="none" stroke="currentColor" strokeWidth="1.5"
-              strokeLinecap="round" strokeLinejoin="round"
-            >
-              <polyline points="3,5 8,11 13,5" />
-            </svg>
-          </div>
         </section>
 
         <section id="journey" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:160ms]">
