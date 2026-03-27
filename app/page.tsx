@@ -17,12 +17,12 @@ const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: str
   '__default':      { border: 'border-slate-700',      label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
 };
 
-const STAT_COLORS: Record<string, string> = {
-  cyan:    'border-cyan-400 text-cyan-400',
-  violet:  'border-violet-400 text-violet-400',
-  amber:   'border-amber-400 text-amber-400',
-  emerald: 'border-emerald-400 text-emerald-400',
-  rose:    'border-rose-400 text-rose-400',
+const STAT_COLORS: Record<string, { from: string; text: string }> = {
+  cyan:    { from: 'from-cyan-400',    text: 'text-cyan-400' },
+  violet:  { from: 'from-violet-400',  text: 'text-violet-400' },
+  amber:   { from: 'from-amber-400',   text: 'text-amber-400' },
+  emerald: { from: 'from-emerald-400', text: 'text-emerald-400' },
+  rose:    { from: 'from-rose-400',    text: 'text-rose-400' },
 };
 
 const TITLE_BADGE_STYLES = [
@@ -113,12 +113,18 @@ export default async function Home() {
           {/* Visual stats strip */}
           {heroStats.length > 0 && (
             <div className="mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:gap-6 md:flex md:flex-wrap md:gap-x-10 md:gap-y-4">
-              {heroStats.map(({ id, value, label, color }) => (
-                <div key={id} className={`border-l-2 pl-3 ${STAT_COLORS[color] ?? STAT_COLORS['cyan']}`}>
-                  <div className="text-2xl font-bold sm:text-3xl">{value}</div>
-                  <div className="mt-0.5 text-[11px] font-medium tracking-widest text-slate-400 uppercase">{label}</div>
-                </div>
-              ))}
+              {heroStats.map(({ id, value, label, color }) => {
+                const c = STAT_COLORS[color] ?? STAT_COLORS['cyan'];
+                return (
+                  <div key={id} className="flex items-stretch gap-3">
+                    <div className={`w-0.5 shrink-0 rounded-full bg-linear-to-b to-transparent ${c.from}`} />
+                    <div>
+                      <div className={`text-2xl font-bold sm:text-3xl ${c.text}`}>{value}</div>
+                      <div className="mt-0.5 text-[11px] font-medium tracking-widest text-slate-400 uppercase">{label}</div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
 
@@ -173,7 +179,7 @@ export default async function Home() {
         <ScrollReveal>
         <section id="journey" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
+            <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
             Career Journey
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
@@ -200,7 +206,7 @@ export default async function Home() {
         <ScrollReveal>
         <section id="skills" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
+            <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
             Skills
           </h2>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
@@ -234,7 +240,7 @@ export default async function Home() {
         <ScrollReveal>
         <section id="about" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
+            <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
             About Me
           </h2>
           <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
@@ -244,7 +250,7 @@ export default async function Home() {
         <ScrollReveal>
         <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-            <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
+            <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
             Live Projects
           </h2>
           <p className="mt-3 max-w-2xl text-slate-400">
@@ -293,7 +299,7 @@ export default async function Home() {
           <div className="grid gap-10 md:grid-cols-2 md:gap-16">
             <div>
               <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-                <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
+                <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
                 Get in touch
               </h2>
               <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base md:leading-8">
