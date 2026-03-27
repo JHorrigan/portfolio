@@ -4,6 +4,7 @@ import NavMenu from './components/NavMenu';
 import PortfolioCard from './components/PortfolioCard';
 import ReadMore from './components/ReadMore';
 import RoleCard from './components/RoleCard';
+import ScrollReveal from './components/ScrollReveal';
 
 const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string }> = {
   'Backend':        { border: 'border-cyan-400/25',    label: 'text-cyan-300',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-200' },
@@ -39,14 +40,17 @@ export default async function Home() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/80 to-transparent" />
 
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
-        <header className="glass relative z-10 flex items-center justify-between gap-4 rounded-2xl px-6 py-4 animate-fade-in-up [animation-delay:0ms]">
+        <ScrollReveal delay={0}>
+        <header className="glass relative z-10 flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
           <p className="text-sm font-semibold tracking-widest text-cyan-300 md:text-lg">
             JAMES HORRIGAN
           </p>
           <NavMenu email={profile?.email} />
         </header>
+        </ScrollReveal>
 
-        <section className="glass relative overflow-hidden rounded-3xl p-6 md:p-16 animate-fade-in-up [animation-delay:80ms]">
+        <ScrollReveal delay={80}>
+        <section className="glass relative overflow-hidden rounded-3xl p-6 md:p-16">
           {/* Inner hero glow */}
           <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(ellipse_at_top_left,rgba(34,211,238,0.07),transparent_55%)]" />
 
@@ -102,8 +106,10 @@ export default async function Home() {
           </div>
 
         </section>
+        </ScrollReveal>
 
-        <section id="journey" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:160ms]">
+        <ScrollReveal>
+        <section id="journey" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Career Journey
@@ -127,8 +133,10 @@ export default async function Home() {
             </ol>
           </div>
         </section>
+        </ScrollReveal>
 
-        <section id="skills" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:240ms]">
+        <ScrollReveal>
+        <section id="skills" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Skills
@@ -159,16 +167,20 @@ export default async function Home() {
             })}
           </div>
         </section>
+        </ScrollReveal>
 
-        <section id="about" className="glass rounded-3xl p-5 md:p-10 animate-fade-in-up [animation-delay:320ms]">
+        <ScrollReveal>
+        <section id="about" className="glass rounded-3xl p-5 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             About Me
           </h2>
           <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
         </section>
+        </ScrollReveal>
 
-        <section id="portfolio" className="glass rounded-3xl p-8 md:p-10 animate-fade-in-up [animation-delay:400ms]">
+        <ScrollReveal>
+        <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
             Live Projects
@@ -195,6 +207,7 @@ export default async function Home() {
             })}
           </div>
         </section>
+        </ScrollReveal>
 
         <script
           type="application/ld+json"
