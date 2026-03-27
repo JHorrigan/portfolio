@@ -1,4 +1,5 @@
 import { getHeroStats, getMarqueeItems, getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
+import ContactForm from './components/ContactForm';
 import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
 import PortfolioCard from './components/PortfolioCard';
@@ -56,7 +57,7 @@ export default async function Home() {
           <p className="text-sm font-semibold tracking-widest text-cyan-300 md:text-lg">
             JAMES HORRIGAN
           </p>
-          <NavMenu email={profile?.email} />
+          <NavMenu />
         </header>
         </ScrollReveal>
 
@@ -150,14 +151,19 @@ export default async function Home() {
           <div className="mt-auto pt-8 sm:pt-10 flex flex-col gap-6 sm:gap-8">
             <HeroMarquee items={marqueeItems} />
           <div className="flex justify-center pb-8 sm:pb-10 md:pb-12 lg:pb-14 pt-2">
-            <svg
-              className="animate-bounce text-slate-400"
-              width="28" height="28" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" strokeWidth="1.5"
-              strokeLinecap="round" strokeLinejoin="round"
+            <a
+              href="#journey"
+              aria-label="Scroll to next section"
+              className="animate-bounce text-slate-400 transition hover:text-slate-200"
             >
-              <polyline points="6,9 12,15 18,9" />
-            </svg>
+              <svg
+                width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="1.5"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </a>
           </div>
           </div>
 
@@ -281,6 +287,46 @@ export default async function Home() {
           }}
         />
         <DigitalTwin />
+
+        <ScrollReveal>
+        <section id="contact" className="glass rounded-3xl p-5 md:p-10">
+          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+            <div>
+              <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
+                <span className="h-5 w-1 shrink-0 rounded-full bg-cyan-400" />
+                Get in touch
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base md:leading-8">
+                Have a project in mind, a role to discuss, or just want to say hello? Drop me a message and I'll get back to you.
+              </p>
+              <div className="mt-8 flex flex-col gap-4">
+                {profile?.email && (
+                  <a href={`mailto:${profile.email}`} className="group flex items-center gap-3 text-sm text-slate-400 transition hover:text-cyan-300">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-slate-700/60 bg-slate-900/60 transition group-hover:border-cyan-400/40">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                    </span>
+                    {profile.email}
+                  </a>
+                )}
+                {profile?.linkedin_url && (
+                  <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-sm text-slate-400 transition hover:text-cyan-300">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-slate-700/60 bg-slate-900/60 transition group-hover:border-cyan-400/40">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </span>
+                    LinkedIn
+                  </a>
+                )}
+              </div>
+            </div>
+            <ContactForm />
+          </div>
+        </section>
+        </ScrollReveal>
 
         <footer className="py-6 md:py-10">
           <div className="mb-6 h-px bg-linear-to-r from-transparent via-cyan-300/40 to-transparent" />

@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { href: '#about', label: 'About' },
   { href: '#portfolio', label: 'Projects' },
   { href: '#ask', label: 'Digital Twin' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 const pillBase =
@@ -16,8 +17,6 @@ const pillBase =
 const pillActive =
   'rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-sm font-semibold text-cyan-200 transition';
 
-const contactBase =
-  'rounded-full border border-cyan-300/40 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10';
 
 function useActiveSection() {
   const [active, setActive] = useState('');
@@ -98,7 +97,7 @@ function DownloadCvButton() {
   );
 }
 
-export default function NavMenu({ email }: { email?: string | null }) {
+export default function NavMenu() {
   const [open, setOpen] = useState(false);
   const activeSection = useActiveSection();
 
@@ -116,11 +115,6 @@ export default function NavMenu({ email }: { email?: string | null }) {
           </a>
         ))}
         <DownloadCvButton />
-        {email && (
-          <a href={`mailto:${email}`} className={contactBase}>
-            Contact
-          </a>
-        )}
       </div>
 
       {/* Mobile burger */}
@@ -175,15 +169,6 @@ export default function NavMenu({ email }: { email?: string | null }) {
               Download CV (DOCX)
             </a>
           </div>
-          {email && (
-            <a
-              href={`mailto:${email}`}
-              onClick={() => setOpen(false)}
-              className="mt-1 rounded-xl border border-cyan-300/30 px-4 py-2.5 text-sm font-semibold text-cyan-200 transition hover:bg-cyan-300/10"
-            >
-              Contact
-            </a>
-          )}
         </div>
       )}
     </div>
