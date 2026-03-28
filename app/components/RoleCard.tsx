@@ -27,6 +27,9 @@ export default function RoleCard({
   categoryColors: CategoryColors;
 }) {
   const [open, setOpen] = useState(isFirst);
+  const year = isFirst
+    ? String(new Date().getFullYear())
+    : item.period.match(/\d{4}/g)?.at(-1);
 
   return (
     <li
@@ -46,8 +49,17 @@ export default function RoleCard({
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="w-full cursor-pointer rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-left transition hover:border-slate-700"
+        className="relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-left transition hover:border-slate-700"
       >
+        {year && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 select-none font-mono font-bold leading-none text-white opacity-[0.04]"
+            style={{ fontSize: 'clamp(4rem, 10vw, 7rem)' }}
+          >
+            {year}
+          </span>
+        )}
         <div className="flex items-start justify-between gap-2">
           <div>
             <p className="text-xs font-semibold tracking-[0.14em] text-cyan-300">{item.period}</p>
