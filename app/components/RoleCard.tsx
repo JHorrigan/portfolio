@@ -49,7 +49,7 @@ export default function RoleCard({
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-left transition hover:border-slate-700"
+        className="relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-700 hover:shadow-[inset_3px_0_0_#67e8f9]"
       >
         {year && (
           <span
