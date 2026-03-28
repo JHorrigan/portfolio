@@ -20,11 +20,15 @@ export default function RoleCard({
   index,
   isFirst,
   categoryColors,
+  activeCategory = null,
+  dimmed = false,
 }: {
   item: Role;
   index: number;
   isFirst: boolean;
   categoryColors: CategoryColors;
+  activeCategory?: string | null;
+  dimmed?: boolean;
 }) {
   const [open, setOpen] = useState(isFirst);
   const year = isFirst
@@ -33,8 +37,8 @@ export default function RoleCard({
 
   return (
     <li
-      className="relative pl-9 animate-fade-in-up"
-      style={{ animationDelay: `${index * 80}ms` }}
+      className="relative pl-9 animate-fade-in-up transition-opacity duration-300"
+      style={{ animationDelay: `${index * 80}ms`, opacity: dimmed ? 0.25 : 1 }}
     >
       {/* Timeline node */}
       {isFirst && (
@@ -49,7 +53,7 @@ export default function RoleCard({
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-700 hover:shadow-[inset_3px_0_0_#67e8f9]"
+        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-700 hover:shadow-[inset_3px_0_0_#67e8f9] ${open ? 'shadow-[inset_3px_0_0_#67e8f9]' : ''}`}
       >
         {year && (
           <span
@@ -105,7 +109,9 @@ export default function RoleCard({
                   return (
                     <li
                       key={`${item.id}-${skill.id}`}
-                      className={`rounded-full border px-2.5 py-0.5 text-xs ${colors.pill}`}
+                      className={`rounded-full border px-2.5 py-0.5 text-xs transition-opacity duration-200 ${colors.pill} ${
+                        activeCategory && skill.category !== activeCategory ? 'opacity-25' : ''
+                      }`}
                     >
                       {skill.name}
                     </li>

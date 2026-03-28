@@ -4,8 +4,7 @@ import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
 import PortfolioCard from './components/PortfolioCard';
 import ReadMore from './components/ReadMore';
-import AnimatedSpine from './components/AnimatedSpine';
-import RoleCard from './components/RoleCard';
+import CareerTimeline from './components/CareerTimeline';
 import HeroMarquee from './components/HeroMarquee';
 import ScrollReveal from './components/ScrollReveal';
 
@@ -195,20 +194,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="relative mt-8">
-            <AnimatedSpine />
-            <ol className="space-y-3">
-              {journey.map((item, index) => (
-                <RoleCard
-                  key={item.id}
-                  item={item}
-                  index={index}
-                  isFirst={index === 0}
-                  categoryColors={CATEGORY_COLORS}
-                />
-              ))}
-            </ol>
-          </div>
+          <CareerTimeline journey={journey} categoryColors={CATEGORY_COLORS} />
         </section>
         </ScrollReveal>
 
