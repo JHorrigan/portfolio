@@ -179,13 +179,21 @@ export default async function Home() {
 
         <ScrollReveal>
         <section id="journey" className="px-1 py-2">
-          <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-            <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
-            Career Journey
-          </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 md:text-lg md:leading-8">
-            {profile?.career_summary}
-          </p>
+          {/* Section strip header */}
+          <div className="relative overflow-hidden py-5">
+            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.03] md:text-[8rem]">
+              CAREER
+            </span>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Career Journey</h2>
+              </div>
+              <span className="font-mono text-xs tracking-[0.15em] text-slate-600">1996 — 2026</span>
+            </div>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+              {profile?.career_summary}
+            </p>
+          </div>
 
           <div className="relative mt-8">
             <AnimatedSpine />
