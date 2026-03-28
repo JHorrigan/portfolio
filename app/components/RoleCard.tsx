@@ -17,18 +17,26 @@ type CategoryColors = Record<string, { border: string; label: string; pill: stri
 
 export default function RoleCard({
   item,
+  index,
   isFirst,
   categoryColors,
 }: {
   item: Role;
+  index: number;
   isFirst: boolean;
   categoryColors: CategoryColors;
 }) {
   const [open, setOpen] = useState(isFirst);
 
   return (
-    <li className="relative pl-9">
+    <li
+      className="relative pl-9 animate-fade-in-up"
+      style={{ animationDelay: `${index * 80}ms` }}
+    >
       {/* Timeline node */}
+      {isFirst && (
+        <div className="absolute left-0 top-5 h-3 w-3 animate-ping rounded-full bg-cyan-400/30" />
+      )}
       <div
         className={`absolute left-0 top-5 h-3 w-3 rounded-full border-2 border-cyan-400/80 bg-slate-950 ${
           isFirst ? 'ring-2 ring-cyan-400/25 ring-offset-1 ring-offset-slate-950' : ''

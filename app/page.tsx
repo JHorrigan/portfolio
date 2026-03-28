@@ -4,6 +4,7 @@ import DigitalTwin from './components/DigitalTwin';
 import NavMenu from './components/NavMenu';
 import PortfolioCard from './components/PortfolioCard';
 import ReadMore from './components/ReadMore';
+import AnimatedSpine from './components/AnimatedSpine';
 import RoleCard from './components/RoleCard';
 import HeroMarquee from './components/HeroMarquee';
 import ScrollReveal from './components/ScrollReveal';
@@ -187,13 +188,13 @@ export default async function Home() {
           </p>
 
           <div className="relative mt-8">
-            {/* Timeline spine */}
-            <div className="absolute left-1.25 top-6 bottom-6 w-px bg-linear-to-b from-cyan-400/50 via-slate-700/40 to-transparent" />
+            <AnimatedSpine />
             <ol className="space-y-3">
               {journey.map((item, index) => (
                 <RoleCard
                   key={item.id}
                   item={item}
+                  index={index}
                   isFirst={index === 0}
                   categoryColors={CATEGORY_COLORS}
                 />
