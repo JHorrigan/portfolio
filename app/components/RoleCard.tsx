@@ -67,12 +67,8 @@ export default function RoleCard({
         <div className="flex items-start justify-between gap-2">
           <div>
             <p className="text-xs font-semibold tracking-[0.14em] text-cyan-300">{item.period}</p>
-            <h3 className="mt-1 text-base font-semibold leading-snug text-white sm:text-lg">
-              {item.role}
-              <br className="sm:hidden" />
-              <span className="hidden sm:inline"> · </span>
-              {item.company}
-            </h3>
+            <h3 className="mt-1 text-base font-semibold leading-snug text-white sm:text-lg">{item.role}</h3>
+            <p className="mt-0.5 text-sm text-slate-400">{item.company}</p>
           </div>
           <svg
             width="14"

@@ -37,7 +37,9 @@ export default function CareerTimeline({
   return (
     <div className="mt-8">
       {/* Filter chips */}
-      <div className="mb-6 flex flex-wrap gap-2">
+      <div className="mb-6">
+      <p className="mb-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-slate-600 uppercase">Stack Filters</p>
+      <div className="flex flex-wrap gap-2">
         <button
           onClick={() => setActiveCategory(null)}
           className={`rounded-full border px-3 py-1 text-xs font-medium transition duration-150 ${
@@ -63,6 +65,7 @@ export default function CareerTimeline({
             </button>
           );
         })}
+      </div>
       </div>
 
       {/* Timeline */}
