@@ -239,15 +239,20 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-        <section id="portfolio" className="glass rounded-3xl p-8 md:p-10">
-          <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-            <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
-            Live Projects
-          </h2>
-          <p className="mt-3 max-w-2xl text-slate-400">
-            Products and platforms built and shipped.
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <section id="portfolio" className="px-1 py-2">
+          <div className="relative overflow-hidden py-5">
+            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.03] md:text-[8rem]">
+              PROJECTS
+            </span>
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Live Projects</h2>
+              <span className="font-mono text-xs tracking-[0.15em] text-slate-600">{portfolioItems.length} shipped</span>
+            </div>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+              Products and platforms built and shipped.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
             {portfolioItems.map((item, i) => {
               const gradients = [
                 'linear-gradient(135deg, #0c4a6e 0%, #020617 60%, #083344 100%)',
