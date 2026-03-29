@@ -5,6 +5,7 @@ import NavMenu from './components/NavMenu';
 import PortfolioCard from './components/PortfolioCard';
 import ReadMore from './components/ReadMore';
 import CareerTimeline from './components/CareerTimeline';
+import SkillsSection from './components/SkillsSection';
 import HeroMarquee from './components/HeroMarquee';
 import ScrollReveal from './components/ScrollReveal';
 
@@ -14,6 +15,8 @@ const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: str
   'AI / ML':        { border: 'border-emerald-400/25', label: 'text-emerald-300', pill: 'border-emerald-400/30 bg-emerald-400/10 text-emerald-200' },
   'Cloud & DevOps': { border: 'border-amber-400/25',   label: 'text-amber-300',   pill: 'border-amber-400/30 bg-amber-400/10 text-amber-200' },
   'Delivery':       { border: 'border-rose-400/25',    label: 'text-rose-300',    pill: 'border-rose-400/30 bg-rose-400/10 text-rose-200' },
+  'Database':       { border: 'border-sky-400/25',     label: 'text-sky-300',     pill: 'border-sky-400/30 bg-sky-400/10 text-sky-200' },
+  'Soft Skills':    { border: 'border-purple-400/25',  label: 'text-purple-300',  pill: 'border-purple-400/30 bg-purple-400/10 text-purple-200' },
   '__default':      { border: 'border-slate-700',      label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
 };
 
@@ -214,31 +217,7 @@ export default async function Home() {
               Technologies and disciplines across the full delivery stack.
             </p>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-            {skillGroups.map((group) => {
-              const colors = CATEGORY_COLORS[group.title] ?? CATEGORY_COLORS['__default'];
-              return (
-                <article
-                  key={group.title}
-                  className={`rounded-xl border bg-slate-900/50 p-3 md:p-4 ${colors.border}`}
-                >
-                  <h3 className={`text-xs font-semibold tracking-[0.14em] ${colors.label}`}>
-                    {group.title.toUpperCase()}
-                  </h3>
-                  <ul className="mt-2 flex flex-wrap gap-1.5">
-                    {group.items.map((skill) => (
-                      <li
-                        key={skill}
-                        className={`rounded-full border px-2.5 py-0.5 text-xs ${colors.pill}`}
-                      >
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              );
-            })}
-          </div>
+          <SkillsSection skillGroups={skillGroups} categoryColors={CATEGORY_COLORS} />
         </section>
         </ScrollReveal>
 

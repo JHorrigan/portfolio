@@ -19,7 +19,7 @@ type Role = {
 
 type CategoryColors = Record<string, { border: string; label: string; pill: string }>;
 
-const CATEGORY_ORDER = ['Backend', 'Frontend', 'AI / ML', 'Cloud & DevOps', 'Delivery'];
+const CATEGORY_ORDER = ['Backend', 'Frontend', 'AI / ML', 'Cloud & DevOps', 'Delivery', 'Database', 'Soft Skills'];
 
 export default function CareerTimeline({
   journey,
