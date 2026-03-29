@@ -288,7 +288,22 @@ export default async function Home() {
             }),
           }}
         />
-        <DigitalTwin />
+        <ScrollReveal>
+        <section id="ask" className="relative overflow-hidden px-1 py-2">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+            ASK
+          </span>
+          <div className="py-5">
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Digital Twin</h2>
+            </div>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+              Ask anything about James&apos;s experience, skills, or career. Powered by AI.
+            </p>
+          </div>
+          <DigitalTwin />
+        </section>
+        </ScrollReveal>
 
         <ScrollReveal>
         <section id="contact" className="glass rounded-3xl p-5 md:p-10">

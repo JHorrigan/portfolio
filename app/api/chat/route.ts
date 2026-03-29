@@ -101,6 +101,15 @@ SKILLS:
 ${skillsText}`;
 }
 
+export async function GET(req: Request) {
+  const ipHash = hashIp(getClientIp(req));
+  const windowCutoff = new Date(Date.now() - WINDOW_HOURS * 60 * 60 * 1000);
+  const rows = await db.select().from(chatRateLimits).where(eq(chatRateLimits.ip_hash, ipHash));
+  const existing = rows[0];
+  const used = existing && existing.window_start >= windowCutoff ? existing.count : 0;
+  return Response.json({ remaining: Math.max(0, RATE_LIMIT - used) });
+}
+
 export async function POST(req: Request) {
   const ipHash = hashIp(getClientIp(req));
 

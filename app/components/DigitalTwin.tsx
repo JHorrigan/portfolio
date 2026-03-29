@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const SUGGESTED = [
   "What's James's tech stack?",
@@ -38,7 +38,11 @@ export default function DigitalTwin() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [remaining, setRemaining] = useState<number | null>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch('/api/chat').then((r) => r.json()).then(({ remaining }) => setRemaining(remaining)).catch(() => {});
+  }, []);
 
   async function send(text: string) {
     const question = text.trim();
@@ -93,7 +97,9 @@ export default function DigitalTwin() {
         });
       }
 
-      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
+      setTimeout(() => {
+        if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }, 50);
     } catch {
       setMessages((prev) => [
         ...prev.slice(0, -1),
@@ -112,7 +118,7 @@ export default function DigitalTwin() {
   }
 
   return (
-    <section id="ask" className="glass rounded-3xl overflow-hidden">
+    <section className="glass rounded-3xl overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between gap-4 border-b border-slate-700/50 px-5 py-4 md:px-10 md:py-6">
         <div>
@@ -120,6 +126,17 @@ export default function DigitalTwin() {
           <h2 className="text-2xl font-semibold text-white md:text-3xl">Ask James</h2>
         </div>
         <div className="flex items-center gap-3 shrink-0">
+          {remaining !== null && (
+            <span className={`font-mono text-[10px] tracking-widest rounded-full border px-2.5 py-1 ${
+              remaining === 0
+                ? 'border-rose-500/40 bg-rose-500/10 text-rose-400'
+                : remaining <= 2
+                ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
+                : 'border-slate-700 bg-slate-800/50 text-slate-500'
+            }`}>
+              {remaining}/5 today
+            </span>
+          )}
           {messages.length > 0 && (
             <button
               onClick={reset}
@@ -147,17 +164,29 @@ export default function DigitalTwin() {
       </div>
 
       {/* Chat window */}
-      <div className="min-h-[260px] max-h-[420px] overflow-y-auto px-5 py-5 md:px-10 space-y-3">
+      <div ref={scrollRef} className="min-h-[260px] max-h-[420px] overflow-y-auto px-5 py-5 md:px-10 space-y-3">
         {showSuggestions && (
           <div className="flex flex-col gap-3">
-            <p className="text-xs text-slate-500 font-mono">Ask me anything about James&apos;s experience, skills, or career.</p>
-            <div className="flex flex-wrap gap-2 pt-1">
+            <div className="flex gap-2.5">
+              <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-[10px] font-semibold text-cyan-300 select-none">
+                JH
+              </div>
+              <div className="max-w-[80%] px-4 py-2.5 text-sm leading-6 bg-slate-800/60 border border-slate-700/50 text-slate-300 rounded-2xl rounded-tl-sm">
+                Hey — I&apos;m James&apos;s digital twin. Ask me anything about his experience, tech stack, or career.
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 pl-9 pt-1">
               {SUGGESTED.map((q) => (
                 <button
                   key={q}
                   onClick={() => send(q)}
-                  className="rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-cyan-500/60 hover:text-cyan-300 hover:bg-cyan-400/5"
+                  className="flex items-center gap-1.5 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-cyan-500/60 hover:text-cyan-300 hover:bg-cyan-400/5"
                 >
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-50">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
                   {q}
                 </button>
               ))}
@@ -205,16 +234,10 @@ export default function DigitalTwin() {
           );
         })}
 
-        <div ref={bottomRef} />
       </div>
 
       {/* Input bar */}
       <div className="border-t border-slate-700/50 px-5 py-4 md:px-10">
-        {remaining !== null && (
-          <p className="text-[11px] text-slate-600 mb-2">
-            {remaining} question{remaining !== 1 ? 's' : ''} remaining today
-          </p>
-        )}
         <div className="flex items-center gap-3 rounded-2xl border border-slate-700/70 bg-slate-900/50 px-4 py-2.5 transition focus-within:border-slate-600">
           <input
             type="text"
@@ -226,6 +249,7 @@ export default function DigitalTwin() {
             disabled={loading || remaining === 0}
             className="flex-1 bg-transparent text-sm text-slate-200 placeholder-slate-600 outline-none disabled:opacity-40"
           />
+          <span className="hidden sm:block text-[10px] text-slate-600 shrink-0">↵ to send</span>
           <button
             onClick={() => send(input)}
             disabled={loading || !input.trim() || remaining === 0}
