@@ -180,12 +180,12 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-        <section id="journey" className="px-1 py-2">
+        <section id="journey" className="relative overflow-hidden px-1 py-2">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+            CAREER
+          </span>
           {/* Section strip header */}
-          <div className="relative overflow-hidden py-5">
-            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
-              CAREER
-            </span>
+          <div className="py-5">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Career Journey</h2>
