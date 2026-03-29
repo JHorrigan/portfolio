@@ -9,15 +9,15 @@ import SkillsSection from './components/SkillsSection';
 import HeroMarquee from './components/HeroMarquee';
 import ScrollReveal from './components/ScrollReveal';
 
-const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string }> = {
-  'Backend':        { border: 'border-cyan-400/25',    label: 'text-cyan-300',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-200' },
-  'Frontend':       { border: 'border-violet-400/25',  label: 'text-violet-300',  pill: 'border-violet-400/30 bg-violet-400/10 text-violet-200' },
-  'AI / ML':        { border: 'border-emerald-400/25', label: 'text-emerald-300', pill: 'border-emerald-400/30 bg-emerald-400/10 text-emerald-200' },
-  'Cloud & DevOps': { border: 'border-amber-400/25',   label: 'text-amber-300',   pill: 'border-amber-400/30 bg-amber-400/10 text-amber-200' },
-  'Delivery':       { border: 'border-rose-400/25',    label: 'text-rose-300',    pill: 'border-rose-400/30 bg-rose-400/10 text-rose-200' },
-  'Database':       { border: 'border-sky-400/25',     label: 'text-sky-300',     pill: 'border-sky-400/30 bg-sky-400/10 text-sky-200' },
-  'Soft Skills':    { border: 'border-purple-400/25',  label: 'text-purple-300',  pill: 'border-purple-400/30 bg-purple-400/10 text-purple-200' },
-  '__default':      { border: 'border-slate-700',      label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
+const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string; line: string }> = {
+  'Backend':        { border: 'border-slate-800', line: 'from-cyan-400',    label: 'text-cyan-300',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-200' },
+  'Frontend':       { border: 'border-slate-800', line: 'from-violet-400',  label: 'text-violet-300',  pill: 'border-violet-400/30 bg-violet-400/10 text-violet-200' },
+  'AI / ML':        { border: 'border-slate-800', line: 'from-emerald-400', label: 'text-emerald-300', pill: 'border-emerald-400/30 bg-emerald-400/10 text-emerald-200' },
+  'Cloud & DevOps': { border: 'border-slate-800', line: 'from-amber-400',   label: 'text-amber-300',   pill: 'border-amber-400/30 bg-amber-400/10 text-amber-200' },
+  'Delivery':       { border: 'border-slate-800', line: 'from-rose-400',    label: 'text-rose-300',    pill: 'border-rose-400/30 bg-rose-400/10 text-rose-200' },
+  'Database':       { border: 'border-slate-800', line: 'from-sky-400',     label: 'text-sky-300',     pill: 'border-sky-400/30 bg-sky-400/10 text-sky-200' },
+  'Soft Skills':    { border: 'border-slate-800', line: 'from-purple-400',  label: 'text-purple-300',  pill: 'border-purple-400/30 bg-purple-400/10 text-purple-200' },
+  '__default':      { border: 'border-slate-800', line: 'from-slate-400',   label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
 };
 
 const STAT_COLORS: Record<string, { from: string; text: string }> = {

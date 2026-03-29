@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 type SkillGroup = { title: string; items: string[] };
-type CategoryColors = Record<string, { border: string; label: string; pill: string }>;
+type CategoryColors = Record<string, { border: string; label: string; pill: string; line: string }>;
 
 const CATEGORY_ORDER = ['Backend', 'Frontend', 'AI / ML', 'Cloud & DevOps', 'Delivery', 'Database', 'Soft Skills'];
 
@@ -64,10 +64,13 @@ export default function SkillsSection({
               key={group.title}
               className={`rounded-xl border bg-slate-900/50 p-3 md:p-4 transition-opacity duration-300 ${colors.border} ${dimmed ? 'opacity-25' : ''}`}
             >
-              <h3 className={`text-xs font-semibold tracking-[0.14em] ${colors.label}`}>
-                {group.title.toUpperCase()}
-              </h3>
-              <ul className="mt-2 flex flex-wrap gap-1.5">
+              <div className="flex items-center gap-2 mb-2">
+                <div className={`w-0.5 h-4 shrink-0 rounded-full bg-linear-to-b to-transparent ${colors.line}`} />
+                <h3 className={`text-xs font-semibold tracking-[0.14em] ${colors.label}`}>
+                  {group.title.toUpperCase()}
+                </h3>
+              </div>
+              <ul className="flex flex-wrap gap-1.5">
                 {group.items.map((skill) => (
                   <li
                     key={skill}
