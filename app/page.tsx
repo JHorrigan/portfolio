@@ -200,11 +200,21 @@ export default async function Home() {
 
         <ScrollReveal>
         <section id="skills" className="px-1 py-2">
-          <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-            <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
-            Skills
-          </h2>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+          <div className="relative overflow-hidden py-5">
+            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.03] md:text-[8rem]">
+              SKILLS
+            </span>
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Skills &amp; Expertise</h2>
+              <span className="font-mono text-xs tracking-[0.15em] text-slate-600">
+                {skillGroups.reduce((acc, g) => acc + g.items.length, 0)} skills
+              </span>
+            </div>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+              Technologies and disciplines across the full delivery stack.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
             {skillGroups.map((group) => {
               const colors = CATEGORY_COLORS[group.title] ?? CATEGORY_COLORS['__default'];
               return (
