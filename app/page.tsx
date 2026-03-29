@@ -306,36 +306,40 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-        <section id="contact" className="glass rounded-3xl p-5 md:p-10">
+        <section id="contact" className="relative overflow-hidden px-1 py-2">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+            CONTACT
+          </span>
+          <div className="py-5">
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Get in Touch</h2>
+            </div>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+              Have a project in mind, a role to discuss, or just want to say hello?
+            </p>
+          </div>
           <div className="grid gap-10 md:grid-cols-2 md:gap-16">
             <div>
-              <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
-                <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
-                Get in touch
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base md:leading-8">
-                Have a project in mind, a role to discuss, or just want to say hello? Drop me a message and I'll get back to you.
+              <div className="flex items-stretch gap-4">
+                <div className="w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
+                <p className="text-2xl font-bold leading-snug tracking-tight text-white md:text-3xl">
+                  Let&apos;s build something great together.
+                </p>
+              </div>
+              <p className="mt-4 text-sm leading-7 text-slate-400">
+                Have a project in mind, a role to discuss, or just want to say hello? Drop me a message.
               </p>
               <div className="mt-8 flex flex-col gap-4">
                 {profile?.email && (
                   <a href={`mailto:${profile.email}`} className="group flex items-center gap-3 text-sm text-slate-400 transition hover:text-cyan-300">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-slate-700/60 bg-slate-900/60 transition group-hover:border-cyan-400/40">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                        <polyline points="22,6 12,13 2,6" />
-                      </svg>
-                    </span>
-                    {profile.email}
+                    <div className="w-0.5 h-8 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10 transition group-hover:from-cyan-300" />
+                    <span>{profile.email}</span>
                   </a>
                 )}
                 {profile?.linkedin_url && (
                   <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-sm text-slate-400 transition hover:text-cyan-300">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-slate-700/60 bg-slate-900/60 transition group-hover:border-cyan-400/40">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                      </svg>
-                    </span>
-                    LinkedIn
+                    <div className="w-0.5 h-8 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10 transition group-hover:from-cyan-300" />
+                    <span>LinkedIn</span>
                   </a>
                 )}
               </div>

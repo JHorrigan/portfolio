@@ -35,25 +35,24 @@ export default function ContactForm() {
   };
 
   const inputClass =
-    'w-full rounded-xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 outline-none transition focus:border-cyan-400/60 focus:ring-1 focus:ring-cyan-400/30';
+    'w-full rounded-2xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 outline-none transition focus:border-cyan-400/60 focus:ring-1 focus:ring-cyan-400/30';
 
   if (status === 'success') {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-400/10">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-400">
-            <polyline points="20,6 9,17 4,12" />
-          </svg>
-        </div>
-        <div>
-          <p className="text-lg font-semibold text-white">Message sent</p>
-          <p className="mt-1 text-sm text-slate-400">Thanks — I'll be in touch soon.</p>
+      <div className="flex flex-col gap-4 py-10">
+        <p className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Message Sent</p>
+        <div className="flex items-center gap-4">
+          <div className="w-0.5 h-10 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
+          <p className="text-2xl font-bold tracking-tight text-white">Thanks — I&apos;ll be in touch soon.</p>
         </div>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-2 text-xs text-slate-500 underline-offset-2 hover:text-slate-300 hover:underline transition"
+          className="mt-2 flex items-center gap-1.5 self-start rounded-full border border-slate-700 px-3 py-1 text-xs font-medium text-slate-400 transition hover:border-slate-600 hover:text-slate-300"
         >
           Send another
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="2,4 6,8 10,4" />
+          </svg>
         </button>
       </div>
     );
@@ -103,7 +102,7 @@ export default function ContactForm() {
       </div>
 
       {status === 'error' && (
-        <p className="rounded-xl border border-rose-400/20 bg-rose-400/10 px-4 py-2.5 text-sm text-rose-300">
+        <p className="rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-2.5 text-sm text-rose-300">
           {errorMsg}
         </p>
       )}
