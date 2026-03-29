@@ -222,7 +222,7 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-        <section id="about" className="glass rounded-3xl p-5 md:p-10">
+        <section id="about" className="px-1 py-2">
           <h2 className="flex items-center gap-3 text-2xl font-semibold text-white md:text-3xl">
             <span className="h-7 w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
             About Me
