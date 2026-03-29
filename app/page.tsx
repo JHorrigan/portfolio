@@ -183,7 +183,7 @@ export default async function Home() {
         <section id="journey" className="px-1 py-2">
           {/* Section strip header */}
           <div className="relative overflow-hidden py-5">
-            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.03] md:text-[8rem]">
+            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
               CAREER
             </span>
             <div className="flex items-center justify-between gap-4">
@@ -202,11 +202,11 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-        <section id="skills" className="px-1 py-2">
-          <div className="relative overflow-hidden py-5">
-            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.03] md:text-[8rem]">
-              SKILLS
-            </span>
+        <section id="skills" className="relative overflow-hidden px-1 py-2">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+            SKILLS
+          </span>
+          <div className="py-5">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Skills &amp; Expertise</h2>
               <span className="font-mono text-xs tracking-[0.15em] text-slate-600">
@@ -222,11 +222,11 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-        <section id="about" className="px-1 py-2">
-          <div className="relative overflow-hidden py-5">
-            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.03] md:text-[8rem]">
-              ABOUT
-            </span>
+        <section id="about" className="relative overflow-hidden px-1 py-2">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+            ABOUT
+          </span>
+          <div className="py-5">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">About Me</h2>
             </div>
@@ -239,11 +239,11 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-        <section id="portfolio" className="px-1 py-2">
-          <div className="relative overflow-hidden py-5">
-            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.03] md:text-[8rem]">
-              PROJECTS
-            </span>
+        <section id="portfolio" className="relative overflow-hidden px-1 py-2">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+            PROJECTS
+          </span>
+          <div className="py-5">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Live Projects</h2>
               <span className="font-mono text-xs tracking-[0.15em] text-slate-600">{portfolioItems.length} shipped</span>

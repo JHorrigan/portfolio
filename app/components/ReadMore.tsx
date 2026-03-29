@@ -9,7 +9,7 @@ export default function ReadMore({ paragraphs }: { paragraphs: string[] }) {
   return (
     <>
       {visible.map((para, i) => (
-        <p key={i} className="mt-4 max-w-3xl text-base leading-8 text-slate-300 md:text-xl md:leading-9">
+        <p key={i} className="mt-4 text-sm leading-7 text-slate-300 md:text-base md:leading-8">
           {para}
         </p>
       ))}
