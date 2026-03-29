@@ -1,7 +1,7 @@
 import { getHeroStats, getMarqueeItems, getPortfolio, getProfile, getRoles, getSkillGroups } from '../db/queries';
 import ContactForm from './components/ContactForm';
 import DigitalTwin from './components/DigitalTwin';
-import NavMenu from './components/NavMenu';
+import StickyHeader from './components/StickyHeader';
 import PortfolioCard from './components/PortfolioCard';
 import ReadMore from './components/ReadMore';
 import CareerTimeline from './components/CareerTimeline';
@@ -50,18 +50,13 @@ export default async function Home() {
     : ['Full Stack Software Engineer'];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
+    <div className="relative min-h-screen overflow-x-clip bg-slate-950 text-slate-100">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.16),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(14,116,144,0.2),transparent_42%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/80 to-transparent" />
 
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
-        <ScrollReveal delay={0} className="relative z-50">
-        <header className="glass flex items-center justify-between gap-4 rounded-2xl px-6 py-4">
-          <p className="text-sm font-semibold tracking-widest text-cyan-300 md:text-lg">
-            JAMES HORRIGAN
-          </p>
-          <NavMenu />
-        </header>
+        <ScrollReveal delay={0} className="sticky top-4 z-50">
+        <StickyHeader name="JAMES HORRIGAN" />
         </ScrollReveal>
 
         <ScrollReveal delay={80}>

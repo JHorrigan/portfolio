@@ -11,11 +11,6 @@ const NAV_LINKS = [
   { href: '#contact', label: 'Contact' },
 ];
 
-const pillBase =
-  'rounded-full border border-slate-700 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-900/70';
-
-const pillActive =
-  'rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-sm font-semibold text-cyan-200 transition';
 
 
 function useActiveSection() {
@@ -39,7 +34,16 @@ function useActiveSection() {
     );
 
     elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    const onScroll = () => {
+      if (window.scrollY < 80) setActive('');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return active;
@@ -52,7 +56,7 @@ function DownloadCvButton() {
     <div className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1.5 rounded-full border border-slate-600 px-3 py-1.5 text-sm font-semibold text-slate-200 transition hover:border-slate-400 hover:bg-slate-900/70"
+        className="flex items-center gap-1.5 rounded-full bg-cyan-400 px-3 py-1.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
       >
         Download CV
         <svg
@@ -105,15 +109,21 @@ export default function NavMenu() {
     <div className="relative flex items-center gap-2">
       {/* Desktop nav */}
       <div className="hidden md:flex items-center gap-2">
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className={link.href === activeSection ? pillActive : pillBase}
-          >
-            {link.label}
-          </a>
-        ))}
+        {NAV_LINKS.map((link) => {
+          const isActive = link.href === activeSection;
+          return (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`relative flex flex-col items-center gap-1 px-3 py-1.5 text-sm font-semibold transition ${
+                isActive ? 'text-cyan-300' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              {link.label}
+              <span className={`h-1 w-1 rounded-full bg-cyan-400 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+            </a>
+          );
+        })}
         <DownloadCvButton />
       </div>
 
@@ -141,16 +151,22 @@ export default function NavMenu() {
       {/* Mobile dropdown */}
       {open && (
         <div className="absolute right-0 top-full z-50 mt-2 flex min-w-37.5 flex-col gap-1 rounded-2xl border border-slate-700/60 bg-slate-900/95 p-3 backdrop-blur-sm md:hidden">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:bg-slate-800"
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = link.href === activeSection;
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={`flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-semibold transition hover:bg-slate-800 ${
+                  isActive ? 'text-cyan-300' : 'text-slate-200'
+                }`}
+              >
+                {link.label}
+                {isActive && <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />}
+              </a>
+            );
+          })}
           <div className="mt-1 border-t border-slate-700/50 pt-1">
             <a
               href="/cv.pdf"
