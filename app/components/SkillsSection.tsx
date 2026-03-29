@@ -69,6 +69,7 @@ export default function SkillsSection({
                 <h3 className={`text-xs font-semibold tracking-[0.14em] ${colors.label}`}>
                   {group.title.toUpperCase()}
                 </h3>
+                <span className="font-mono text-[10px] text-slate-600">{group.items.length}</span>
               </div>
               <ul className="flex flex-wrap gap-1.5">
                 {group.items.map((skill) => (
