@@ -50,10 +50,10 @@
   --dot-opacity: 0.20;
 
   /* Watermark */
-  --watermark-opacity: 0.06;
+  --watermark-opacity: 0.13;
 
   /* Solid button text */
-  --btn-text: #ffffff;
+  --btn-text: #0f172a;
 
   /* Card outline — light mode only */
   --card-outline: transparent;
