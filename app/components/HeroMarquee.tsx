@@ -19,7 +19,7 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
         }`}
       >
         {/* Front */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border border-slate-700/60 bg-slate-900/80 backface-hidden px-3">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border border-default-60 bg-card-80 backface-hidden px-3">
           {item.image_url ? (
             <img
               src={item.image_url}
@@ -28,19 +28,19 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
               onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
             />
           ) : (
-            <span className="text-lg font-bold text-slate-600">{item.label.charAt(0)}</span>
+            <span className="text-lg font-bold text-faint">{item.label.charAt(0)}</span>
           )}
-          <span className="w-full text-center font-mono text-[10px] tracking-widest text-slate-500 truncate">
+          <span className="w-full text-center font-mono text-[10px] tracking-widest text-subtle truncate">
             {item.label.toUpperCase()}
           </span>
         </div>
 
         {/* Back */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-cyan-400/25 bg-slate-900/95 backface-hidden transform-[rotateY(180deg)] px-3">
-          <div className="h-px w-8 bg-linear-to-r from-transparent via-cyan-400 to-transparent" />
-          <span className="text-xs font-semibold text-white">{item.label}</span>
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-cyan-400/25 bg-card-95 backface-hidden transform-[rotateY(180deg)] px-3">
+          <div className="h-px w-8 bg-linear-to-r from-transparent via-(--accent) to-transparent" />
+          <span className="text-xs font-semibold text-page">{item.label}</span>
           {item.description && (
-            <span className="text-center text-[10px] leading-tight text-slate-400">{item.description}</span>
+            <span className="text-center text-[10px] leading-tight text-muted">{item.description}</span>
           )}
         </div>
       </div>

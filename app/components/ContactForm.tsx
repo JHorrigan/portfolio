@@ -35,19 +35,19 @@ export default function ContactForm() {
   };
 
   const inputClass =
-    'w-full rounded-2xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 outline-none transition focus:border-cyan-400/60 focus:ring-1 focus:ring-cyan-400/30';
+    'w-full rounded-2xl border border-default-60 bg-card-60 px-4 py-3 text-sm text-page placeholder-subtle outline-none transition focus:border-cyan-400/60 focus:ring-1 focus:ring-cyan-400/30';
 
   if (status === 'success') {
     return (
       <div className="flex flex-col gap-4 py-10">
-        <p className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Message Sent</p>
+        <p className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Message Sent</p>
         <div className="flex items-center gap-4">
-          <div className="w-0.5 h-10 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
-          <p className="text-2xl font-bold tracking-tight text-white">Thanks — I&apos;ll be in touch soon.</p>
+          <div className="w-0.5 h-10 shrink-0 rounded-full bg-linear-to-b from-(--accent) to-transparent" />
+          <p className="text-2xl font-bold tracking-tight text-page">Thanks — I&apos;ll be in touch soon.</p>
         </div>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-2 flex items-center gap-1.5 self-start rounded-full border border-slate-700 px-3 py-1 text-xs font-medium text-slate-400 transition hover:border-slate-600 hover:text-slate-300"
+          className="mt-2 flex items-center gap-1.5 self-start rounded-full border border-default px-3 py-1 text-xs font-medium text-muted transition hover:border-default hover:text-page-2"
         >
           Send another
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -62,7 +62,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold tracking-widest text-slate-500 uppercase">Name</label>
+          <label className="text-[11px] font-semibold tracking-widest text-subtle uppercase">Name</label>
           <input
             type="text"
             value={name}
@@ -74,7 +74,7 @@ export default function ContactForm() {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold tracking-widest text-slate-500 uppercase">Email</label>
+          <label className="text-[11px] font-semibold tracking-widest text-subtle uppercase">Email</label>
           <input
             type="email"
             value={email}
@@ -88,7 +88,7 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label className="text-[11px] font-semibold tracking-widest text-slate-500 uppercase">Message</label>
+        <label className="text-[11px] font-semibold tracking-widest text-subtle uppercase">Message</label>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -98,7 +98,7 @@ export default function ContactForm() {
           rows={5}
           className={`${inputClass} resize-none`}
         />
-        <p className="text-right text-[10px] text-slate-600">{message.length}/2000</p>
+        <p className="text-right text-[10px] text-faint">{message.length}/2000</p>
       </div>
 
       {status === 'error' && (
@@ -110,7 +110,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="mt-1 flex items-center justify-center gap-2 self-start rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(103,232,249,0.30)] transition hover:bg-cyan-300 hover:shadow-[0_0_36px_rgba(103,232,249,0.50)] disabled:opacity-60 disabled:cursor-not-allowed"
+        className="mt-1 flex items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3 text-sm font-semibold text-btn shadow-[0_0_24px_rgba(103,232,249,0.30)] transition hover:bg-accent-soft hover:shadow-[0_0_36px_rgba(103,232,249,0.50)] disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? (
           <>

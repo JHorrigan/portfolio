@@ -10,14 +10,14 @@ import HeroMarquee from './components/HeroMarquee';
 import ScrollReveal from './components/ScrollReveal';
 
 const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string; line: string }> = {
-  'Backend':        { border: 'border-slate-800', line: 'from-cyan-400',    label: 'text-cyan-300',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-200' },
-  'Frontend':       { border: 'border-slate-800', line: 'from-violet-400',  label: 'text-violet-300',  pill: 'border-violet-400/30 bg-violet-400/10 text-violet-200' },
-  'AI / ML':        { border: 'border-slate-800', line: 'from-emerald-400', label: 'text-emerald-300', pill: 'border-emerald-400/30 bg-emerald-400/10 text-emerald-200' },
-  'Cloud & DevOps': { border: 'border-slate-800', line: 'from-amber-400',   label: 'text-amber-300',   pill: 'border-amber-400/30 bg-amber-400/10 text-amber-200' },
-  'Delivery':       { border: 'border-slate-800', line: 'from-rose-400',    label: 'text-rose-300',    pill: 'border-rose-400/30 bg-rose-400/10 text-rose-200' },
-  'Database':       { border: 'border-slate-800', line: 'from-sky-400',     label: 'text-sky-300',     pill: 'border-sky-400/30 bg-sky-400/10 text-sky-200' },
-  'Soft Skills':    { border: 'border-slate-800', line: 'from-purple-400',  label: 'text-purple-300',  pill: 'border-purple-400/30 bg-purple-400/10 text-purple-200' },
-  '__default':      { border: 'border-slate-800', line: 'from-slate-400',   label: 'text-slate-300',   pill: 'border-slate-700 bg-slate-900/70 text-slate-200' },
+  'Backend':        { border: 'border-subtle-theme', line: 'from-cyan-400',    label: 'text-label-cyan',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-pill-cyan' },
+  'Frontend':       { border: 'border-subtle-theme', line: 'from-violet-400',  label: 'text-label-violet',  pill: 'border-violet-400/30 bg-violet-400/10 text-pill-violet' },
+  'AI / ML':        { border: 'border-subtle-theme', line: 'from-emerald-400', label: 'text-label-emerald', pill: 'border-emerald-400/30 bg-emerald-400/10 text-pill-emerald' },
+  'Cloud & DevOps': { border: 'border-subtle-theme', line: 'from-amber-400',   label: 'text-label-amber',   pill: 'border-amber-400/30 bg-amber-400/10 text-pill-amber' },
+  'Delivery':       { border: 'border-subtle-theme', line: 'from-rose-400',    label: 'text-label-rose',    pill: 'border-rose-400/30 bg-rose-400/10 text-pill-rose' },
+  'Database':       { border: 'border-subtle-theme', line: 'from-sky-400',     label: 'text-label-sky',     pill: 'border-sky-400/30 bg-sky-400/10 text-pill-sky' },
+  'Soft Skills':    { border: 'border-subtle-theme', line: 'from-purple-400',  label: 'text-label-purple',  pill: 'border-purple-400/30 bg-purple-400/10 text-pill-purple' },
+  '__default':      { border: 'border-subtle-theme', line: 'from-slate-400',   label: 'text-page-2',        pill: 'border-default bg-card-70 text-page-2' },
 };
 
 const STAT_COLORS: Record<string, { from: string; text: string }> = {
@@ -29,10 +29,10 @@ const STAT_COLORS: Record<string, { from: string; text: string }> = {
 };
 
 const TITLE_BADGE_STYLES = [
-  'border-cyan-300/35 bg-cyan-300/10 text-cyan-200',
-  'border-emerald-300/35 bg-emerald-300/10 text-emerald-200',
-  'border-amber-300/35 bg-amber-300/10 text-amber-200',
-  'border-rose-300/35 bg-rose-300/10 text-rose-200',
+  'border-cyan-300/35 bg-cyan-300/10 text-label-cyan',
+  'border-emerald-300/35 bg-emerald-300/10 text-label-emerald',
+  'border-amber-300/35 bg-amber-300/10 text-label-amber',
+  'border-rose-300/35 bg-rose-300/10 text-label-rose',
 ];
 
 export default async function Home() {
@@ -50,9 +50,9 @@ export default async function Home() {
     : ['Full Stack Software Engineer'];
 
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-slate-950 text-slate-100">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.16),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(14,116,144,0.2),transparent_42%)]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/80 to-transparent" />
+    <div className="relative min-h-screen overflow-x-clip bg-page text-page">
+      <div className="pointer-events-none absolute inset-0 hero-glow" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-(--accent)/60 to-transparent" />
 
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
         <ScrollReveal delay={0} className="sticky top-4 z-50">
@@ -64,7 +64,7 @@ export default async function Home() {
 
           {/* Background decorative glyph */}
           <div
-            className="pointer-events-none absolute right-8 top-14 select-none font-bold leading-none text-slate-800/50 sm:top-4 md:right-16 md:top-0"
+            className="pointer-events-none absolute right-8 top-14 select-none font-bold leading-none text-page opacity-[var(--watermark-opacity)] sm:top-4 md:right-16 md:top-0"
             style={{ fontSize: 'clamp(8rem, 22vw, 20rem)', fontFamily: 'var(--font-geist-mono)' }}
             aria-hidden="true"
           >
@@ -83,14 +83,14 @@ export default async function Home() {
           </div>
 
           <div className="flex items-stretch gap-4 md:gap-6">
-            <div className="w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
+            <div className="w-0.5 shrink-0 rounded-full bg-linear-to-b from-(--accent) to-transparent" />
             <h1
-              className="max-w-4xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+              className="max-w-4xl text-3xl font-bold tracking-tight text-page sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
               style={{ textShadow: '0 0 80px rgba(103,232,249,0.22)' }}
             >
               {(profile?.hero ?? 'AI-first engineering. Enterprise-grade delivery.').split('AI-first').map((part, i, arr) => (
                 <span key={i}>
-                  {i > 0 && <span className="text-cyan-400">AI-first</span>}
+                  {i > 0 && <span className="text-accent">AI-first</span>}
                   {part}
                 </span>
               ))}
@@ -100,10 +100,10 @@ export default async function Home() {
           <div className="mt-5 hidden flex-wrap items-center gap-x-3 gap-y-1.5 sm:mt-6 sm:flex md:mt-8">
             {['30 yrs in tech', 'Founder & CTO', 'Enterprise & Startup', 'AI-first'].map((stat, i, arr) => (
               <span key={stat} className="flex items-center gap-x-3">
-                <span className={`text-sm font-medium md:text-base ${stat === 'AI-first' ? 'text-cyan-400' : 'text-slate-300'}`}>
+                <span className={`text-sm font-medium md:text-base ${stat === 'AI-first' ? 'text-cyan-400' : 'text-page-2'}`}>
                   {stat}
                 </span>
-                {i < arr.length - 1 && <span className="text-slate-600">·</span>}
+                {i < arr.length - 1 && <span className="text-faint">·</span>}
               </span>
             ))}
           </div>
@@ -118,7 +118,7 @@ export default async function Home() {
                     <div className={`w-0.5 shrink-0 rounded-full bg-linear-to-b to-transparent ${c.from}`} />
                     <div>
                       <div className={`text-2xl font-bold sm:text-3xl ${c.text}`}>{value}</div>
-                      <div className="mt-0.5 text-[11px] font-medium tracking-widest text-slate-400 uppercase">{label}</div>
+                      <div className="mt-0.5 text-[11px] font-medium tracking-widest text-muted uppercase">{label}</div>
                     </div>
                   </div>
                 );
@@ -132,7 +132,7 @@ export default async function Home() {
                 href={profile.linkedin_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(103,232,249,0.30)] transition hover:bg-cyan-300 hover:shadow-[0_0_36px_rgba(103,232,249,0.50)]"
+                className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-btn shadow-[0_0_24px_rgba(103,232,249,0.30)] transition hover:bg-accent-soft hover:shadow-[0_0_36px_rgba(103,232,249,0.50)]"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -142,7 +142,7 @@ export default async function Home() {
             )}
             <a
               href="#ask"
-              className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/5 px-5 py-3 text-sm font-semibold text-cyan-300 transition hover:border-cyan-300 hover:bg-cyan-400/10 hover:shadow-[0_0_24px_rgba(103,232,249,0.15)]"
+              className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/5 px-5 py-3 text-sm font-semibold text-accent transition hover:border-cyan-400/70 hover:bg-cyan-400/10 hover:shadow-[0_0_24px_rgba(103,232,249,0.15)]"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
@@ -158,7 +158,7 @@ export default async function Home() {
             <a
               href="#journey"
               aria-label="Scroll to next section"
-              className="animate-bounce text-slate-400 transition hover:text-slate-200"
+              className="animate-bounce text-muted transition hover:text-page-2"
             >
               <svg
                 width="28" height="28" viewBox="0 0 24 24"
@@ -176,18 +176,18 @@ export default async function Home() {
 
         <ScrollReveal>
         <section id="journey" className="relative overflow-hidden px-1 py-2">
-          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             CAREER
           </span>
           {/* Section strip header */}
           <div className="py-5">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Career Journey</h2>
+                <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Career Journey</h2>
               </div>
-              <span className="font-mono text-xs tracking-[0.15em] text-slate-600">1996 — 2026</span>
+              <span className="font-mono text-xs tracking-[0.15em] text-faint">1996 — 2026</span>
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-subtle">
               {profile?.career_summary}
             </p>
           </div>
@@ -198,17 +198,17 @@ export default async function Home() {
 
         <ScrollReveal>
         <section id="skills" className="relative overflow-hidden px-1 py-2">
-          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             SKILLS
           </span>
           <div className="py-5">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Skills &amp; Expertise</h2>
-              <span className="font-mono text-xs tracking-[0.15em] text-slate-600">
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Skills &amp; Expertise</h2>
+              <span className="font-mono text-xs tracking-[0.15em] text-faint">
                 {skillGroups.reduce((acc, g) => acc + g.items.length, 0)} skills
               </span>
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-subtle">
               Technologies and disciplines across the full delivery stack.
             </p>
           </div>
@@ -218,14 +218,14 @@ export default async function Home() {
 
         <ScrollReveal>
         <section id="about" className="relative overflow-hidden px-1 py-2">
-          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             ABOUT
           </span>
           <div className="py-5">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">About Me</h2>
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">About Me</h2>
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-subtle">
               Background, perspective, and what drives the work.
             </p>
           </div>
@@ -235,15 +235,15 @@ export default async function Home() {
 
         <ScrollReveal>
         <section id="portfolio" className="relative overflow-hidden px-1 py-2">
-          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             PROJECTS
           </span>
           <div className="py-5">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Live Projects</h2>
-              <span className="font-mono text-xs tracking-[0.15em] text-slate-600">{portfolioItems.length} shipped</span>
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Live Projects</h2>
+              <span className="font-mono text-xs tracking-[0.15em] text-faint">{portfolioItems.length} shipped</span>
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-subtle">
               Products and platforms built and shipped.
             </p>
           </div>
@@ -285,14 +285,14 @@ export default async function Home() {
         />
         <ScrollReveal>
         <section id="ask" className="relative overflow-hidden px-1 py-2">
-          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             ASK
           </span>
           <div className="py-5">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Digital Twin</h2>
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Digital Twin</h2>
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-subtle">
               Ask anything about James&apos;s experience, skills, or career. Powered by AI.
             </p>
           </div>
@@ -302,38 +302,38 @@ export default async function Home() {
 
         <ScrollReveal>
         <section id="contact" className="relative overflow-hidden px-1 py-2">
-          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-white opacity-[0.05] md:text-[8rem]">
+          <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             CONTACT
           </span>
           <div className="py-5">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-cyan-400 uppercase">Get in Touch</h2>
+              <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Get in Touch</h2>
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-subtle">
               Have a project in mind, a role to discuss, or just want to say hello?
             </p>
           </div>
           <div className="grid gap-10 md:grid-cols-2 md:gap-16">
             <div>
               <div className="flex items-stretch gap-4">
-                <div className="w-0.5 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10" />
-                <p className="text-2xl font-bold leading-snug tracking-tight text-white md:text-3xl">
+                <div className="w-0.5 shrink-0 rounded-full bg-linear-to-b from-(--accent) to-transparent" />
+                <p className="text-2xl font-bold leading-snug tracking-tight text-page md:text-3xl">
                   Let&apos;s build something great together.
                 </p>
               </div>
-              <p className="mt-4 text-sm leading-7 text-slate-400">
+              <p className="mt-4 text-sm leading-7 text-muted">
                 Have a project in mind, a role to discuss, or just want to say hello? Drop me a message.
               </p>
               <div className="mt-8 flex flex-col gap-4">
                 {profile?.email && (
-                  <a href={`mailto:${profile.email}`} className="group flex items-center gap-3 text-sm text-slate-400 transition hover:text-cyan-300">
-                    <div className="w-0.5 h-8 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10 transition group-hover:from-cyan-300" />
+                  <a href={`mailto:${profile.email}`} className="group flex items-center gap-3 text-sm text-muted transition hover:text-accent">
+                    <div className="w-0.5 h-8 shrink-0 rounded-full bg-linear-to-b from-(--accent) to-transparent transition group-hover:from-(--accent-soft)" />
                     <span>{profile.email}</span>
                   </a>
                 )}
                 {profile?.linkedin_url && (
-                  <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-sm text-slate-400 transition hover:text-cyan-300">
-                    <div className="w-0.5 h-8 shrink-0 rounded-full bg-linear-to-b from-cyan-400 to-cyan-400/10 transition group-hover:from-cyan-300" />
+                  <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-sm text-muted transition hover:text-accent">
+                    <div className="w-0.5 h-8 shrink-0 rounded-full bg-linear-to-b from-(--accent) to-transparent transition group-hover:from-(--accent-soft)" />
                     <span>LinkedIn</span>
                   </a>
                 )}
@@ -345,33 +345,33 @@ export default async function Home() {
         </ScrollReveal>
 
         <footer className="py-6 md:py-10">
-          <div className="mb-6 h-px bg-linear-to-r from-transparent via-cyan-300/40 to-transparent" />
+          <div className="mb-6 h-px bg-linear-to-r from-transparent via-(--accent)/30 to-transparent" />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm font-semibold tracking-widest text-slate-300">JAMES HORRIGAN</p>
+              <p className="text-sm font-semibold tracking-widest text-page-2">JAMES HORRIGAN</p>
               {profile?.location && (
-                <p className="mt-1 text-xs text-slate-500">{profile.location}</p>
+                <p className="mt-1 text-xs text-subtle">{profile.location}</p>
               )}
             </div>
-            <div className="flex flex-wrap items-center gap-5 text-sm text-slate-400">
+            <div className="flex flex-wrap items-center gap-5 text-sm text-muted">
               {profile?.linkedin_url && (
-                <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="transition hover:text-cyan-300">
+                <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="transition hover:text-accent">
                   LinkedIn
                 </a>
               )}
               {profile?.github_url && (
-                <a href={profile.github_url} target="_blank" rel="noopener noreferrer" className="transition hover:text-cyan-300">
+                <a href={profile.github_url} target="_blank" rel="noopener noreferrer" className="transition hover:text-accent">
                   GitHub
                 </a>
               )}
               {profile?.email && (
-                <a href={`mailto:${profile.email}`} className="transition hover:text-cyan-300">
+                <a href={`mailto:${profile.email}`} className="transition hover:text-accent">
                   {profile.email}
                 </a>
               )}
             </div>
           </div>
-          <p className="mt-4 text-xs text-slate-600">© 2025 James Horrigan</p>
+          <p className="mt-4 text-xs text-faint">© 2025 James Horrigan</p>
         </footer>
       </main>
     </div>

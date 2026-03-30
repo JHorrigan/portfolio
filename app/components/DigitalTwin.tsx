@@ -17,9 +17,9 @@ interface Message {
 function TypingDots() {
   return (
     <span className="inline-flex items-center gap-1 py-1">
-      <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce [animation-delay:0ms]" />
-      <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce [animation-delay:150ms]" />
-      <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce [animation-delay:300ms]" />
+      <span className="w-1.5 h-1.5 rounded-full bg-muted animate-bounce [animation-delay:0ms]" />
+      <span className="w-1.5 h-1.5 rounded-full bg-muted animate-bounce [animation-delay:150ms]" />
+      <span className="w-1.5 h-1.5 rounded-full bg-muted animate-bounce [animation-delay:300ms]" />
     </span>
   );
 }
@@ -120,10 +120,10 @@ export default function DigitalTwin() {
   return (
     <section className="glass rounded-3xl overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4 border-b border-slate-700/50 px-5 py-4 md:px-10 md:py-6">
+      <div className="flex items-center justify-between gap-4 border-b border-default-50 px-5 py-4 md:px-10 md:py-6">
         <div>
-          <p className={`text-xs font-mono uppercase tracking-widest mb-1 ${remaining === 0 ? 'text-rose-400' : 'text-cyan-400'}`}>Digital Twin</p>
-          <h2 className="text-2xl font-semibold text-white md:text-3xl">Ask James</h2>
+          <p className={`text-xs font-mono uppercase tracking-widest mb-1 ${remaining === 0 ? 'text-rose-400' : 'text-accent'}`}>Digital Twin</p>
+          <h2 className="text-2xl font-semibold text-page md:text-3xl">Ask James</h2>
         </div>
         <div className="flex items-center gap-3 shrink-0">
           {remaining !== null && (
@@ -132,7 +132,7 @@ export default function DigitalTwin() {
                 ? 'border-rose-500/40 bg-rose-500/10 text-rose-400'
                 : remaining <= 2
                 ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
-                : 'border-slate-700 bg-slate-800/50 text-slate-500'
+                : 'border-default bg-card-80 text-subtle'
             }`}>
               {remaining}/5 today
             </span>
@@ -141,7 +141,7 @@ export default function DigitalTwin() {
             <button
               onClick={reset}
               aria-label="Clear conversation"
-              className="flex items-center gap-1.5 rounded-full border border-slate-700/60 px-3 py-1 text-xs text-slate-400 transition hover:border-slate-500 hover:text-slate-200 hover:bg-slate-800/50"
+              className="flex items-center gap-1.5 rounded-full border border-default-60 px-3 py-1 text-xs text-muted transition hover:border-default hover:text-page-2 hover:bg-raised-60"
             >
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <line x1="2" y1="2" x2="10" y2="10" />
@@ -154,8 +154,8 @@ export default function DigitalTwin() {
             JH
           </div>
           <div className="hidden sm:block text-right">
-            <p className="text-xs font-semibold text-slate-200">James Horrigan</p>
-            <p className="text-[11px] text-slate-500 flex items-center gap-1 justify-end">
+            <p className="text-xs font-semibold text-page-2">James Horrigan</p>
+            <p className="text-[11px] text-subtle flex items-center gap-1 justify-end">
               <span className={`w-1.5 h-1.5 rounded-full inline-block ${remaining === 0 ? 'bg-rose-400' : 'bg-emerald-400'}`} />
               Digital Twin
             </p>
@@ -171,7 +171,7 @@ export default function DigitalTwin() {
               <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-[10px] font-semibold text-cyan-300 select-none">
                 JH
               </div>
-              <div className="max-w-[80%] px-4 py-2.5 text-sm leading-6 bg-slate-800/60 border border-slate-700/50 text-slate-300 rounded-2xl rounded-tl-sm">
+              <div className="max-w-[80%] px-4 py-2.5 text-sm leading-6 bg-raised-60 border border-default-50 text-page-2 rounded-2xl rounded-tl-sm">
                 Hey — I&apos;m James&apos;s digital twin. Ask me anything about his experience, tech stack, or career.
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function DigitalTwin() {
                 <button
                   key={q}
                   onClick={() => send(q)}
-                  className="flex items-center gap-1.5 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-cyan-500/60 hover:text-cyan-300 hover:bg-cyan-400/5"
+                  className="flex items-center gap-1.5 rounded-full border border-default px-3 py-1.5 text-xs font-medium text-muted transition hover:border-cyan-500/60 hover:text-accent hover:bg-cyan-400/5"
                 >
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-50">
                     <circle cx="12" cy="12" r="10" />
@@ -206,7 +206,7 @@ export default function DigitalTwin() {
                   JH
                 </div>
               ) : (
-                <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full bg-slate-800 border border-slate-600/50 flex items-center justify-center text-[9px] font-semibold text-slate-400 select-none">
+                <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full bg-raised border border-default-50 flex items-center justify-center text-[9px] font-semibold text-muted select-none">
                   YOU
                 </div>
               )}
@@ -215,8 +215,8 @@ export default function DigitalTwin() {
               <div
                 className={`max-w-[80%] px-4 py-2.5 text-sm leading-6 ${
                   isUser
-                    ? 'bg-cyan-950/80 border border-cyan-500/20 text-slate-100 rounded-2xl rounded-tr-sm'
-                    : 'bg-slate-800/60 border border-slate-700/50 text-slate-300 rounded-2xl rounded-tl-sm'
+                    ? 'bg-cyan-950/80 border border-cyan-500/20 text-page rounded-2xl rounded-tr-sm'
+                    : 'bg-raised-60 border border-default-50 text-page-2 rounded-2xl rounded-tl-sm'
                 }`}
               >
                 {loading && isLastAssistant && m.text === '' ? (
@@ -237,8 +237,8 @@ export default function DigitalTwin() {
       </div>
 
       {/* Input bar */}
-      <div className="border-t border-slate-700/50 px-5 py-4 md:px-10">
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-700/70 bg-slate-900/50 px-4 py-2.5 transition focus-within:border-slate-600">
+      <div className="border-t border-default-50 px-5 py-4 md:px-10">
+        <div className="flex items-center gap-3 rounded-2xl border border-default-60 bg-card-50 px-4 py-2.5 transition focus-within:border-default">
           <input
             type="text"
             value={input}
@@ -247,14 +247,14 @@ export default function DigitalTwin() {
             placeholder={remaining === 0 ? 'Daily limit reached' : 'Message James...'}
             maxLength={500}
             disabled={loading || remaining === 0}
-            className="flex-1 bg-transparent text-sm text-slate-200 placeholder-slate-600 outline-none disabled:opacity-40"
+            className="flex-1 bg-transparent text-sm text-page placeholder-subtle outline-none disabled:opacity-40"
           />
-          <span className="hidden sm:block text-[10px] text-slate-600 shrink-0">↵ to send</span>
+          <span className="hidden sm:block text-[10px] text-faint shrink-0">↵ to send</span>
           <button
             onClick={() => send(input)}
             disabled={loading || !input.trim() || remaining === 0}
             aria-label="Send message"
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-400 text-slate-950 transition hover:bg-cyan-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-btn transition hover:bg-accent-soft disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <SendIcon />
           </button>

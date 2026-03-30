@@ -24,14 +24,14 @@ export default function SkillsSection({
     <>
       {/* Filter chips */}
       <div className="mb-6">
-        <p className="mb-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-slate-600 uppercase">Category Filters</p>
+        <p className="mb-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-faint uppercase">Category Filters</p>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setActiveCategory(null)}
             className={`rounded-full border px-3 py-1 text-xs font-medium transition duration-150 ${
               activeCategory === null
-                ? 'border-cyan-400/60 bg-cyan-400/10 text-cyan-300'
-                : 'border-slate-700 text-slate-500 hover:border-slate-600 hover:text-slate-400'
+                ? 'border-cyan-400/60 bg-cyan-400/10 text-accent'
+                : 'border-default text-subtle hover:border-default hover:text-muted'
             }`}
           >
             All
@@ -44,7 +44,7 @@ export default function SkillsSection({
                 key={cat}
                 onClick={() => setActiveCategory(isActive ? null : cat)}
                 className={`rounded-full border px-3 py-1 text-xs font-medium transition duration-150 ${
-                  isActive ? colors.pill : 'border-slate-700 text-slate-500 hover:border-slate-600 hover:text-slate-400'
+                  isActive ? colors.pill : 'border-default text-subtle hover:border-default hover:text-muted'
                 }`}
               >
                 {cat}
@@ -62,14 +62,14 @@ export default function SkillsSection({
           return (
             <article
               key={group.title}
-              className={`rounded-xl border bg-slate-900/50 p-3 md:p-4 transition-opacity duration-300 ${colors.border} ${dimmed ? 'opacity-25' : ''}`}
+              className={`rounded-xl border bg-card-50 p-3 md:p-4 transition-opacity duration-300 ${colors.border} ${dimmed ? 'opacity-25' : ''}`}
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className={`w-0.5 h-4 shrink-0 rounded-full bg-linear-to-b to-transparent ${colors.line}`} />
                 <h3 className={`text-xs font-semibold tracking-[0.14em] ${colors.label}`}>
                   {group.title.toUpperCase()}
                 </h3>
-                <span className="font-mono text-[10px] text-slate-600">{group.items.length}</span>
+                <span className="font-mono text-[10px] text-faint">{group.items.length}</span>
               </div>
               <ul className="flex flex-wrap gap-1.5">
                 {group.items.map((skill) => (

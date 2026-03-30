@@ -38,14 +38,14 @@ export default function CareerTimeline({
     <div className="mt-8">
       {/* Filter chips */}
       <div className="mb-6">
-      <p className="mb-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-slate-600 uppercase">Stack Filters</p>
+      <p className="mb-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-faint uppercase">Stack Filters</p>
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => setActiveCategory(null)}
           className={`rounded-full border px-3 py-1 text-xs font-medium transition duration-150 ${
             activeCategory === null
-              ? 'border-cyan-400/60 bg-cyan-400/10 text-cyan-300'
-              : 'border-slate-700 text-slate-500 hover:border-slate-600 hover:text-slate-400'
+              ? 'border-cyan-400/60 bg-cyan-400/10 text-accent'
+              : 'border-default text-subtle hover:border-default hover:text-muted'
           }`}
         >
           All
@@ -58,7 +58,7 @@ export default function CareerTimeline({
               key={cat}
               onClick={() => setActiveCategory(isActive ? null : cat)}
               className={`rounded-full border px-3 py-1 text-xs font-medium transition duration-150 ${
-                isActive ? colors.pill : 'border-slate-700 text-slate-500 hover:border-slate-600 hover:text-slate-400'
+                isActive ? colors.pill : 'border-default text-subtle hover:border-default hover:text-muted'
               }`}
             >
               {cat}

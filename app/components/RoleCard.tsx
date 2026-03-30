@@ -45,20 +45,20 @@ export default function RoleCard({
         <div className="absolute left-0 top-5 h-3 w-3 animate-ping rounded-full bg-cyan-400/30" />
       )}
       <div
-        className={`absolute left-0 top-5 h-3 w-3 rounded-full border-2 border-cyan-400/80 bg-slate-950 ${
-          isFirst ? 'ring-2 ring-cyan-400/25 ring-offset-1 ring-offset-slate-950' : ''
+        className={`absolute left-0 top-5 h-3 w-3 rounded-full border-2 border-cyan-400/80 bg-page ${
+          isFirst ? 'ring-2 ring-cyan-400/25 ring-offset-1 ring-offset-transparent' : ''
         }`}
       />
 
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-700 hover:shadow-[inset_3px_0_0_#67e8f9] ${open ? 'shadow-[inset_3px_0_0_#67e8f9]' : ''}`}
+        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border border-subtle-theme bg-card-70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-default hover:shadow-[inset_3px_0_0_#67e8f9] ${open ? 'shadow-[inset_3px_0_0_#67e8f9]' : ''}`}
       >
         {year && (
           <span
             aria-hidden
-            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 select-none font-mono font-bold leading-none text-white opacity-[0.04]"
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 select-none font-mono font-bold leading-none text-page opacity-[0.04]"
             style={{ fontSize: 'clamp(4rem, 10vw, 7rem)' }}
           >
             {year}
@@ -66,9 +66,9 @@ export default function RoleCard({
         )}
         <div className="flex items-start justify-between gap-2">
           <div>
-            <p className="text-xs font-semibold tracking-[0.14em] text-cyan-300">{item.period}</p>
-            <h3 className="mt-1 text-base font-semibold leading-snug text-white sm:text-lg">{item.role}</h3>
-            <p className="mt-0.5 text-sm text-slate-400">{item.company}</p>
+            <p className="text-xs font-semibold tracking-[0.14em] text-accent">{item.period}</p>
+            <h3 className="mt-1 text-base font-semibold leading-snug text-page sm:text-lg">{item.role}</h3>
+            <p className="mt-0.5 text-sm text-muted">{item.company}</p>
           </div>
           <svg
             width="14"
@@ -79,7 +79,7 @@ export default function RoleCard({
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={`mt-2 shrink-0 text-slate-500 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+            className={`mt-2 shrink-0 text-subtle transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
           >
             <polyline points="2,4 7,10 12,4" />
           </svg>
@@ -93,7 +93,7 @@ export default function RoleCard({
         >
           <div className="overflow-hidden">
             {item.summary && (
-              <p className="mt-2 text-sm leading-7 text-slate-300 md:text-base md:leading-8">
+              <p className="mt-2 text-sm leading-7 text-page-2 md:text-base md:leading-8">
                 {item.summary}
               </p>
             )}
