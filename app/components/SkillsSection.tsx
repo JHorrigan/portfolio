@@ -30,7 +30,7 @@ export default function SkillsSection({
             onClick={() => setActiveCategory(null)}
             className={`rounded-full border px-3 py-1 text-xs font-medium transition duration-150 ${
               activeCategory === null
-                ? 'border-cyan-400/60 bg-cyan-400/10 text-accent'
+                ? 'border-(--accent)/60 bg-(--accent)/10 text-accent'
                 : 'border-default text-subtle hover:border-default hover:text-muted'
             }`}
           >
@@ -62,7 +62,7 @@ export default function SkillsSection({
           return (
             <article
               key={group.title}
-              className={`rounded-xl border bg-card-50 p-3 md:p-4 transition-opacity duration-300 ${colors.border} ${dimmed ? 'opacity-25' : ''}`}
+              className={`rounded-xl border border-card-outline bg-card-50 p-3 md:p-4 transition-opacity duration-300 ${dimmed ? 'opacity-25' : ''}`}
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className={`w-0.5 h-4 shrink-0 rounded-full bg-linear-to-b to-transparent ${colors.line}`} />

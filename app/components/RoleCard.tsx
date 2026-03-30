@@ -53,7 +53,7 @@ export default function RoleCard({
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border border-subtle-theme bg-card-70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-default hover:shadow-[inset_3px_0_0_var(--accent)] ${open ? 'shadow-[inset_3px_0_0_var(--accent)]' : ''}`}
+        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border bg-card-70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-[inset_3px_0_0_var(--accent)] role-card-border ${open ? 'shadow-[inset_3px_0_0_var(--accent)]' : ''}`}
       >
         {year && (
           <span

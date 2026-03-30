@@ -54,6 +54,9 @@
 
   /* Solid button text */
   --btn-text: #ffffff;
+
+  /* Card outline — light mode only */
+  --card-outline: transparent;
 }
 
 [data-theme="light"] {
@@ -106,11 +109,15 @@
 
   /* Solid button text */
   --btn-text: #ffffff;
+
+  /* Card outline */
+  --card-outline: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card-outline: var(--card-outline);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --animate-fade-in-up: fade-in-up 0.55s ease-out both;
@@ -228,3 +235,24 @@ body {
 @utility text-pill-rose    { color: var(--pill-rose); }
 @utility text-pill-sky     { color: var(--pill-sky); }
 @utility text-pill-purple  { color: var(--pill-purple); }
+
+/* ── Light-mode accent borders ─────────────────────────────────────────────── */
+
+/* Glass card */
+html[data-theme="light"] .glass {
+  border-color: var(--card-outline);
+}
+
+/* Role cards — transparent in dark, accent in light */
+.role-card-border { border-color: transparent; }
+html[data-theme="light"] .role-card-border       { border-color: var(--card-outline); }
+html[data-theme="light"] .role-card-border:hover  { border-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+
+/* Digital Twin inner elements (bubbles, pills) — light mode only */
+html[data-theme="light"] .dt-border { border-color: var(--card-outline); }
+
+/* Input / textarea — subtle border in dark, accent in light */
+.input-field-border { border-color: color-mix(in srgb, var(--border) 60%, transparent); }
+html[data-theme="light"] .input-field-border                    { border-color: var(--card-outline); }
+html[data-theme="light"] .input-field-border:focus,
+html[data-theme="light"] .input-field-border:focus-within       { border-color: color-mix(in srgb, var(--accent) 60%, transparent); }

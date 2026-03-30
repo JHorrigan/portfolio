@@ -118,7 +118,7 @@ export default function DigitalTwin() {
   }
 
   return (
-    <section className="glass rounded-3xl overflow-hidden">
+    <section className="glass dt-border rounded-3xl overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between gap-4 border-b border-default-50 px-5 py-4 md:px-10 md:py-6">
         <div>
@@ -171,7 +171,7 @@ export default function DigitalTwin() {
               <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-[10px] font-semibold text-cyan-300 select-none">
                 JH
               </div>
-              <div className="max-w-[80%] px-4 py-2.5 text-sm leading-6 bg-raised-60 border border-default-50 text-page-2 rounded-2xl rounded-tl-sm">
+              <div className="max-w-[80%] px-4 py-2.5 text-sm leading-6 bg-raised-60 border border-default-50 dt-border text-page-2 rounded-2xl rounded-tl-sm">
                 Hey — I&apos;m James&apos;s digital twin. Ask me anything about his experience, tech stack, or career.
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function DigitalTwin() {
                 <button
                   key={q}
                   onClick={() => send(q)}
-                  className="flex items-center gap-1.5 rounded-full border border-default px-3 py-1.5 text-xs font-medium text-muted transition hover:border-cyan-500/60 hover:text-accent hover:bg-cyan-400/5"
+                  className="flex items-center gap-1.5 rounded-full border border-default dt-border px-3 py-1.5 text-xs font-medium text-muted transition hover:border-(--accent)/60 hover:text-accent hover:bg-(--accent)/5"
                 >
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-50">
                     <circle cx="12" cy="12" r="10" />
@@ -215,8 +215,8 @@ export default function DigitalTwin() {
               <div
                 className={`max-w-[80%] px-4 py-2.5 text-sm leading-6 ${
                   isUser
-                    ? 'bg-cyan-950/80 border border-cyan-500/20 text-page rounded-2xl rounded-tr-sm'
-                    : 'bg-raised-60 border border-default-50 text-page-2 rounded-2xl rounded-tl-sm'
+                    ? 'bg-cyan-950/80 border border-cyan-500/20 dt-border text-page rounded-2xl rounded-tr-sm'
+                    : 'bg-raised-60 border border-default-50 dt-border text-page-2 rounded-2xl rounded-tl-sm'
                 }`}
               >
                 {loading && isLastAssistant && m.text === '' ? (
@@ -238,7 +238,7 @@ export default function DigitalTwin() {
 
       {/* Input bar */}
       <div className="border-t border-default-50 px-5 py-4 md:px-10">
-        <div className="flex items-center gap-3 rounded-2xl border border-default-60 bg-card-50 px-4 py-2.5 transition focus-within:border-default">
+        <div className="flex items-center gap-3 rounded-2xl border bg-card-50 px-4 py-2.5 transition input-field-border">
           <input
             type="text"
             value={input}

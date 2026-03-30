@@ -35,7 +35,7 @@ export default function ContactForm() {
   };
 
   const inputClass =
-    'w-full rounded-2xl border border-default-60 bg-card-60 px-4 py-3 text-sm text-page placeholder-subtle outline-none transition focus:border-cyan-400/60 focus:ring-1 focus:ring-cyan-400/30';
+    'w-full rounded-2xl border bg-card-60 px-4 py-3 text-sm text-page placeholder-subtle outline-none transition input-field-border focus:ring-1 focus:ring-(--accent)/30';
 
   if (status === 'success') {
     return (
