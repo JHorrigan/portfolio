@@ -44,7 +44,7 @@ export default function CareerTimeline({
           onClick={() => setActiveCategory(null)}
           className={`rounded-full border px-3 py-1 text-xs font-medium transition duration-150 ${
             activeCategory === null
-              ? 'border-cyan-400/60 bg-cyan-400/10 text-accent'
+              ? 'border-(--accent)/60 bg-(--accent)/10 text-accent'
               : 'border-default text-subtle hover:border-default hover:text-muted'
           }`}
         >

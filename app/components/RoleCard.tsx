@@ -42,18 +42,18 @@ export default function RoleCard({
     >
       {/* Timeline node */}
       {isFirst && (
-        <div className="absolute left-0 top-5 h-3 w-3 animate-ping rounded-full bg-cyan-400/30" />
+        <div className="absolute left-0 top-5 h-3 w-3 animate-ping rounded-full bg-(--accent)/30" />
       )}
       <div
-        className={`absolute left-0 top-5 h-3 w-3 rounded-full border-2 border-cyan-400/80 bg-page ${
-          isFirst ? 'ring-2 ring-cyan-400/25 ring-offset-1 ring-offset-transparent' : ''
+        className={`absolute left-0 top-5 h-3 w-3 rounded-full border-2 border-(--accent)/80 bg-page ${
+          isFirst ? 'ring-2 ring-(--accent)/25 ring-offset-1 ring-offset-transparent' : ''
         }`}
       />
 
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border border-subtle-theme bg-card-70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-default hover:shadow-[inset_3px_0_0_#67e8f9] ${open ? 'shadow-[inset_3px_0_0_#67e8f9]' : ''}`}
+        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border border-subtle-theme bg-card-70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-default hover:shadow-[inset_3px_0_0_var(--accent)] ${open ? 'shadow-[inset_3px_0_0_var(--accent)]' : ''}`}
       >
         {year && (
           <span

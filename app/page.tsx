@@ -21,7 +21,7 @@ const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: str
 };
 
 const STAT_COLORS: Record<string, { from: string; text: string }> = {
-  cyan:    { from: 'from-cyan-400',    text: 'text-cyan-400' },
+  cyan:    { from: 'from-(--accent)',  text: 'text-accent' },
   violet:  { from: 'from-violet-400',  text: 'text-violet-400' },
   amber:   { from: 'from-amber-400',   text: 'text-amber-400' },
   emerald: { from: 'from-emerald-400', text: 'text-emerald-400' },
@@ -100,7 +100,7 @@ export default async function Home() {
           <div className="mt-5 hidden flex-wrap items-center gap-x-3 gap-y-1.5 sm:mt-6 sm:flex md:mt-8">
             {['30 yrs in tech', 'Founder & CTO', 'Enterprise & Startup', 'AI-first'].map((stat, i, arr) => (
               <span key={stat} className="flex items-center gap-x-3">
-                <span className={`text-sm font-medium md:text-base ${stat === 'AI-first' ? 'text-cyan-400' : 'text-page-2'}`}>
+                <span className={`text-sm font-medium md:text-base ${stat === 'AI-first' ? 'text-accent' : 'text-page-2'}`}>
                   {stat}
                 </span>
                 {i < arr.length - 1 && <span className="text-faint">·</span>}
@@ -142,7 +142,7 @@ export default async function Home() {
             )}
             <a
               href="#ask"
-              className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/5 px-5 py-3 text-sm font-semibold text-accent transition hover:border-cyan-400/70 hover:bg-cyan-400/10 hover:shadow-[0_0_24px_rgba(103,232,249,0.15)]"
+              className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border border-(--accent)/40 bg-(--accent)/5 px-5 py-3 text-sm font-semibold text-accent transition hover:border-(--accent)/70 hover:bg-(--accent)/10 hover:shadow-[0_0_24px_rgba(103,232,249,0.15)]"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />

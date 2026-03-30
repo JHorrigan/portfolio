@@ -19,16 +19,23 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
         }`}
       >
         {/* Front */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border border-default-60 bg-card-80 backface-hidden px-3">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border border-(--accent)/35 bg-card-80 backface-hidden px-3">
           {item.image_url ? (
-            <img
-              src={item.image_url}
-              alt={item.label}
-              className="mx-auto h-10 w-auto max-w-24 object-contain opacity-70"
-              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+            <div
+              aria-hidden
+              className="h-10 w-20 shrink-0"
+              style={{
+                maskImage: `url(${item.image_url})`,
+                WebkitMaskImage: `url(${item.image_url})`,
+                maskRepeat: 'no-repeat',
+                maskPosition: 'center',
+                maskSize: 'contain',
+                backgroundColor: 'var(--accent)',
+                opacity: 0.85,
+              }}
             />
           ) : (
-            <span className="text-lg font-bold text-faint">{item.label.charAt(0)}</span>
+            <span className="text-lg font-bold text-accent">{item.label.charAt(0)}</span>
           )}
           <span className="w-full text-center font-mono text-[10px] tracking-widest text-subtle truncate">
             {item.label.toUpperCase()}
@@ -36,7 +43,7 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
         </div>
 
         {/* Back */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-cyan-400/25 bg-card-95 backface-hidden transform-[rotateY(180deg)] px-3">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-(--accent)/25 bg-card-95 backface-hidden transform-[rotateY(180deg)] px-3">
           <div className="h-px w-8 bg-linear-to-r from-transparent via-(--accent) to-transparent" />
           <span className="text-xs font-semibold text-page">{item.label}</span>
           {item.description && (

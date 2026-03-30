@@ -25,7 +25,7 @@ export default function AnimatedSpine() {
   return (
     <div
       ref={ref}
-      className="absolute left-1.25 top-6 bottom-6 w-px origin-top bg-linear-to-b from-cyan-400/50 via-[var(--border)]/40 to-transparent"
+      className="absolute left-1.25 top-6 bottom-6 w-px origin-top bg-linear-to-b from-(--accent)/50 via-(--border)/40 to-transparent"
       style={{
         transform: visible ? 'scaleY(1)' : 'scaleY(0)',
         transition: 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)',
