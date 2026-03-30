@@ -57,11 +57,11 @@
 }
 
 [data-theme="light"] {
-  --background: #f8fafc;
+  --background: #eaf5f8;
   --foreground: #0f172a;
 
   /* Surface */
-  --bg: #f8fafc;
+  --bg: #eaf5f8;
   --bg-card: #ffffff;
   --bg-raised: #f1f5f9;
 
@@ -99,7 +99,7 @@
   --pill-purple: #581c87;   /* purple-900 */
 
   /* Background effects */
-  --dot-opacity: 0.06;
+  --dot-opacity: 0.03;
 
   /* Watermark */
   --watermark-opacity: 0.10;
