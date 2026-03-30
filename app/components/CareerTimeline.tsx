@@ -35,7 +35,7 @@ export default function CareerTimeline({
   );
 
   return (
-    <div className="mt-8">
+    <div>
       {/* Filter chips */}
       <div className="mb-6">
       <p className="mb-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-faint uppercase">Stack Filters</p>

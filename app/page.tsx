@@ -180,7 +180,7 @@ export default async function Home() {
             CAREER
           </span>
           {/* Section strip header */}
-          <div className="py-5">
+          <div className="pt-5 pb-10">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Career Journey</h2>
@@ -201,7 +201,7 @@ export default async function Home() {
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             SKILLS
           </span>
-          <div className="py-5">
+          <div className="pt-5 pb-10">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Skills &amp; Expertise</h2>
               <span className="font-mono text-xs tracking-[0.15em] text-faint">
@@ -221,7 +221,7 @@ export default async function Home() {
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             ABOUT
           </span>
-          <div className="py-5">
+          <div className="pt-5 pb-10">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">About Me</h2>
             </div>
@@ -238,7 +238,7 @@ export default async function Home() {
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             PROJECTS
           </span>
-          <div className="py-5">
+          <div className="pt-5 pb-10">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Live Projects</h2>
               <span className="font-mono text-xs tracking-[0.15em] text-faint">{portfolioItems.length} shipped</span>
@@ -288,7 +288,7 @@ export default async function Home() {
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             ASK
           </span>
-          <div className="py-5">
+          <div className="pt-5 pb-10">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Digital Twin</h2>
             </div>
@@ -305,7 +305,7 @@ export default async function Home() {
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
             CONTACT
           </span>
-          <div className="py-5">
+          <div className="pt-5 pb-10">
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Get in Touch</h2>
             </div>
