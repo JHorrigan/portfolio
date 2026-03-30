@@ -54,7 +54,7 @@ export default async function Home() {
       <div className="pointer-events-none absolute inset-0 hero-glow" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-(--accent)/60 to-transparent" />
 
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 md:gap-10 md:px-10 md:py-14">
+      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-6 md:gap-16 md:px-10 md:py-14">
         <ScrollReveal delay={0} className="sticky top-4 z-50">
         <StickyHeader name="JAMES HORRIGAN" />
         </ScrollReveal>
@@ -174,6 +174,8 @@ export default async function Home() {
         </section>
         </ScrollReveal>
 
+        <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
+
         <ScrollReveal>
         <section id="journey" className="relative overflow-hidden px-1 py-2">
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
@@ -196,6 +198,8 @@ export default async function Home() {
         </section>
         </ScrollReveal>
 
+        <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
+
         <ScrollReveal>
         <section id="skills" className="relative overflow-hidden px-1 py-2">
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
@@ -216,6 +220,8 @@ export default async function Home() {
         </section>
         </ScrollReveal>
 
+        <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
+
         <ScrollReveal>
         <section id="about" className="relative overflow-hidden px-1 py-2">
           <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
@@ -232,6 +238,8 @@ export default async function Home() {
           <ReadMore paragraphs={(profile?.summary ?? '').split('\n\n').filter(Boolean)} />
         </section>
         </ScrollReveal>
+
+        <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
 
         <ScrollReveal>
         <section id="portfolio" className="relative overflow-hidden px-1 py-2">
@@ -268,6 +276,8 @@ export default async function Home() {
         </section>
         </ScrollReveal>
 
+        <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -299,6 +309,8 @@ export default async function Home() {
           <DigitalTwin />
         </section>
         </ScrollReveal>
+
+        <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
 
         <ScrollReveal>
         <section id="contact" className="relative overflow-hidden px-1 py-2">
