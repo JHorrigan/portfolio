@@ -120,7 +120,7 @@ export default function DigitalTwin() {
   return (
     <section className="glass dt-border rounded-3xl overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4 border-b border-default-50 px-5 py-4 md:px-10 md:py-6">
+      <div className="flex items-center justify-between gap-4 border-b border-default-50 dt-divider px-5 py-4 md:px-10 md:py-6">
         <div>
           <p className={`text-xs font-mono uppercase tracking-widest mb-1 ${remaining === 0 ? 'text-rose-400' : 'text-accent'}`}>Digital Twin</p>
           <h2 className="text-2xl font-semibold text-page md:text-3xl">Ask James</h2>
@@ -132,7 +132,7 @@ export default function DigitalTwin() {
                 ? 'border-rose-500/40 bg-rose-500/10 text-rose-400'
                 : remaining <= 2
                 ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
-                : 'border-default bg-card-80 text-subtle'
+                : 'border-default bg-card-80 text-subtle dt-counter-default'
             }`}>
               {remaining}/5 today
             </span>
@@ -141,7 +141,7 @@ export default function DigitalTwin() {
             <button
               onClick={reset}
               aria-label="Clear conversation"
-              className="flex items-center gap-1.5 rounded-full border border-default-60 px-3 py-1 text-xs text-muted transition hover:border-default hover:text-page-2 hover:bg-raised-60"
+              className="flex items-center gap-1.5 rounded-full border border-default-60 dt-border px-3 py-1 text-xs text-muted transition hover:border-default hover:text-page-2 hover:bg-raised-60"
             >
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <line x1="2" y1="2" x2="10" y2="10" />
@@ -150,7 +150,7 @@ export default function DigitalTwin() {
               New chat
             </button>
           )}
-          <div className="w-8 h-8 rounded-full bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-xs font-semibold text-cyan-300 select-none">
+          <div className="w-8 h-8 rounded-full dt-avatar bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-xs font-semibold text-cyan-300 select-none">
             JH
           </div>
           <div className="hidden sm:block text-right">
@@ -168,10 +168,10 @@ export default function DigitalTwin() {
         {showSuggestions && (
           <div className="flex flex-col gap-3">
             <div className="flex gap-2.5">
-              <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-[10px] font-semibold text-cyan-300 select-none">
+              <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full dt-avatar bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-[10px] font-semibold text-cyan-300 select-none">
                 JH
               </div>
-              <div className="max-w-[80%] px-4 py-2.5 text-sm leading-6 bg-raised-60 border border-default-50 dt-border text-page-2 rounded-2xl rounded-tl-sm">
+              <div className="max-w-[80%] px-4 py-2.5 text-sm leading-6 dt-assistant-bubble bg-raised-60 border border-default-50 text-page-2 rounded-2xl rounded-tl-sm">
                 Hey — I&apos;m James&apos;s digital twin. Ask me anything about his experience, tech stack, or career.
               </div>
             </div>
@@ -202,7 +202,7 @@ export default function DigitalTwin() {
             <div key={i} className={`flex gap-2.5 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
               {/* Avatar */}
               {!isUser ? (
-                <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-[10px] font-semibold text-cyan-300 select-none">
+                <div className="mt-0.5 w-7 h-7 shrink-0 rounded-full dt-avatar bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-[10px] font-semibold text-cyan-300 select-none">
                   JH
                 </div>
               ) : (
@@ -215,8 +215,8 @@ export default function DigitalTwin() {
               <div
                 className={`max-w-[80%] px-4 py-2.5 text-sm leading-6 ${
                   isUser
-                    ? 'bg-cyan-950/80 border border-cyan-500/20 dt-border text-page rounded-2xl rounded-tr-sm'
-                    : 'bg-raised-60 border border-default-50 dt-border text-page-2 rounded-2xl rounded-tl-sm'
+                    ? 'dt-user-bubble bg-cyan-950/80 border border-cyan-500/20 text-page rounded-2xl rounded-tr-sm'
+                    : 'dt-assistant-bubble bg-raised-60 border border-default-50 text-page-2 rounded-2xl rounded-tl-sm'
                 }`}
               >
                 {loading && isLastAssistant && m.text === '' ? (
@@ -225,7 +225,7 @@ export default function DigitalTwin() {
                   <>
                     {m.text}
                     {loading && isLastAssistant && (
-                      <span className="inline-block w-1 h-3.5 bg-cyan-400/70 ml-0.5 align-middle animate-pulse rounded-sm" />
+                      <span className="inline-block w-1 h-3.5 bg-(--accent)/70 ml-0.5 align-middle animate-pulse rounded-sm" />
                     )}
                   </>
                 )}
@@ -237,7 +237,7 @@ export default function DigitalTwin() {
       </div>
 
       {/* Input bar */}
-      <div className="border-t border-default-50 px-5 py-4 md:px-10">
+      <div className="border-t border-default-50 dt-divider px-5 py-4 md:px-10">
         <div className="flex items-center gap-3 rounded-2xl border bg-card-50 px-4 py-2.5 transition input-field-border">
           <input
             type="text"

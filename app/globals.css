@@ -236,6 +236,40 @@ body {
 @utility text-pill-sky     { color: var(--pill-sky); }
 @utility text-pill-purple  { color: var(--pill-purple); }
 
+/* ── Digital Twin — light-mode adaptations ─────────────────────────────────── */
+
+/* JH avatar: dark cyan in dark mode, accent-tinted in light mode */
+html[data-theme="light"] .dt-avatar {
+  background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color:     color-mix(in srgb, var(--accent) 40%, transparent);
+  color:            var(--accent);
+}
+
+/* User message bubble: dark navy in dark, soft accent tint in light */
+html[data-theme="light"] .dt-user-bubble {
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color:     color-mix(in srgb, var(--accent) 35%, transparent);
+  color:            var(--fg);
+}
+
+/* Assistant bubble: raised surface, clearly distinct from white card */
+html[data-theme="light"] .dt-assistant-bubble {
+  background-color: var(--bg-raised);
+  border-color:     var(--card-outline);
+}
+
+/* Header / input-area dividers */
+html[data-theme="light"] .dt-divider {
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Rate counter pill (normal/full state) */
+html[data-theme="light"] .dt-counter-default {
+  border-color:     color-mix(in srgb, var(--accent) 30%, transparent);
+  background-color: color-mix(in srgb, var(--accent) 6%, transparent);
+  color:            var(--fg-muted);
+}
+
 /* ── Light-mode accent borders ─────────────────────────────────────────────── */
 
 /* Glass card */
