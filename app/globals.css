@@ -177,6 +177,11 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* ── Scroll offset for sticky header ───────────────────────────────────────── */
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 /* ── Glass utility ─────────────────────────────────────────────────────────── */
 .glass {
   border: 1px solid var(--border);

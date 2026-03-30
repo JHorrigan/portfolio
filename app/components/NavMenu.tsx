@@ -101,6 +101,18 @@ function DownloadCvButton() {
   );
 }
 
+function scrollToSection(href: string) {
+  const id = href.slice(1);
+  const el = document.getElementById(id);
+  if (!el) return;
+  const header = document.querySelector('header');
+  const headerBottom = header ? header.getBoundingClientRect().bottom : 80;
+  const gap = 16;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerBottom - gap;
+  window.scrollTo({ top, behavior: 'smooth' });
+  history.pushState(null, '', href);
+}
+
 export default function NavMenu() {
   const [open, setOpen] = useState(false);
   const activeSection = useActiveSection();
@@ -115,6 +127,7 @@ export default function NavMenu() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
               className={`relative flex items-center px-3 py-1.5 text-sm font-semibold transition ${
                 isActive ? 'text-accent' : 'text-muted hover:text-page-2'
               }`}
@@ -157,7 +170,7 @@ export default function NavMenu() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => { e.preventDefault(); setOpen(false); scrollToSection(link.href); }}
                 className={`flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-semibold transition hover:bg-raised ${
                   isActive ? 'text-accent' : 'text-page-2'
                 }`}
