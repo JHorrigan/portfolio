@@ -51,7 +51,7 @@ export default function PortfolioCard({
             <p className="mb-1 truncate font-mono text-xs" style={{ color: `${accent}99` }}>
               {item.url?.replace('https://', '')}
             </p>
-            <h3 className="text-lg font-bold leading-tight tracking-tight text-page">
+            <h3 className="text-lg font-bold leading-tight tracking-tight text-white">
               {item.title}
             </h3>
             <div className="mt-1.5 flex items-center justify-between">
