@@ -193,8 +193,8 @@ export default function NavMenu() {
               </a>
             );
           })}
-          <div className="mt-1 border-t border-default-50 px-4 pt-3">
-            <p className="mb-2 text-xs font-semibold tracking-[0.18em] text-muted uppercase">
+          <div className="mt-1 border-t border-default-50 pt-3">
+            <p className="mb-1 px-4 text-xs font-semibold tracking-[0.18em] text-muted uppercase">
               Download CV
             </p>
             <div className="flex flex-col gap-1">
@@ -202,7 +202,7 @@ export default function NavMenu() {
                 href="/cv.pdf"
                 download
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium text-subtle transition hover:bg-raised hover:text-page-2"
+                className="flex items-center gap-2.5 rounded-xl px-4 py-2 text-sm font-medium text-subtle transition hover:bg-raised hover:text-page-2"
               >
                 <CvFormatIcon label="PDF" tone="pdf" />
                 PDF
@@ -211,7 +211,7 @@ export default function NavMenu() {
                 href="/cv.docx"
                 download
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium text-subtle transition hover:bg-raised hover:text-page-2"
+                className="flex items-center gap-2.5 rounded-xl px-4 py-2 text-sm font-medium text-subtle transition hover:bg-raised hover:text-page-2"
               >
                 <CvFormatIcon label="DOC" tone="docx" />
                 DOCX
