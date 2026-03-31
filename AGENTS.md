@@ -22,8 +22,19 @@ app/
   globals.css         # @import "tailwindcss" + @theme inline + .glass utility
   api/chat/route.ts   # POST — rate limiting, GPT-4o-mini streaming
   components/
-    NavMenu.tsx        # "use client" — burger/pill nav, Download CV dropdown
+    NavMenu.tsx        # "use client" — burger/pill nav, Download CV dropdown (desktop: pill+popover; mobile: stacked section with PDF/DOCX file-badge rows)
     DigitalTwin.tsx    # "use client" — messaging UI for digital twin
+    AnimatedSpine.tsx
+    CareerTimeline.tsx
+    ContactForm.tsx
+    HeroMarquee.tsx
+    PortfolioCard.tsx  # flip card — front: screenshot/gradient; back: description + visit link
+    ReadMore.tsx
+    RoleCard.tsx
+    ScrollReveal.tsx
+    SkillsSection.tsx
+    StickyHeader.tsx
+    ThemeToggle.tsx
 db/
   schema.ts            # tables: profile, skills, roles, roleSkills, portfolio, education, chatRateLimits
   index.ts             # Neon HTTP client + Drizzle instance
@@ -34,9 +45,9 @@ public/
 drizzle.config.ts      # postgresql dialect, points to db/schema.ts
 next.config.ts         # reactCompiler: true
 planning/
-  PLAN.md              # phased plan + checklist
-  DATABASE_STRATEGY.md # DB decision rationale
-  TECHSTACK.md         # tech stack research
+  PLAN.md              # active + future work only (phases 1–9 done, see above)
+  DATABASE_STRATEGY.md # Neon+Drizzle decision + full schema table reference
+  TECHSTACK.md         # Next.js/React + Tailwind v4 actionable facts
 ```
 
 ## Design System
@@ -69,7 +80,11 @@ Update content: edit `db/seed.ts --force` or use Neon SQL editor directly.
 
 ## CV Downloads
 
-`public/cv.pdf` + `public/cv.docx` — ATS-optimised (single column, standard headings, action-verb bullets, plain ASCII). Download button in `NavMenu.tsx` (desktop dropdown / mobile burger). **Placeholders still to fill:** phone `+44 [PHONE]`, education, certifications.
+`public/cv.pdf` + `public/cv.docx` — ATS-optimised (single column, standard headings, action-verb bullets, plain ASCII). Download button in `NavMenu.tsx`:
+- **Desktop**: cyan pill button → popover with PDF / DOCX rows
+- **Mobile burger menu**: "Download CV" section header + two left-aligned rows, each with a small colour-coded file badge (rose = PDF, sky = DOCX) and muted label text
+
+**Placeholders still to fill:** phone `+44 [PHONE]`, education, certifications.
 
 ## Deployment (Vercel)
 
@@ -80,12 +95,14 @@ Update content: edit `db/seed.ts --force` or use Neon SQL editor directly.
 
 ## Conventions
 
-- RSC-first — `"use client"` only in `NavMenu.tsx` and `DigitalTwin.tsx`
-- All markup in `page.tsx`; interactive components in `app/components/`
+- RSC-first — `"use client"` only where interaction is needed (currently `NavMenu.tsx`, `DigitalTwin.tsx`, `PortfolioCard.tsx`, `ContactForm.tsx`, `CareerTimeline.tsx`, `SkillsSection.tsx`, `ReadMore.tsx`, `ScrollReveal.tsx`, `HeroMarquee.tsx`, `StickyHeader.tsx`, `ThemeToggle.tsx`)
+- All page-level markup in `page.tsx`; interactive components in `app/components/`
 - `.glass` for all section card surfaces
 - Content editable via DB only — no code deploys for content changes
 - `seed.ts` requires `--force` to prevent accidental truncation
 - Tailwind slate/cyan utilities used directly — no custom token classes
+- Hero CTA buttons: mobile uses `text-xs px-4 py-2.5 gap-1.5`; desktop (`sm:`) uses `text-sm px-5 py-3 gap-2`
+- Tailwind v4 shorthand: use `opacity-(--var)` not `opacity-[var(--var)]`, `min-w-35` not `min-w-[140px]`, etc.
 
 ## Current Date
-Today's date is 2026-03-17.
+Today's date is 2026-03-31.
