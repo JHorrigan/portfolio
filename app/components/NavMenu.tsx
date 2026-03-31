@@ -49,6 +49,19 @@ function useActiveSection() {
   return active;
 }
 
+function CvFormatIcon({ label, tone }: { label: string; tone: 'pdf' | 'docx' }) {
+  const toneClasses = tone === 'pdf'
+    ? 'border-rose-400/35 bg-rose-400/12 text-rose-300'
+    : 'border-sky-400/35 bg-sky-400/12 text-sky-300';
+
+  return (
+    <span className={`relative inline-flex h-7 w-6 shrink-0 items-end justify-center rounded-[5px] border ${toneClasses}`} aria-hidden="true">
+      <span className="absolute right-0 top-0 h-2 w-2 rounded-bl-sm border-b border-l border-inherit bg-card-95" />
+      <span className="pb-0.5 text-[7px] font-bold tracking-[0.12em]">{label}</span>
+    </span>
+  );
+}
+
 function DownloadCvButton() {
   const [open, setOpen] = useState(false);
 
@@ -71,7 +84,7 @@ function DownloadCvButton() {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full z-50 mt-2 flex min-w-[140px] flex-col gap-1 rounded-2xl border border-default-60 bg-card-95 p-2 backdrop-blur-sm">
+          <div className="absolute right-0 top-full z-50 mt-2 flex min-w-35 flex-col gap-1 rounded-2xl border border-default-60 bg-card-95 p-2 backdrop-blur-sm">
             <a
               href="/cv.pdf"
               download
@@ -180,23 +193,30 @@ export default function NavMenu() {
               </a>
             );
           })}
-          <div className="mt-1 border-t border-default-50 pt-1">
-            <a
-              href="/cv.pdf"
-              download
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-page-2 transition hover:bg-raised"
-            >
-              Download CV (PDF)
-            </a>
-            <a
-              href="/cv.docx"
-              download
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-page-2 transition hover:bg-raised"
-            >
-              Download CV (DOCX)
-            </a>
+          <div className="mt-1 border-t border-default-50 px-4 pt-3">
+            <p className="mb-2 text-xs font-semibold tracking-[0.18em] text-muted uppercase">
+              Download CV
+            </p>
+            <div className="flex flex-col gap-1">
+              <a
+                href="/cv.pdf"
+                download
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium text-subtle transition hover:bg-raised hover:text-page-2"
+              >
+                <CvFormatIcon label="PDF" tone="pdf" />
+                PDF
+              </a>
+              <a
+                href="/cv.docx"
+                download
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium text-subtle transition hover:bg-raised hover:text-page-2"
+              >
+                <CvFormatIcon label="DOC" tone="docx" />
+                DOCX
+              </a>
+            </div>
           </div>
         </div>
       )}
