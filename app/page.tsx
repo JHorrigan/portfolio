@@ -126,13 +126,13 @@ export default async function Home() {
             </div>
           )}
 
-          <div className="mt-6 flex gap-3 sm:mt-8">
+          <div className="mt-6 flex gap-2.5 sm:mt-8 sm:gap-3">
             {profile?.linkedin_url && (
               <a
                 href={profile.linkedin_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-btn shadow-[0_0_24px_rgba(103,232,249,0.30)] transition hover:bg-accent-soft hover:shadow-[0_0_36px_rgba(103,232,249,0.50)]"
+                className="flex flex-1 items-center justify-center gap-1.5 rounded-full bg-accent px-4 py-2.5 text-xs font-semibold text-btn shadow-[0_0_24px_rgba(103,232,249,0.30)] transition hover:bg-accent-soft hover:shadow-[0_0_36px_rgba(103,232,249,0.50)] sm:flex-none sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -142,7 +142,7 @@ export default async function Home() {
             )}
             <a
               href="#ask"
-              className="flex flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border border-(--accent)/40 bg-(--accent)/5 px-5 py-3 text-sm font-semibold text-accent transition hover:border-(--accent)/70 hover:bg-(--accent)/10 hover:shadow-[0_0_24px_rgba(103,232,249,0.15)]"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-(--accent)/40 bg-(--accent)/5 px-4 py-2.5 text-xs font-semibold text-accent transition hover:border-(--accent)/70 hover:bg-(--accent)/10 hover:shadow-[0_0_24px_rgba(103,232,249,0.15)] sm:flex-none sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
