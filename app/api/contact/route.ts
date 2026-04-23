@@ -25,12 +25,14 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const { name, email, message } = body as Record<string, unknown>;
 
-  if (
-    typeof name !== 'string' || !name.trim() ||
-    typeof email !== 'string' || !email.includes('@') ||
-    typeof message !== 'string' || !message.trim()
-  ) {
-    return NextResponse.json({ error: 'Please fill in all fields.' }, { status: 422 });
+  if (typeof name !== 'string' || !name.trim()) {
+    return NextResponse.json({ error: 'Please enter your name.' }, { status: 422 });
+  }
+  if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 422 });
+  }
+  if (typeof message !== 'string' || !message.trim()) {
+    return NextResponse.json({ error: 'Please enter a message.' }, { status: 422 });
   }
 
   if (name.length > MAX_NAME || email.length > MAX_EMAIL || message.length > MAX_MESSAGE) {
