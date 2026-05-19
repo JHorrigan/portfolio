@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 type PortfolioItem = {
   id: number;
   title: string;
@@ -15,9 +19,28 @@ export default function PortfolioCard({
   gradient: string;
   accent: string;
 }) {
+  const [tapFlipped, setTapFlipped] = useState(false);
+  const [canHover, setCanHover] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: hover)');
+    const update = () => {
+      setCanHover(mq.matches);
+      if (mq.matches) setTapFlipped(false);
+    };
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
   return (
-    <article className="group h-72 perspective-[1000px]">
-      <div className="relative h-full transition-transform duration-500 transform-3d group-hover:transform-[rotateY(180deg)]">
+    <article
+      className={`group h-72 perspective-[1000px] ${canHover ? '' : 'cursor-pointer'}`}
+      onClick={canHover ? undefined : () => setTapFlipped((f) => !f)}
+    >
+      <div
+        className={`relative h-full transition-transform duration-500 transform-3d group-hover:transform-[rotateY(180deg)] ${tapFlipped ? 'transform-[rotateY(180deg)]' : ''}`}
+      >
         {/* Front — screenshot / gradient with title overlay */}
         <div className="absolute inset-0 overflow-hidden rounded-2xl border border-default-60 backface-hidden">
           {item.image_url ? (
@@ -42,7 +65,7 @@ export default function PortfolioCard({
               {item.title}
             </h3>
             <div className="mt-1.5 flex items-center justify-between">
-              <span className="text-xs text-muted">hover to explore</span>
+              <span className="text-xs text-muted">{canHover ? 'hover to explore' : 'tap to explore'}</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted">
                 <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
               </svg>
