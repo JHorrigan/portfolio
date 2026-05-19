@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PortfolioCard from './PortfolioCard';
 
 type PortfolioItem = {
@@ -20,7 +20,7 @@ const GRADIENTS = [
 const ACCENTS = ['#67e8f9', '#6ee7b7', '#c4b5fd', '#fdba74'];
 
 const AUTO_ADVANCE_MS = 5000;
-const TRANSITION_MS = 700;
+const TRANSITION_MS = 350;
 
 export default function PortfolioCarousel({ items }: { items: PortfolioItem[] }) {
   const N = items.length;
@@ -33,6 +33,7 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
   const [offset, setOffset] = useState(N);
   const [transition, setTransition] = useState(true);
   const [paused, setPaused] = useState(false);
+  const animatingRef = useRef(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -44,7 +45,11 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setOffset((o) => o + 1), AUTO_ADVANCE_MS);
+    const id = setInterval(() => {
+      if (animatingRef.current) return;
+      animatingRef.current = true;
+      setOffset((o) => o + 1);
+    }, AUTO_ADVANCE_MS);
     return () => clearInterval(id);
   }, [paused]);
 
@@ -53,19 +58,33 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
       setTransition(false);
       setOffset((o) => o - N);
       requestAnimationFrame(() =>
-        requestAnimationFrame(() => setTransition(true))
+        requestAnimationFrame(() => {
+          setTransition(true);
+          animatingRef.current = false;
+        })
       );
     } else if (offset < N) {
       setTransition(false);
       setOffset((o) => o + N);
       requestAnimationFrame(() =>
-        requestAnimationFrame(() => setTransition(true))
+        requestAnimationFrame(() => {
+          setTransition(true);
+          animatingRef.current = false;
+        })
       );
+    } else {
+      animatingRef.current = false;
     }
   };
 
-  const handleNext = () => setOffset((o) => o + 1);
-  const handlePrev = () => setOffset((o) => o - 1);
+  const advance = (delta: 1 | -1) => {
+    if (animatingRef.current) return;
+    animatingRef.current = true;
+    setOffset((o) => o + delta);
+  };
+
+  const handleNext = () => advance(1);
+  const handlePrev = () => advance(-1);
 
   return (
     <div
