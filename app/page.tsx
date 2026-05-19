@@ -2,7 +2,7 @@ import { getHeroStats, getMarqueeItems, getPortfolio, getProfile, getRoles, getS
 import ContactForm from './components/ContactForm';
 import DigitalTwin from './components/DigitalTwin';
 import StickyHeader from './components/StickyHeader';
-import PortfolioCard from './components/PortfolioCard';
+import PortfolioCarousel from './components/PortfolioCarousel';
 import ReadMore from './components/ReadMore';
 import CareerTimeline from './components/CareerTimeline';
 import SkillsSection from './components/SkillsSection';
@@ -255,24 +255,7 @@ export default async function Home() {
               Products and platforms built and shipped.
             </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {portfolioItems.map((item, i) => {
-              const gradients = [
-                'linear-gradient(135deg, #0c4a6e 0%, #020617 60%, #083344 100%)',
-                'linear-gradient(135deg, #064e3b 0%, #020617 60%, #052e16 100%)',
-                'linear-gradient(135deg, #2e1065 0%, #020617 60%, #1e1b4b 100%)',
-              ];
-              const accentColors = ['#67e8f9', '#6ee7b7', '#c4b5fd'];
-              return (
-                <PortfolioCard
-                  key={item.id}
-                  item={item}
-                  gradient={gradients[i % gradients.length]}
-                  accent={accentColors[i % accentColors.length]}
-                />
-              );
-            })}
-          </div>
+          <PortfolioCarousel items={portfolioItems} />
         </section>
         </ScrollReveal>
 
