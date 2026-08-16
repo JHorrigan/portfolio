@@ -154,21 +154,21 @@ async function seed() {
   await db.insert(schema.portfolio).values([
     {
       title: 'XPLORATECH.AI',
-      description: 'AI Automation Agency',
+      description: 'My limited company, and the vehicle I contract through',
       url: 'https://xploratech.ai',
       image_url: '/xploratech-screenshot.png',
       sort_order: 0,
     },
     {
       title: 'XA3',
-      description: 'AI Automation Agency Administration Platform',
+      description: 'Admin platform I built to run my own consultancy',
       url: 'https://xa3.xploratech.ai',
       image_url: '/xa3-screenshot.png',
       sort_order: 1,
     },
     {
       title: 'Xploratech API',
-      description: 'Xploratech API to support Xploratech Applications',
+      description: 'Serverless API behind my own applications',
       url: 'https://api.xploratech.ai/docs',
       image_url: '/xploratech-api-screenshot.png',
       sort_order: 2,

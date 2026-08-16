@@ -45,3 +45,6 @@ Desktop.ini
 .cache/
 .vercel/
 .vercel
+
+# Word lock files
+~$*
