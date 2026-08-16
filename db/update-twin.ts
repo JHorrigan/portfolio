@@ -206,7 +206,7 @@ async function update() {
   const xplora = await db
     .select()
     .from(schema.roles)
-    .where(ilike(schema.roles.company, '%xplora%'));
+    .where(eq(schema.roles.company, 'XPLORATECH.AI'));
 
   for (const row of xplora) {
     await db
@@ -264,7 +264,7 @@ async function update() {
     await db
       .update(schema.roles)
       .set({ summary: content.summary, highlights: content.highlights })
-      .where(eq(schema.roles.company, company));
+      .where(ilike(schema.roles.company, `%${company}%`));
     console.log(`  ${company}: summary + ${content.highlights.length} highlights`);
   }
 
@@ -284,6 +284,22 @@ async function update() {
       .set({ summary: XPLORA_SUMMARY, highlights: XPLORA_HIGHLIGHTS, sort_order: 0 })
       .where(eq(schema.roles.id, row.id));
     console.log(`  id=${row.id}: summary + ${XPLORA_HIGHLIGHTS.length} highlights, sort_order -> 0`);
+  }
+
+  // Done LAST so every matcher above still resolves. Mirrors the CV, where the
+  // company line reads "Intrum via XPLORATECH.AI" - the card renders company as
+  // the subtitle under the role, so this is the right field for it.
+  console.log('Marking the two contract roles as delivered via XPLORATECH.AI...');
+  const VIA: Array<[string, string]> = [
+    ['%mytrade%', 'MYTRADE TECHNOLOGIES via XPLORATECH.AI'],
+    ['%intrum%', 'Intrum via XPLORATECH.AI'],
+  ];
+  for (const [pattern, name] of VIA) {
+    await db
+      .update(schema.roles)
+      .set({ company: name })
+      .where(ilike(schema.roles.company, pattern));
+    console.log(`  ${name}`);
   }
 
   console.log('Done. Nothing was deleted.');
