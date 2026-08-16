@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: '#skills', label: 'Skills' },
   { href: '#about', label: 'About' },
   { href: '#portfolio', label: 'Projects' },
+  { href: '#activity', label: 'Activity' },
   { href: '#ask', label: 'Digital Twin' },
   { href: '#contact', label: 'Contact' },
 ];

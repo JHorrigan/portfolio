@@ -8,6 +8,8 @@ import CareerTimeline from './components/CareerTimeline';
 import SkillsSection from './components/SkillsSection';
 import HeroMarquee from './components/HeroMarquee';
 import ScrollReveal from './components/ScrollReveal';
+import ContributionGraph from './components/ContributionGraph';
+import { getContributions } from '../lib/github';
 
 const CATEGORY_COLORS: Record<string, { border: string; label: string; pill: string; line: string }> = {
   'Backend':        { border: 'border-subtle-theme', line: 'from-cyan-400',    label: 'text-label-cyan',    pill: 'border-cyan-400/30 bg-cyan-400/10 text-pill-cyan' },
@@ -36,13 +38,14 @@ const TITLE_BADGE_STYLES = [
 ];
 
 export default async function Home() {
-  const [profile, journey, skillGroups, portfolioItems, marqueeItems, heroStats] = await Promise.all([
+  const [profile, journey, skillGroups, portfolioItems, marqueeItems, heroStats, contributions] = await Promise.all([
     getProfile(),
     getRoles(),
     getSkillGroups(),
     getPortfolio(),
     getMarqueeItems(),
     getHeroStats(),
+    getContributions(),
   ]);
 
   const titleBadges = Array.isArray(profile?.title) && profile.title.length > 0
@@ -260,6 +263,30 @@ export default async function Home() {
         </ScrollReveal>
 
         <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
+
+        {contributions && (
+          <>
+          <ScrollReveal>
+          <section id="activity" className="relative overflow-hidden px-1 py-2">
+            <span aria-hidden className="pointer-events-none absolute -top-3 left-0 select-none font-mono text-[5rem] font-black leading-none tracking-tighter text-page opacity-[var(--watermark-opacity)] md:text-[8rem]">
+              ACTIVITY
+            </span>
+            <div className="pt-5 pb-10">
+              <div className="flex items-center justify-between gap-4">
+                <h2 className="font-mono text-xs font-semibold tracking-[0.22em] text-accent uppercase">Build Activity</h2>
+                <span className="font-mono text-xs tracking-[0.15em] text-faint">last 6 months</span>
+              </div>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-subtle">
+                Commits, pull requests and reviews across public and private repositories.
+              </p>
+            </div>
+            <ContributionGraph data={contributions} />
+          </section>
+          </ScrollReveal>
+
+          <div aria-hidden className="h-px bg-linear-to-r from-transparent via-(--accent)/35 to-transparent" />
+          </>
+        )}
 
         <script
           type="application/ld+json"

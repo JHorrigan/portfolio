@@ -27,6 +27,7 @@ app/
     AnimatedSpine.tsx
     CareerTimeline.tsx
     ContactForm.tsx
+    ContributionGraph.tsx # GitHub heatmap — server component, cyan scale via --accent
     HeroMarquee.tsx
     PortfolioCard.tsx  # flip card — front: screenshot/gradient; back: description + visit link
     ReadMore.tsx
@@ -35,6 +36,8 @@ app/
     SkillsSection.tsx
     StickyHeader.tsx
     ThemeToggle.tsx
+lib/
+  github.ts            # GraphQL contribution calendar, rolling 6-month window, revalidate 1h
 db/
   schema.ts            # tables: profile, skills, roles, roleSkills, portfolio, education, chatRateLimits
   index.ts             # Neon HTTP client + Drizzle instance
@@ -90,7 +93,11 @@ Update content: edit `db/seed.ts --force` or use Neon SQL editor directly.
 
 - URL: https://jameshorrigan.com — Vercel project `portfolio` (team `james-horrigans-projects-9b275ab9`)
 - GitHub `JHorrigan/portfolio` → push to `main` auto-deploys
-- Required env vars: `DATABASE_URL`, `OPENAI_API_KEY`, `IP_SALT`
+- Required env vars: `DATABASE_URL`, `OPENAI_API_KEY`, `IP_SALT`, `GITHUB_TOKEN`
+- `GITHUB_TOKEN` is a classic PAT with `read:user`. The Build Activity section renders only
+  if the fetch succeeds, so a missing or expired token silently drops the section rather than
+  breaking the page. Private-repo contributions (~95% of the total) appear only while the
+  GitHub account setting "Include private contributions on my profile" stays enabled.
 - DNS: IONOS A records → 76.76.21.21
 
 ## Conventions
