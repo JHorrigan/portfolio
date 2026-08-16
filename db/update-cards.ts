@@ -37,6 +37,17 @@ const CARDS = [
       'portal for managing listings and analytics.',
     url: 'https://mytradebargains.com',
     image_url: '/bargains-screenshot.png',
+    // Consumer-facing screens only - no supplier portal (not live) and no admin
+    // (internal). Files that do not exist yet are dropped from the rotation by
+    // PortfolioCard's onError handler, so this can be populated ahead of time.
+    image_urls: [
+      '/bargains-screenshot.png',   // home
+      '/bargains-search.png',
+      '/bargains-product.png',
+      '/bargains-suppliers.png',
+      '/bargains-lists.png',
+      '/bargains-favourites.png',
+    ],
     sort_order: 0,
   },
   {
@@ -58,6 +69,12 @@ const CARDS = [
     // Deliberately unlinked: the host is an n8n login screen, not a demo.
     url: null as string | null,
     image_url: null as string | null,
+    // Workflow canvases show the work far better than a login page would.
+    image_urls: [
+      '/n8n-daily-deal.png',        // daily deal auto-post, incl. the Slack approval gate
+      '/n8n-cost-digest.png',       // AWS daily cost digest
+      '/n8n-suggest-prewarm.png',   // search suggestion pre-warm
+    ],
     sort_order: 2,
   },
   {
@@ -100,6 +117,7 @@ async function update() {
           url: card.url,
           sort_order: card.sort_order,
           ...(card.image_url ? { image_url: card.image_url } : {}),
+          ...('image_urls' in card && card.image_urls ? { image_urls: card.image_urls } : {}),
         })
         .where(eq(schema.portfolio.id, found.id));
       console.log(`  updated: ${card.title}`);

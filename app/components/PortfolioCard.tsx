@@ -8,7 +8,11 @@ type PortfolioItem = {
   description: string | null;
   url: string | null;
   image_url: string | null;
+  image_urls?: string[] | null;
 };
+
+const SLIDE_MS = 4200;
+const FADE_MS = 700;
 
 export default function PortfolioCard({
   item,
@@ -21,6 +25,37 @@ export default function PortfolioCard({
 }) {
   const [tapFlipped, setTapFlipped] = useState(false);
   const [canHover, setCanHover] = useState(true);
+
+  // Prefer the array; fall back to the single legacy image. Any file that fails
+  // to load is dropped from rotation, so a missing screenshot degrades to the
+  // remaining slides rather than showing a broken image.
+  const declared = item.image_urls?.length ? item.image_urls : item.image_url ? [item.image_url] : [];
+  const [broken, setBroken] = useState<string[]>([]);
+  const slides = declared.filter((src) => !broken.includes(src));
+  const [slide, setSlide] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduceMotion(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  // Only cycle while the front face is showing. Hovering flips the card, so
+  // advancing on hover or click is not available to us here.
+  const paused = tapFlipped || slides.length < 2 || reduceMotion;
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => setSlide((i) => (i + 1) % slides.length), SLIDE_MS);
+    return () => clearInterval(id);
+  }, [paused, slides.length]);
+
+  useEffect(() => {
+    if (slide >= slides.length) setSlide(0);
+  }, [slide, slides.length]);
 
   useEffect(() => {
     const mq = window.matchMedia('(hover: hover)');
@@ -43,10 +78,40 @@ export default function PortfolioCard({
       >
         {/* Front — screenshot / gradient with title overlay */}
         <div className="absolute inset-0 overflow-hidden rounded-2xl border border-default-60 backface-hidden">
-          {item.image_url ? (
-            <img src={item.image_url} alt={item.title} className="h-full w-full object-cover" />
+          {slides.length > 0 ? (
+            slides.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={
+                  slides.length > 1
+                    ? `${item.title} — screen ${i + 1} of ${slides.length}`
+                    : item.title
+                }
+                onError={() => setBroken((b) => (b.includes(src) ? b : [...b, src]))}
+                className="absolute inset-0 h-full w-full object-cover transition-opacity ease-out"
+                style={{
+                  opacity: i === slide ? 1 : 0,
+                  transitionDuration: `${reduceMotion ? 0 : FADE_MS}ms`,
+                }}
+              />
+            ))
           ) : (
             <div className="h-full w-full" style={{ background: gradient }} />
+          )}
+          {slides.length > 1 && (
+            <div className="absolute right-4 top-4 z-10 flex gap-1" aria-hidden="true">
+              {slides.map((src, i) => (
+                <span
+                  key={src}
+                  className="h-0.5 w-5 rounded-full transition-all duration-500"
+                  style={{
+                    background: i === slide ? accent : `${accent}33`,
+                    boxShadow: i === slide ? `0 0 6px ${accent}80` : 'none',
+                  }}
+                />
+              ))}
+            </div>
           )}
           {/* dot-grid accent overlay */}
           <div

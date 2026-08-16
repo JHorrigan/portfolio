@@ -53,6 +53,7 @@ export const portfolio = pgTable('portfolio', {
   description: text('description'),
   url: text('url'),
   image_url: text('image_url'),
+  image_urls: text('image_urls').array(),
   sort_order: integer('sort_order').default(0),
 });
 
