@@ -78,6 +78,80 @@ const PROFILE_SUMMARY =
   'I have adopted the latest agentic development tools throughout my workflow, alongside the engineering ' +
   'standards and verification that keep that output reliable.';
 
+
+// ---------------------------------------------------------------------------
+// Career section content. The hero stats (1.3M, 70%, 300M, 1.3B, <1s) were
+// claims the page never substantiated - the roles that earned them said nothing
+// about them. These summaries and highlights close that gap.
+// ---------------------------------------------------------------------------
+
+const ROLE_CONTENT: Record<string, { summary: string; highlights: string[] }> = {
+  Intrum: {
+    summary:
+      'Led full stack development of a new customer self-service portal for a European debt management group, ' +
+      'built with React, Python, API Gateway and AWS serverless architecture and deployed across multiple ' +
+      'regulated client bases. Delivered secure authentication, white-labelling, high-speed content delivery ' +
+      'and AI-assisted tooling for contact centre agents.',
+    highlights: [
+      'Reduced call volumes to the contact centre by 70% after launch of the self-service portal.',
+      'Cut page load latency by over 40% with a content delivery solution on AWS Lambda and CloudFront.',
+      'Implemented OAuth2 authentication and white-labelling across regulated client deployments, supporting client-specific branding and authentication flows that helped secure top-tier clients.',
+      'Built an Amazon Connect agent interface presenting AI-powered call transcripts, sentiment analysis and RAG interactions, improving agent performance.',
+    ],
+  },
+  CiiVSOFT: {
+    summary:
+      'Led the engineering function as CTO, designing a scalable Python architecture for concurrent data ' +
+      'ingestion from enterprise applicant tracking systems, with real-time business logic providing automated ' +
+      'hiring assistance. Built the team, ran code reviews and mentoring, and delivered client onboarding ' +
+      'across Europe. Stack was Python, Django, Celery, Docker and AWS, using asynchronous and multiprocessing ' +
+      'techniques to overcome IO and CPU-bound limits.',
+    highlights: [
+      'Delivered £1.3 million in hiring cost savings for a transport operator.',
+      'Built an in-house NLP resume parser with Flask and spaCy, removing a costly and unreliable third-party dependency, processing thousands of job applications per hour for the first enterprise client.',
+      'Onboarded major European clients including Alstom, Agoda, Babcock, EDP and Glovo.',
+      'Replaced key infrastructure with serverless microservices on EventBridge, Step Functions, Lambda and DynamoDB.',
+    ],
+  },
+  'Pricesearcher.com': {
+    summary:
+      'Worked in the data platform team behind a vertical product search engine, using Python and AWS to ' +
+      'process live product and price data direct from merchants at least once a day. Built a feed processor ' +
+      'designed to handle any feed in any format - CSV, XML, JSON and text, from URL and FTP sources - using ' +
+      'parallel processing and queues for speed and scale.',
+    highlights: [
+      'Processed 300 million live products and price changes daily, direct from merchants.',
+      'Led a migration of 300 million products from Elasticsearch to DynamoDB, rewriting the processors from PHP to Python with zero downtime.',
+      'Applied a field value change across a database of 1.3 billion products, updating both the data and the processors that read it.',
+      'Built bespoke feed processors for Amazon, eBay and German marketplace Billiger, and rebuilt the downloader to handle frequent downloads from around 1,000 clients.',
+    ],
+  },
+};
+
+const MYTRADE_SUMMARY_TIGHT =
+  'Designed and built MYTRADEBARGAINS, a UK price and product search platform for trade professionals, from ' +
+  'an empty repository to a live product earning affiliate revenue from launch day in May 2026. Founding ' +
+  'engineer within a small commercial team, across a Python serverless API, multiple Next.js applications, ' +
+  'Postgres with pgvector, and a Fargate pipeline that refreshes the full catalogue nightly. Search combines ' +
+  'keyword matching with LLM embeddings, so a query finds the right products even when the wording differs, ' +
+  'and the same pipeline categorises products and enriches supplier profiles automatically. Also built the ' +
+  'admin and operational tooling the business runs on, and the engineering harness behind the AI-assisted ' +
+  'workflow itself - written standards, isolated workstreams and deploy locking.';
+
+// Rebalanced: three years of contracting leads, the AI method follows as one
+// sentence. The previous version gave a third of its length to the January 2026
+// retraining, which foregrounded a two-month period over a three-year record.
+// "certifying" softened to "training" - the courses are Udemy completions, not
+// accredited qualifications, and should not read as formal credentials.
+const XPLORA_SUMMARY =
+  'My own limited company, and the vehicle I contract and build through. Since 2023 I have delivered full ' +
+  'stack engineering for agencies and product teams on contract, across the debt management and construction ' +
+  'supply sectors, taking production systems end to end from front end through back end to infrastructure. ' +
+  'Alongside client work I build and operate my own products, and rebuilt the consultancy\'s own ' +
+  'infrastructure with serverless APIs, an internal admin platform and an agency site. My delivery method is ' +
+  'now AI-native: agent workflows, written coding standards and automated verification built around ' +
+  'AI-assisted engineering, backed by self-directed training in AI-assisted development and n8n automation.';
+
 async function update() {
   console.log('Updating profile.summary only (hero, hero_summary, title, email untouched)...');
   await db.update(schema.profile).set({ summary: PROFILE_SUMMARY });
@@ -172,6 +246,32 @@ async function update() {
       .set({ summary: cleaned })
       .where(eq(schema.roles.id, row.id));
     console.log(`  id=${row.id}: removed (${current.length} -> ${cleaned.length} chars)`);
+  }
+
+  console.log('Updating earlier role summaries and highlights...');
+  for (const [company, content] of Object.entries(ROLE_CONTENT)) {
+    await db
+      .update(schema.roles)
+      .set({ summary: content.summary, highlights: content.highlights })
+      .where(eq(schema.roles.company, company));
+    console.log(`  ${company}: summary + ${content.highlights.length} highlights`);
+  }
+
+  console.log('Tightening the MyTrade summary...');
+  for (const row of mytrade) {
+    await db
+      .update(schema.roles)
+      .set({ summary: MYTRADE_SUMMARY_TIGHT })
+      .where(eq(schema.roles.id, row.id));
+  }
+
+  console.log('Rebalancing the XPLORATECH.AI summary...');
+  for (const row of xplora) {
+    await db
+      .update(schema.roles)
+      .set({ summary: XPLORA_SUMMARY })
+      .where(eq(schema.roles.id, row.id));
+    console.log(`  id=${row.id}: ${(row.summary ?? '').length} -> ${XPLORA_SUMMARY.length} chars`);
   }
 
   console.log('Done. Nothing was deleted.');
