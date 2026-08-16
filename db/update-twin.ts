@@ -147,6 +147,7 @@ const XPLORA_SUMMARY =
   'My own limited company, and the vehicle I contract and build through. Since 2023 I have delivered full ' +
   'stack engineering for agencies and product teams on contract, across the debt management and construction ' +
   'supply sectors, taking production systems end to end from front end through back end to infrastructure. ' +
+  'I specialise in vector search, retrieval pipelines and language-model features running in production. ' +
   'Alongside client work I build and operate my own products, and rebuilt the consultancy\'s own ' +
   'infrastructure with serverless APIs, an internal admin platform and an agency site. My delivery method is ' +
   'now AI-native: agent workflows, written coding standards and automated verification built around ' +
