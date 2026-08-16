@@ -57,7 +57,7 @@ const CARDS = [
       'applications in a single monorepo alongside the consumer site, supplier portal, admin system and ' +
       'internal operations tooling.',
     url: 'https://mytradetechnologies.com',
-    image_url: null as string | null,
+    image_url: '/mytradetechnologies-screenshot.png' as string | null,
     sort_order: 1,
   },
   {
