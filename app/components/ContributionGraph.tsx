@@ -49,9 +49,11 @@ function summary(data: Contributions) {
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <div>
-      <p className="font-mono text-3xl leading-none font-semibold text-accent tabular-nums">{value}</p>
-      <p className="mt-2 font-mono text-[10px] font-semibold tracking-[0.18em] text-faint uppercase">{label}</p>
+    <div className="min-w-0">
+      <p className="font-mono text-xl leading-none font-semibold text-accent tabular-nums sm:text-3xl">{value}</p>
+      <p className="mt-1.5 font-mono text-[9px] font-semibold tracking-[0.12em] text-faint uppercase sm:mt-2 sm:text-[10px] sm:tracking-[0.18em]">
+        {label}
+      </p>
     </div>
   );
 }
@@ -124,7 +126,7 @@ export default function ContributionGraph({ data }: { data: Contributions }) {
         </div>
 
         {/* Stats */}
-        <div className="flex shrink-0 flex-wrap gap-x-10 gap-y-6 md:w-44 md:flex-col md:border-l md:border-default-30 md:pl-8">
+        <div className="flex shrink-0 justify-between gap-x-4 gap-y-6 sm:justify-start sm:gap-x-10 md:w-44 md:flex-col md:border-l md:border-default-30 md:pl-8">
           <Stat value={data.total.toLocaleString('en-GB')} label="Contributions" />
           <Stat value={String(data.activeDays)} label="Active days" />
           <Stat value={String(data.busiestDay.contributionCount)} label="Busiest day" />

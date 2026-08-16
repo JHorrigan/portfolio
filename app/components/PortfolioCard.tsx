@@ -77,7 +77,7 @@ export default function PortfolioCard({
         className={`relative h-full transition-transform duration-500 transform-3d group-hover:transform-[rotateY(180deg)] ${tapFlipped ? 'transform-[rotateY(180deg)]' : ''}`}
       >
         {/* Front — screenshot / gradient with title overlay */}
-        <div className="absolute inset-0 overflow-hidden rounded-2xl border border-default-60 backface-hidden">
+        <div className="card-face absolute inset-0 overflow-hidden rounded-2xl border border-default-60 backface-hidden">
           {/* Backdrop only visible when a card has no usable image. */}
           <div className="absolute inset-0" style={{ background: gradient }} />
           {slides.length > 0 &&
@@ -138,7 +138,7 @@ export default function PortfolioCard({
         </div>
 
         {/* Back — detail */}
-        <div className="absolute inset-0 flex flex-col rounded-2xl border border-default-60 bg-card-95 p-5 backface-hidden transform-[rotateY(180deg)]">
+        <div className="card-face absolute inset-0 flex flex-col rounded-2xl border border-default-60 bg-card-95 p-5 backface-hidden transform-[rotateY(180deg)]">
           <div
             className="mb-4 h-px w-full"
             style={{ background: `linear-gradient(90deg, transparent, ${accent}60, transparent)` }}

@@ -57,13 +57,13 @@ export default async function Home() {
       <div className="pointer-events-none absolute inset-0 hero-glow" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-(--accent)/60 to-transparent" />
 
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-6 md:gap-16 md:px-10 md:py-14">
+      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-4 md:gap-16 md:px-10 md:py-14">
         <ScrollReveal delay={0} className="sticky top-4 z-50">
         <StickyHeader name="JAMES HORRIGAN" />
         </ScrollReveal>
 
         <ScrollReveal delay={80}>
-        <section className="relative flex min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-10rem)] flex-col justify-start pt-8 sm:pt-12 md:pt-14 lg:pt-16 px-4 sm:px-8 md:px-10 lg:px-14">
+        <section className="relative flex min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-10rem)] flex-col justify-start pt-2 sm:pt-12 md:pt-14 lg:pt-16 px-4 sm:px-8 md:px-10 lg:px-14">
 
           {/* Background decorative glyph */}
           <div
@@ -157,7 +157,7 @@ export default async function Home() {
           {/* Marquee + scroll indicator */}
           <div className="mt-auto pt-8 sm:pt-10 flex flex-col gap-6 sm:gap-8">
             <HeroMarquee items={marqueeItems} />
-          <div className="flex justify-center pb-8 sm:pb-10 md:pb-12 lg:pb-14 pt-2">
+          <div className="flex justify-center pb-8 sm:pb-10 md:pb-12 lg:pb-14 pt-5 sm:pt-2">
             <a
               href="#journey"
               aria-label="Scroll to next section"

@@ -9,7 +9,7 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
 
   return (
     <article
-      className="h-24 w-36 shrink-0 cursor-pointer perspective-[800px]"
+      className="h-20 w-28 shrink-0 cursor-pointer perspective-[800px] sm:h-24 sm:w-36"
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
     >
@@ -23,7 +23,7 @@ function MarqueeTile({ item }: { item: MarqueeItem }) {
           {item.image_url ? (
             <div
               aria-hidden
-              className="h-10 w-20 shrink-0"
+              className="h-8 w-16 shrink-0 sm:h-10 sm:w-20"
               style={{
                 maskImage: `url(${item.image_url})`,
                 WebkitMaskImage: `url(${item.image_url})`,
@@ -108,7 +108,7 @@ export default function HeroMarquee({ items }: { items: MarqueeItem[] }) {
         <div
           key={animKey}
           ref={animatedRef}
-          className="flex gap-3 animate-marquee"
+          className="flex gap-2 animate-marquee sm:gap-3"
           style={{
             width: 'max-content',
             animationPlayState: paused ? 'paused' : 'running',

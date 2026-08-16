@@ -109,13 +109,15 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="mb-3 flex justify-end">
+      {/* Controls sit above the track, not over it -- arrows floated on the card
+          covered the screenshots, worst on mobile where one card fills the width. */}
+      <div className="mb-3 flex items-center justify-end gap-2">
         <button
           type="button"
           onClick={() => setUserPaused((v) => !v)}
           aria-pressed={userPaused}
           aria-label={userPaused ? 'Play project carousel' : 'Pause project carousel'}
-          className="inline-flex items-center gap-1.5 rounded-full border border-default-60 bg-card-80 px-3 py-1 font-mono text-xs text-page-2 backdrop-blur transition hover:border-(--accent) hover:text-accent"
+          className="inline-flex items-center gap-1.5 rounded-full border border-default-60 bg-card-80 px-3 py-1.5 font-mono text-xs text-page-2 backdrop-blur transition hover:border-(--accent) hover:text-accent"
         >
           {userPaused ? (
             <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
@@ -128,6 +130,27 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
             </svg>
           )}
           {userPaused ? 'Play' : 'Pause'}
+        </button>
+
+        <button
+          type="button"
+          onClick={handlePrev}
+          aria-label="Previous projects"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-default-60 bg-card-80 text-page-2 backdrop-blur transition hover:border-(--accent) hover:text-accent"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onClick={handleNext}
+          aria-label="Next projects"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-default-60 bg-card-80 text-page-2 backdrop-blur transition hover:border-(--accent) hover:text-accent"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
         </button>
       </div>
 
@@ -160,44 +183,6 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={handlePrev}
-        aria-label="Previous projects"
-        className="absolute top-1/2 left-3 z-10 -translate-y-1/2 rounded-full border border-default-60 bg-card-80 p-2 text-page-2 backdrop-blur transition hover:border-(--accent) hover:text-accent md:p-3"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        onClick={handleNext}
-        aria-label="Next projects"
-        className="absolute top-1/2 right-3 z-10 -translate-y-1/2 rounded-full border border-default-60 bg-card-80 p-2 text-page-2 backdrop-blur transition hover:border-(--accent) hover:text-accent md:p-3"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      </button>
     </div>
   );
 }

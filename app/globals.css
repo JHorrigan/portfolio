@@ -193,6 +193,14 @@ section[id] {
   backdrop-filter: blur(8px);
 }
 
+/* ── Project card edges ────────────────────────────────────────────────────── */
+/* Light mode paints a near-white card on a pale blue page, so `border-default`
+   leaves the flipped face with no discernible edge. Reuse the accent-tinted
+   outline that only exists in light mode. Dark mode keeps the default border. */
+[data-theme='light'] .card-face {
+  border-color: var(--card-outline);
+}
+
 /* ── Semantic utility classes ──────────────────────────────────────────────── */
 @utility bg-page        { background-color: var(--bg); }
 @utility bg-card        { background-color: var(--bg-card); }
@@ -202,6 +210,9 @@ section[id] {
 @utility text-muted     { color: var(--fg-muted); }
 @utility text-subtle    { color: var(--fg-subtle); }
 @utility text-faint     { color: var(--fg-faint); }
+/* The `bg-` twin of text-muted. Its absence left DigitalTwin's typing dots
+   bouncing with no colour, so the "..." indicator was invisible, not missing. */
+@utility bg-muted       { background-color: var(--fg-muted); }
 @utility border-default       { border-color: var(--border); }
 @utility border-subtle-theme  { border-color: var(--border-2); }
 

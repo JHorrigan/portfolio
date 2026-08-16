@@ -31,6 +31,7 @@ export default function RoleCard({
   dimmed?: boolean;
 }) {
   const [open, setOpen] = useState(isFirst);
+  const [showFullSummary, setShowFullSummary] = useState(false);
   const year = isFirst
     ? String(new Date().getFullYear())
     : item.period.match(/\d{4}/g)?.at(-1);
@@ -53,10 +54,16 @@ export default function RoleCard({
         }`}
       />
 
+      {/* The expandable panel is a sibling of the toggle, not a child: the
+          summary needs its own "More" control on mobile, and a button inside a
+          button is invalid. */}
+      <div
+        className={`relative overflow-hidden rounded-2xl border bg-card-70 transition duration-200 hover:-translate-y-0.5 hover:shadow-[inset_3px_0_0_var(--accent)] role-card-border ${open ? 'shadow-[inset_3px_0_0_var(--accent)]' : ''}`}
+      >
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border bg-card-70 p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-[inset_3px_0_0_var(--accent)] role-card-border ${open ? 'shadow-[inset_3px_0_0_var(--accent)]' : ''}`}
+        className="relative w-full cursor-pointer p-4 text-left"
       >
         {year && (
           <span
@@ -87,18 +94,42 @@ export default function RoleCard({
             <polyline points="2,4 7,10 12,4" />
           </svg>
         </div>
+      </button>
 
-        {/* Smooth height animation via CSS grid trick */}
-        <div
-          className={`grid transition-all duration-300 ${
-            open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-          }`}
-        >
-          <div className="overflow-hidden">
+      {/* Smooth height animation via CSS grid trick */}
+      <div
+        className={`grid transition-all duration-300 ${
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+          <div className="overflow-hidden px-4 pb-4">
             {item.summary && (
-              <p className="mt-2 text-sm leading-7 text-page-2 md:text-base md:leading-8">
-                {item.summary}
-              </p>
+              <>
+                <p
+                  className={`text-sm leading-7 text-page-2 md:text-base md:leading-8 ${
+                    showFullSummary ? '' : 'line-clamp-5 md:line-clamp-none'
+                  }`}
+                >
+                  {item.summary}
+                </p>
+                {/* Narrow screens only -- on desktop the summary never runs long
+                    enough to be worth a control. */}
+                <button
+                  onClick={() => setShowFullSummary((v) => !v)}
+                  aria-expanded={showFullSummary}
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-accent transition hover:opacity-80 md:hidden"
+                >
+                  {showFullSummary ? 'Less' : 'More'}
+                  <svg
+                    width="11" height="11" viewBox="0 0 12 12"
+                    fill="none" stroke="currentColor" strokeWidth="1.8"
+                    strokeLinecap="round" strokeLinejoin="round"
+                    className={`transition-transform duration-300 ${showFullSummary ? 'rotate-180' : ''}`}
+                  >
+                    <polyline points="2,4 6,8 10,4" />
+                  </svg>
+                </button>
+              </>
             )}
             {item.skills.length > 0 && (
               <ul className="mt-3 flex flex-wrap gap-1.5">
@@ -119,8 +150,8 @@ export default function RoleCard({
               </ul>
             )}
           </div>
-        </div>
-      </button>
+      </div>
+      </div>
     </li>
   );
 }
