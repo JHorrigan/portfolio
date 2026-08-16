@@ -68,7 +68,9 @@ const CARDS = [
       'enrichment and social publishing, all reporting into Slack.',
     // Deliberately unlinked: the host is an n8n login screen, not a demo.
     url: null as string | null,
-    image_url: null as string | null,
+    // Cover is the daily-deal canvas: its centre crop lands on the Slack
+    // approval branch, which is the most legible and most interesting section.
+    image_url: '/n8n-daily-deal.png' as string | null,
     // Workflow canvases show the work far better than a login page would.
     image_urls: [
       '/n8n-daily-deal.png',        // daily deal auto-post, incl. the Slack approval gate
