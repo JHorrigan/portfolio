@@ -53,7 +53,12 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
     return () => clearInterval(id);
   }, [paused]);
 
-  const handleTransitionEnd = () => {
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    // transitionend BUBBLES. The cards contain their own transitions - image
+    // crossfades and progress bars - and without this guard those fire the
+    // snap-back logic mid-cycle, which makes a card appear to vanish.
+    if (e.target !== e.currentTarget || e.propertyName !== 'transform') return;
+
     if (offset >= 2 * N) {
       setTransition(false);
       setOffset((o) => o - N);
