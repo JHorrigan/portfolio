@@ -33,7 +33,19 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
   const [offset, setOffset] = useState(N);
   const [transition, setTransition] = useState(true);
   const [paused, setPaused] = useState(false);
+  // Hovering pauses, but hovering also flips a card - so there is no way to
+  // hold the carousel still while reading one. This is the explicit control.
+  const [userPaused, setUserPaused] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const animatingRef = useRef(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduceMotion(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -44,14 +56,14 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
   }, []);
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || userPaused || reduceMotion) return;
     const id = setInterval(() => {
       if (animatingRef.current) return;
       animatingRef.current = true;
       setOffset((o) => o + 1);
     }, AUTO_ADVANCE_MS);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, userPaused, reduceMotion]);
 
   const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
     // transitionend BUBBLES. The cards contain their own transitions - image
@@ -97,6 +109,28 @@ export default function PortfolioCarousel({ items }: { items: PortfolioItem[] })
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
+      <div className="mb-3 flex justify-end">
+        <button
+          type="button"
+          onClick={() => setUserPaused((v) => !v)}
+          aria-pressed={userPaused}
+          aria-label={userPaused ? 'Play project carousel' : 'Pause project carousel'}
+          className="inline-flex items-center gap-1.5 rounded-full border border-default-60 bg-card-80 px-3 py-1 font-mono text-xs text-page-2 backdrop-blur transition hover:border-(--accent) hover:text-accent"
+        >
+          {userPaused ? (
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+              <path d="M3 1.5v9l7-4.5z" />
+            </svg>
+          ) : (
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+              <rect x="3" y="1.5" width="2.5" height="9" rx="0.6" />
+              <rect x="6.5" y="1.5" width="2.5" height="9" rx="0.6" />
+            </svg>
+          )}
+          {userPaused ? 'Play' : 'Pause'}
+        </button>
+      </div>
+
       <div className="overflow-hidden">
         <div
           className="flex"
