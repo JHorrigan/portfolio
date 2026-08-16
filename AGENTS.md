@@ -43,6 +43,8 @@ db/
   index.ts             # Neon HTTP client + Drizzle instance
   queries.ts           # getProfile(), getRoles(), getSkillGroups(), getPortfolio()
   seed.ts              # truncate + re-seed (--force required)
+  audit-skills.ts      # read-only: skills by category, role links, orphans, category coverage
+  update-skills.ts     # 2026-08-16 skills correction; dry run by default, --apply to write
 public/
   cv.pdf / cv.docx     # ATS-optimised CVs (single-column, plain ASCII)
 drizzle.config.ts      # postgresql dialect, points to db/schema.ts
@@ -106,6 +108,14 @@ Update content: edit `db/seed.ts --force` or use Neon SQL editor directly.
 - All page-level markup in `page.tsx`; interactive components in `app/components/`
 - `.glass` for all section card surfaces
 - Content editable via DB only — no code deploys for content changes
+- **A DB content change will not show in a local `npm run build` for up to an hour.** `/` carries
+  `revalidate: 1h` (inherited from the contribution-graph fetch in `lib/github.ts`), and
+  `next build` reuses the prerendered route from `.next/cache` while it is still inside that
+  window. Run `rm -rf .next && npm run build` to see fresh content immediately. Production
+  self-refreshes within the hour regardless.
+- **Never animate a property you also set conditionally.** `animate-fade-in-up` fills `both`, so
+  its finished `to { opacity: 1 }` keyframe outranks inline styles and plain classes. The career
+  filter's role dimming was silently dead until `RoleCard.tsx` switched to `opacity-25!`.
 - `seed.ts` requires `--force` to prevent accidental truncation
 - Tailwind slate/cyan utilities used directly — no custom token classes
 - Hero CTA buttons: mobile uses `text-xs px-4 py-2.5 gap-1.5`; desktop (`sm:`) uses `text-sm px-5 py-3 gap-2`

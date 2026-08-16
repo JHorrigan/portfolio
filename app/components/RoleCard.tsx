@@ -37,8 +37,11 @@ export default function RoleCard({
 
   return (
     <li
-      className="relative pl-9 animate-fade-in-up transition-opacity duration-300"
-      style={{ animationDelay: `${index * 80}ms`, opacity: dimmed ? 0.25 : 1 }}
+      // `opacity-25!` is deliberate: `animate-fade-in-up` fills `both`, so its
+      // finished `to { opacity: 1 }` keyframe outranks a plain declaration and
+      // silently cancelled the dim.
+      className={`relative pl-9 animate-fade-in-up transition-opacity duration-300 ${dimmed ? 'opacity-25!' : ''}`}
+      style={{ animationDelay: `${index * 80}ms` }}
     >
       {/* Timeline node */}
       {isFirst && (
