@@ -153,6 +153,16 @@ const XPLORA_SUMMARY =
   'now AI-native: agent workflows, written coding standards and automated verification built around ' +
   'AI-assisted engineering, backed by self-directed training in AI-assisted development and n8n automation.';
 
+// Xploratech sorts above MyTrade: it is ongoing ("Present") while MyTrade has
+// ended, it is the employer that MyTrade was delivered through, and the CV and
+// LinkedIn both order it that way. Highlights added so the top entry is not the
+// only one without any.
+const XPLORA_HIGHLIGHTS = [
+  'Delivered contract engagements end to end since 2023, across the debt management and construction supply sectors, covering front end, back end and infrastructure.',
+  "Rebuilt the consultancy's own platform: serverless APIs, an internal admin system, an agency site, and the AI digital twin on this page.",
+  'Adopted agentic AI development across all delivery, building the written standards, workstream isolation and automated verification that make it safe to use on production systems.',
+];
+
 async function update() {
   console.log('Updating profile.summary only (hero, hero_summary, title, email untouched)...');
   await db.update(schema.profile).set({ summary: PROFILE_SUMMARY });
@@ -262,17 +272,18 @@ async function update() {
   for (const row of mytrade) {
     await db
       .update(schema.roles)
-      .set({ summary: MYTRADE_SUMMARY_TIGHT })
+      .set({ summary: MYTRADE_SUMMARY_TIGHT, sort_order: 1 })
       .where(eq(schema.roles.id, row.id));
+    console.log(`  id=${row.id}: sort_order -> 1 (below Xploratech)`);
   }
 
   console.log('Rebalancing the XPLORATECH.AI summary...');
   for (const row of xplora) {
     await db
       .update(schema.roles)
-      .set({ summary: XPLORA_SUMMARY })
+      .set({ summary: XPLORA_SUMMARY, highlights: XPLORA_HIGHLIGHTS, sort_order: 0 })
       .where(eq(schema.roles.id, row.id));
-    console.log(`  id=${row.id}: ${(row.summary ?? '').length} -> ${XPLORA_SUMMARY.length} chars`);
+    console.log(`  id=${row.id}: summary + ${XPLORA_HIGHLIGHTS.length} highlights, sort_order -> 0`);
   }
 
   console.log('Done. Nothing was deleted.');
