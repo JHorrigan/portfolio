@@ -121,7 +121,7 @@ export default function PortfolioCard({
             }}
           />
           {/* title + hint overlay */}
-          <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-black/20 to-transparent p-5">
+          <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/95 via-black/50 to-transparent p-5">
             <p className="mb-1 truncate font-mono text-xs" style={{ color: `${accent}99` }}>
               {item.url?.replace('https://', '')}
             </p>
