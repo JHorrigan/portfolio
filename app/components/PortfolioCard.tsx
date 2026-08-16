@@ -78,8 +78,7 @@ export default function PortfolioCard({
       >
         {/* Front — screenshot / gradient with title overlay */}
         <div className="absolute inset-0 overflow-hidden rounded-2xl border border-default-60 backface-hidden">
-          {/* Backdrop always rendered: screenshots are letterboxed with
-              object-contain so nothing is cropped, and this fills the bands. */}
+          {/* Backdrop only visible when a card has no usable image. */}
           <div className="absolute inset-0" style={{ background: gradient }} />
           {slides.length > 0 &&
             slides.map((src, i) => (
@@ -92,7 +91,7 @@ export default function PortfolioCard({
                     : item.title
                 }
                 onError={() => setBroken((b) => (b.includes(src) ? b : [...b, src]))}
-                className="absolute inset-0 h-full w-full object-contain object-top transition-opacity ease-out"
+                className="absolute inset-0 h-full w-full object-cover transition-opacity ease-out"
                 style={{
                   opacity: i === slide ? 1 : 0,
                   transitionDuration: `${reduceMotion ? 0 : FADE_MS}ms`,
