@@ -116,10 +116,18 @@ Update content: edit `db/seed.ts --force` or use Neon SQL editor directly.
 - **Never animate a property you also set conditionally.** `animate-fade-in-up` fills `both`, so
   its finished `to { opacity: 1 }` keyframe outranks inline styles and plain classes. The career
   filter's role dimming was silently dead until `RoleCard.tsx` switched to `opacity-25!`.
+- **`npm run dev` refresh-loops** on a pre-existing Turbopack HMR panic. Use
+  `npx next dev --webpack`. `package.json` is deliberately unchanged; production is unaffected.
+- **Project card screenshots must be captured at ~1.18 aspect.** The card box renders 337x286,
+  and `object-cover` silently crops the sides — a 2.0-ratio capture loses 41% of its width.
+- **Skills removed on purpose — do not "helpfully" re-add them.** `C`, `C++` (Marconi), `NodeJS`
+  (Capita), `Terraform` (MyTrade), `Vitest`, and `NLP` unlinked from Intrum. Each is restorable
+  from the `DELETE_SKILLS` block in `db/update-skills.ts`, which records id/category/sort_order/
+  role. The CV deliberately still cites Terraform and C/C++; that mismatch is a settled decision.
 - `seed.ts` requires `--force` to prevent accidental truncation
 - Tailwind slate/cyan utilities used directly — no custom token classes
 - Hero CTA buttons: mobile uses `text-xs px-4 py-2.5 gap-1.5`; desktop (`sm:`) uses `text-sm px-5 py-3 gap-2`
 - Tailwind v4 shorthand: use `opacity-(--var)` not `opacity-[var(--var)]`, `min-w-35` not `min-w-[140px]`, etc.
 
 ## Current Date
-Today's date is 2026-03-31.
+Today's date is 2026-08-17.

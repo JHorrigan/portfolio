@@ -48,3 +48,6 @@ Desktop.ini
 
 # Word lock files
 ~$*
+
+# Private career materials - never commit, never deploy
+career-private/
