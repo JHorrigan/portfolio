@@ -100,11 +100,25 @@ const ROLE_LINKS: Record<number, string[]> = {
 };
 
 /**
- * Skills to remove entirely. `Vitest` was dropped on review: the tooling was
- * wired on MyTrade but no tests were written, so it is not a claim worth
- * defending under questioning.
+ * Skills to remove entirely.
+ *
+ * `Vitest` was dropped on review: the tooling was wired on MyTrade but no tests
+ * were written, so it is not a claim worth defending under questioning.
+ *
+ * The rest came off 2026-08-17 as deliberate positioning -- James does not want
+ * roles that hire on them and would need to refresh before interviewing. Kept
+ * here rather than just deleted so they can be restored exactly:
+ *
+ *   C          Backend         sort 5   Marconi PLC (Aug 1996 - Dec 2006)
+ *   C++        Backend         sort 4   Marconi PLC (Aug 1996 - Dec 2006)
+ *   NodeJS     Backend         sort 6   Capita Customer Mgmt (Mar - Dec 2016)
+ *   Terraform  Cloud & DevOps  sort 45  MYTRADE TECHNOLOGIES (Mar - Aug 2026)
+ *
+ * Terraform is the odd one out: it is current MyTrade work and still appears on
+ * the CV. Removed on request anyway -- if the CV and portfolio should agree,
+ * that is the line to revisit.
  */
-const DELETE_SKILLS = ['Vitest'];
+const DELETE_SKILLS = ['Vitest', 'C', 'C++', 'NodeJS', 'Terraform'];
 
 /**
  * Links to remove, [roleId, skillName]. MUI belongs to Intrum, not the umbrella.
