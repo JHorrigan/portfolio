@@ -82,7 +82,7 @@ const ROLE_LINKS: Record<number, string[]> = {
   ],
   // Intrum -- Full Stack Software Engineer
   1: [
-    'Lambda', 'API Gateway', 'CloudFront', 'OAuth2', 'NLP',
+    'Lambda', 'API Gateway', 'CloudFront', 'OAuth2',
     'Technical Leadership', 'Solution Architecture', 'Git', 'CI/CD',
     'MUI', 'DynamoDB',
   ],
@@ -106,8 +106,13 @@ const ROLE_LINKS: Record<number, string[]> = {
  */
 const DELETE_SKILLS = ['Vitest'];
 
-/** Links to remove, [roleId, skillName]. MUI belongs to Intrum, not the umbrella. */
-const UNLINK: Array<[number, string]> = [[7, 'MUI']];
+/**
+ * Links to remove, [roleId, skillName]. MUI belongs to Intrum, not the umbrella.
+ * NLP came off Intrum on review -- the sentiment-analysis tooling there was not
+ * NLP work James did himself. The skill stays, still linked to CiiVSOFT where he
+ * built the spaCy resume parser.
+ */
+const UNLINK: Array<[number, string]> = [[7, 'MUI'], [1, 'NLP']];
 
 async function main() {
   console.log(APPLY ? '=== APPLYING ===\n' : '=== DRY RUN (pass --apply to write) ===\n');
