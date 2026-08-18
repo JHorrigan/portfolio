@@ -3,6 +3,10 @@
 Enterprise-meets-edgy single-page portfolio. Stack: Next.js 16.1.6 + React 19, Tailwind CSS v4, TypeScript strict, Neon Postgres + Drizzle ORM.
 See `@planning/TECHSTACK.md` and `@planning/DATABASE_STRATEGY.md` for decisions and rationale.
 
+Part of the `~/james/claude/` workspace. Workspace-wide conventions (work process, retiring shipped
+work, commit workflow) live in `@../CLAUDE.md`. Open work: `@planning/PLAN.md`. Shipped:
+`@planning/HISTORY.md`.
+
 ## Commands
 
 ```bash
@@ -50,7 +54,8 @@ public/
 drizzle.config.ts      # postgresql dialect, points to db/schema.ts
 next.config.ts         # reactCompiler: true
 planning/
-  PLAN.md              # active + future work only (phases 1–9 done, see above)
+  PLAN.md              # open + in-flight work only
+  HISTORY.md           # shipped and deployed slices, newest first
   DATABASE_STRATEGY.md # Neon+Drizzle decision + full schema table reference
   TECHSTACK.md         # Next.js/React + Tailwind v4 actionable facts
 ```
@@ -128,6 +133,3 @@ Update content: edit `db/seed.ts --force` or use Neon SQL editor directly.
 - Tailwind slate/cyan utilities used directly — no custom token classes
 - Hero CTA buttons: mobile uses `text-xs px-4 py-2.5 gap-1.5`; desktop (`sm:`) uses `text-sm px-5 py-3 gap-2`
 - Tailwind v4 shorthand: use `opacity-(--var)` not `opacity-[var(--var)]`, `min-w-35` not `min-w-[140px]`, etc.
-
-## Current Date
-Today's date is 2026-08-17.

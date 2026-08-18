@@ -1,9 +1,11 @@
 # Portfolio Project Plan
 
-Last updated: 2026-03-31
+Last updated: 2026-08-18
 
 ## References
+- Workspace conventions: `@../../CLAUDE.md`
 - Implementation status (source of truth): `@AGENTS.md`
+- Shipped work: `@planning/HISTORY.md`
 - DB decision rationale: `@planning/DATABASE_STRATEGY.md`
 - Tech stack notes: `@planning/TECHSTACK.md`
 
@@ -14,13 +16,8 @@ Last updated: 2026-03-31
 - Content editable via DB, not code deploys.
 - Docs stay synchronised with implementation.
 
----
-
-## Completed
-
-Phases 1–9 shipped. Current state fully documented in `@AGENTS.md`.
-
-One open item from Phase 8: fill CV placeholders — phone `+44 [PHONE]`, education, certifications.
+This file holds open and in-flight work only. Shipped slices are retired into
+`@planning/HISTORY.md` once they are deployed.
 
 ---
 
