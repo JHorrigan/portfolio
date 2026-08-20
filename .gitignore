@@ -51,3 +51,7 @@ Desktop.ini
 
 # Private career materials - never commit, never deploy
 career-private/
+
+# Windows NTFS alternate data streams from copied downloads
+*:Zone.Identifier
+*:mshield
