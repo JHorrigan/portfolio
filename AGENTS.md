@@ -3,9 +3,10 @@
 Enterprise-meets-edgy single-page portfolio. Stack: Next.js 16.1.6 + React 19, Tailwind CSS v4, TypeScript strict, Neon Postgres + Drizzle ORM.
 See `@planning/TECHSTACK.md` and `@planning/DATABASE_STRATEGY.md` for decisions and rationale.
 
-Part of the `~/james/claude/` workspace. Workspace-wide conventions (work process, retiring shipped
-work, commit workflow) live in `@../CLAUDE.md`. Open work: `@planning/PLAN.md`. Shipped:
-`@planning/HISTORY.md`.
+Lives in the `~/career/` workspace (moved from `~/james/claude/` on 2026-09-10) and is a standalone
+repo, `JHorrigan/portfolio`. This file is authoritative for the project - working practice is in
+**Working practice** below, no longer inherited from a parent workspace file. Open work:
+`@planning/PLAN.md`. Shipped: `@planning/HISTORY.md`.
 
 ## Commands
 
@@ -133,3 +134,37 @@ Update content: edit `db/seed.ts --force` or use Neon SQL editor directly.
 - Tailwind slate/cyan utilities used directly — no custom token classes
 - Hero CTA buttons: mobile uses `text-xs px-4 py-2.5 gap-1.5`; desktop (`sm:`) uses `text-sm px-5 py-3 gap-2`
 - Tailwind v4 shorthand: use `opacity-(--var)` not `opacity-[var(--var)]`, `min-w-35` not `min-w-[140px]`, etc.
+
+## Working practice
+
+Carried over from the old `~/james/claude/` workspace file when the project moved out of it.
+
+**Work process.** New work lands as a spec in `planning/`. Read it, ask rather than assume, write
+a step-by-step checklist into `planning/PLAN.md`, then work through it a step at a time - review,
+implement, test, report. James confirms each step before it is ticked.
+
+**Retiring shipped work.** A slice moves from `PLAN.md` to `HISTORY.md` the moment it is done
+**and deployed**, not merely committed. Code-complete-but-undeployed stays in `PLAN.md`, ticked or
+annotated but not retired. `HISTORY.md` lines stay short: feature, date, what shipped. Rationale
+and bug stories live in `git show`.
+
+**Commit workflow.** When a set of changes is complete: ask whether James is ready to commit, give
+a brief explanation of what was done, then give a commit message in Title Case (every word
+capitalized), using `&` instead of `+`. Never run `git commit` or `git push` unless he explicitly
+asks - he commits and pushes himself.
+
+**Working rules.**
+
+- Be incremental. Small steps, validate each before moving on.
+- Identify root cause before fixing. Reproduce, prove, then fix. No workarounds, no guessing.
+- Do not over-engineer or program defensively. Validate at boundaries only.
+- Verify anything version-sensitive against current docs via the `context7` MCP - not just before
+  writing SDK calls, but before asserting how a library behaves. Next.js, React, Tailwind and
+  TypeScript move quickly and training memory goes stale silently.
+- Sparse comments. Clear names and short docstrings instead.
+- No emojis in code, prints, logs, commits or PRs.
+- Update docs in the same step as the code, not as a tail phase.
+
+**Copy voice.** Any text a visitor reads must not read as AI-written. No em dashes, no AI filler
+("unlock", "seamless", "elevate", "in today's fast-paced world"), no emoji in site copy. Say the
+specific thing plainly, in a distinct voice.
